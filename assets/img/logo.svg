@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" role="img" aria-label="Puzzles Marathon logo">
+  <rect width="56" height="56" rx="12" fill="#1e73be"/>
+  <circle cx="18" cy="18" r="6" fill="#f9c74f"/>
+  <circle cx="38" cy="18" r="6" fill="#f9c74f"/>
+  <circle cx="18" cy="38" r="6" fill="#f9c74f"/>
+  <circle cx="38" cy="38" r="6" fill="#f9c74f"/>
+</svg>
