@@ -1,155 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Puzzles Marathon</title>
-  <meta name="description" content="Puzzles Marathon — a community event to celebrate, support, and fundraise for the autism community." />
-  <link rel="icon" href="assets/img/favicon.png">
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Puzzles Marathon — Danbury, CT</title>
+  <meta name="description" content="Puzzles Marathon — April 25, 10am–1pm on Main Street, Danbury, CT. Start: Main Street → End: Rogers Park." />
+  <link rel="icon" href="assets/img/logo-heart.jpg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,.9); }
+  </style>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <img src="assets/img/logo.svg" alt="Puzzles Marathon logo" class="logo" width="56" height="56" />
-      <div class="brand">
-        <h1>Puzzles Marathon</h1>
-        <p class="tagline">Community • Education • Accessibility</p>
-      </div>
-      <nav class="site-nav" aria-label="Primary">
-        <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-        <ul id="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#event">Event</a></li>
-          <li><a href="#community">Community</a></li>
-          <li><a href="#accessibility">Accessibility</a></li>
-          <li><a href="#get-involved">Get Involved</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="hero">
-      <img src="assets/img/banner.svg" alt="Banner with puzzle shapes and runners" />
-      <div class="hero-cta">
-        <h2>Running together for autism awareness & impact</h2>
-        <p><strong>Date:</strong> TBD • <strong>Location:</strong> Your City</p>
-        <a class="btn" href="#get-involved">Register / Volunteer</a>
-      </div>
-    </div>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Nav -->
+  <header class="sticky top-0 z-40 bg-white/90 border-b border-slate-200">
+    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 font-semibold text-xl">
+        <img src="assets/img/logo-heart.jpg" alt="Puzzles Marathon logo" class="w-8 h-8 rounded-full object-cover" />
+        Puzzles Marathon
+      </a>
+      <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <li><a href="#about" class="hover:text-blue-600">About</a></li>
+        <li><a href="#event" class="hover:text-blue-600">Event</a></li>
+        <li><a href="#community" class="hover:text-blue-600">Community</a></li>
+        <li><a href="#accessibility" class="hover:text-blue-600">Accessibility</a></li>
+        <li><a href="#forms" class="hover:text-blue-600">Register</a></li>
+        <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+      </ul>
+      <a href="#forms" class="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg shadow">Register</a>
+    </nav>
   </header>
 
-  <main id="main" class="container">
-    <section id="about">
-      <h2>About</h2>
-      <p>The Puzzles Marathon is a simple, action‑focused proposal to celebrate the autism community, raise awareness, and (optionally) fundraise for local programs. This site is a working mockup to share with city leadership and partners.</p>
-      <ul class="pillars">
-        <li><img src="assets/img/puzzle-icon.svg" alt="" aria-hidden="true" /><span>Education</span></li>
-        <li><img src="assets/img/puzzle-icon.svg" alt="" aria-hidden="true" /><span>Community</span></li>
-        <li><img src="assets/img/puzzle-icon.svg" alt="" aria-hidden="true" /><span>Accessibility</span></li>
-      </ul>
-    </section>
-
-    <section id="event">
-      <h2>Event Details</h2>
-      <div class="grid two">
+  <!-- Hero (no animation) -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h3>Key Info</h3>
-          <ul class="keyinfo">
-            <li><strong>Date:</strong> [Insert Date]</li>
-            <li><strong>Start / Finish:</strong> [Insert Park/Street]</li>
-            <li><strong>Distances:</strong> 5K • 10K • Family Mile</li>
-            <li><strong>Registration:</strong> Opens upon city approval</li>
-          </ul>
-          <a class="btn outline" href="#contact">Ask a Question</a>
+          <div class="glass rounded-2xl shadow-xl p-6 md:p-8">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+              Run for Awareness. Celebrate Community.
+            </h1>
+            <p class="mt-4 text-slate-700">
+              An inclusive city‑backed event supporting the autism community through connection and movement.
+            </p>
+            <p class="mt-3">
+              <strong>Date:</strong> April 25, 10:00 AM–1:00 PM<br />
+              <strong>Location:</strong> Main Street, Danbury, CT 06810<br />
+              <strong>Route:</strong> Start — Main Street • End — Rogers Park
+            </p>
+            <div class="mt-6 flex gap-3">
+              <a href="#forms" class="bg-blue-600 text-white px-5 py-3 rounded-xl shadow hover:brightness-95">Register Now</a>
+              <a href="#event" class="bg-white px-5 py-3 rounded-xl shadow hover:bg-slate-100">Event Details</a>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3>Route (Draft)</h3>
-          <img src="assets/img/route-map-placeholder.svg" alt="Placeholder route map" class="route" />
-          <p class="caption">Final route to be coordinated with city and public safety.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="community">
-      <h2>Community & Impact</h2>
-      <div class="grid three cards">
-        <article class="card">
-          <h3>Awareness</h3>
-          <p>Spotlight local organizations supporting autistic individuals and families. Educational booths and resources at the finish festival.</p>
-        </article>
-        <article class="card">
-          <h3>Inclusion</h3>
-          <p>Family‑friendly events, quiet spaces, and accessible pacing options ensure everyone can take part.</p>
-        </article>
-        <article class="card">
-          <h3>Support</h3>
-          <p>Optional fundraising pathways for programs chosen with community input and city guidance.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="accessibility">
-      <h2>Accessibility Plan</h2>
-      <ul class="checklist">
-        <li>Wheelchair‑friendly route and start/finish areas</li>
-        <li>Sensory‑friendly zones (quiet tents, headphones, visual schedules)</li>
-        <li>Clear signage, wayfinding, and volunteer training</li>
-        <li>Accessible restrooms & parking near start/finish</li>
-        <li>Communication access: large‑print maps, alt text, readable colors</li>
-      </ul>
-    </section>
-
-    <section id="get-involved">
-      <h2>Get Involved</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Volunteer</h3>
-          <p>Course marshals, water stations, check‑in, finish line, and sensory support teams.</p>
-          <a class="btn" href="mailto:info@puzzlesmarathon.com?subject=Volunteer%20Inquiry">Email to Volunteer</a>
-        </div>
-        <div class="card">
-          <h3>Sponsor & Partners</h3>
-          <p>Help fund logistics, participant support, and community programming.</p>
-          <a class="btn" href="mailto:info@puzzlesmarathon.com?subject=Sponsor%20Inquiry">Email for Sponsorship</a>
+        <div class="flex items-center justify-center">
+          <img src="assets/img/logo-heart.jpg" alt="Puzzles Marathon Heart Logo"
+               class="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-lg" />
         </div>
       </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Questions, ideas, or interest in partnering?</p>
-      <ul class="contact-list">
-        <li>Email: <a href="mailto:info@puzzlesmarathon.com">info@puzzlesmarathon.com</a></li>
-        <li>Instagram: <a href="#" aria-label="Instagram profile">Coming soon</a></li>
-      </ul>
-      <form class="contact-form" action="mailto:info@puzzlesmarathon.com" method="post" enctype="text/plain">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required />
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5"></textarea>
-        <button type="submit" class="btn">Send</button>
-      </form>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <img src="assets/img/logo.svg" alt="" aria-hidden="true" class="logo small" width="40" height="40"/>
-      <p>&copy; 2025 Puzzles Marathon</p>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const btn = document.querySelector('.menu-toggle');
-    const nav = document.getElementById('nav-links');
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('open');
-    });
-  </script>
+  <!-- About -->
+  <section id="about" class="max-w-6xl mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold">About the Marathon</h2>
+        <p class="mt-3 text-slate-700">
+          The Puzzles Marathon brings our city together to support autistic individuals and families. We focus on
+          <span class="font-semibold">awareness</span>, <span class="font-semibold">community</span>, and
+          <span class="font-semibold">accessibility</span> to ensure everyone can participate.
+        </p>
+        <ul class="mt-5 grid grid-cols-3 gap-3 text-center">
+          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">🧩</div><div class="text-xs mt-1">Awareness</div></li>
+          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">🤝</div><div class="text-xs mt-1">Community</div></li>
+          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">♿</div><div class="text-xs mt-1">Accessibility</div></li>
+        </ul>
+      </div>
+      <img src="assets/img/logo-heart.jpg" alt="Heart logo" class="w-full rounded-2xl shadow-lg border object-cover" />
+    </div>
+  </section>
+
+  <!-- Event -->
+  <section id="event" class="bg-white border-y">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold">Event Details</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-8">
+        <div class="bg-slate-50 rounded-2xl p-6 border">
+          <h3 class="font-semibold text-lg">Key Info</h3>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li><strong>Date:</strong> April 25, 10:00 AM–1:00 PM</li>
+            <li><strong>Location:</strong> Main Street, Danbury, CT 06810</li>
+            <li><strong>Start:</strong> Main Street</li>
+            <li><strong>End:</strong> Rogers Park</li>
+            <li><strong>Distances:</strong> 5K • 10K • Family Mile</li>
+            <li><strong>Waivers:</strong> Required for all participants</li>
+          </ul>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-6 border">
+          <h3 class="font-semibold text-lg">Route (Draft)</h3>
+          <img src="assets/img/route.svg" alt="Placeholder route map" class="rounded-xl border" />
+          <p class="text-xs text-slate-500 mt-2">Final route coordinated with city and public safety.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section id="community" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">Community Impact</h2>
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Awareness</h3><p class="text-slate-700 mt-2">Educational booths and local org spotlights at the finish festival.</p></div>
+      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Inclusion</h3><p class="text-slate-700 mt-2">Quiet spaces, sensory kits, pacing options, and family‑friendly activities.</p></div>
+      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Support</h3><p class="text-slate-700 mt-2">Optional fundraising for programs chosen with community input.</p></div>
+    </div>
+  </section>
+
+  <!-- Accessibility -->
+  <section id="accessibility" class="bg-white border-y">
+    <div class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold">Accessibility Plan</h2>
+      <ul class="mt-4 grid md:grid-cols-2 gap-3 text-slate-700">
+        <li>Wheelchair‑friendly route and venues</li>
+        <li>Sensory‑friendly areas and visual schedules</li>
+        <li>Volunteer training and clear wayfinding</li>
+        <li>Accessible parking/restrooms near start/finish</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Forms -->
+  <section id="forms" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">Register & Sign Up</h2>
+
+    <div class="mt-6 grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-6 border shadow-sm">
+        <h3 class="font-semibold">Participants & Attendees</h3>
+        <ul class="text-slate-700 text-sm list-disc ml-5 mt-2">
+          <li>Full Name, Email, Phone</li>
+          <li>Role (Runner / Attendee)</li>
+          <li>T‑Shirt Size, Emergency Contact</li>
+          <li>Waiver Acknowledgement (checkbox)</li>
+        </ul>
+        <div class="mt-3 aspect-[4/3] rounded-xl border overflow-hidden">
+          <iframe title="Participant Registration" src="https://airtable.com/embed/YOUR_PARTICIPANT_FORM" class="w-full h-full" frameborder="0"></iframe>
+        </div>
+        <a target="_blank" href="https://airtable.com/YOUR_PARTICIPANT_FORM" class="inline-block mt-3 text-blue-600">Open full form ↗</a>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border shadow-sm">
+        <h3 class="font-semibold">Volunteers</h3>
+        <ul class="text-slate-700 text-sm list-disc ml-5 mt-2">
+          <li>Full Name, Email, Phone</li>
+          <li>Preferred Role (Course marshal, Water, Check‑in, Sensory Support)</li>
+          <li>Availability window</li>
+          <li>T‑Shirt Size</li>
+        </ul>
+        <div class="mt-3 aspect-[4/3] rounded-xl border overflow-hidden">
+          <iframe title="Volunteer Signup" src="https://airtable.com/embed/YOUR_VOLUNTEER_FORM" class="w-full h-full" frameborder="0"></iframe>
+        </div>
+        <a target="_blank" href="https://airtable.com/YOUR_VOLUNTEER_FORM" class="inline-block mt-3 text-blue-600">Open full form ↗</a>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 border shadow-sm md:col-span-2">
+        <h3 class="font-semibold">Sponsors & Partners</h3>
+        <ul class="text-slate-700 text-sm list-disc ml-5 mt-2">
+          <li>Organization, Contact Name, Email, Phone</li>
+          <li>Sponsorship Level (Bronze/Silver/Gold/Community)</li>
+          <li>Logo upload link, Website</li>
+          <li>Notes or Activation ideas</li>
+        </ul>
+        <div class="mt-3 aspect-[21/9] rounded-xl border overflow-hidden">
+          <iframe title="Sponsor & Partner" src="https://airtable.com/embed/YOUR_SPONSOR_FORM" class="w-full h-full" frameborder="0"></iframe>
+        </div>
+        <a target="_blank" href="https://airtable.com/YOUR_SPONSOR_FORM" class="inline-block mt-3 text-blue-600">Open full form ↗</a>
+      </div>
+    </div>
+
+    <div class="mt-8 p-4 bg-slate-100 rounded-xl border">
+      <h3 class="font-semibold">Staff Check‑In (Internal)</h3>
+      <p class="text-sm text-slate-700">Volunteers can use the Airtable Interface to search names or scan QR codes and toggle “Checked In”.</p>
+      <a target="_blank" href="https://airtable.com/YOUR_INTERFACE_URL" class="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg">Open Check‑In Interface</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-white border-t">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="md:flex items-center justify-between gap-6">
+        <p class="text-slate-700">
+          Questions or partnership ideas?
+          <a href="mailto:info@puzzlesmarathon.com" class="text-blue-600 underline">info@puzzlesmarathon.com</a>
+        </p>
+        <p class="text-slate-500 text-sm">&copy; 2025 Puzzles Marathon</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
