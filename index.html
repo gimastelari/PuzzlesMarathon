@@ -12,6 +12,7 @@
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
+
   <!-- Nav -->
   <header class="sticky top-0 z-40 bg-white/90 border-b border-slate-200">
     <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -31,7 +32,7 @@
     </nav>
   </header>
 
-  <!-- Hero (no animation) -->
+  <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
       <div class="grid md:grid-cols-2 gap-10 items-center">
@@ -41,7 +42,7 @@
               Run for Awareness. Celebrate Community.
             </h1>
             <p class="mt-4 text-slate-700">
-              An inclusive city‑backed event supporting the autism community through connection and movement.
+              An inclusive city-backed event supporting the autism community through connection and movement.
             </p>
             <p class="mt-3">
               <strong>Date:</strong> April 25, 10:00 AM–1:00 PM<br />
@@ -112,7 +113,7 @@
     <h2 class="text-2xl md:text-3xl font-bold">Community Impact</h2>
     <div class="mt-6 grid md:grid-cols-3 gap-6">
       <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Awareness</h3><p class="text-slate-700 mt-2">Educational booths and local org spotlights at the finish festival.</p></div>
-      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Inclusion</h3><p class="text-slate-700 mt-2">Quiet spaces, sensory kits, pacing options, and family‑friendly activities.</p></div>
+      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Inclusion</h3><p class="text-slate-700 mt-2">Quiet spaces, sensory kits, pacing options, and family-friendly activities.</p></div>
       <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Support</h3><p class="text-slate-700 mt-2">Optional fundraising for programs chosen with community input.</p></div>
     </div>
   </section>
@@ -122,8 +123,8 @@
     <div class="max-w-6xl mx-auto px-4 py-16">
       <h2 class="text-2xl md:text-3xl font-bold">Accessibility Plan</h2>
       <ul class="mt-4 grid md:grid-cols-2 gap-3 text-slate-700">
-        <li>Wheelchair‑friendly route and venues</li>
-        <li>Sensory‑friendly areas and visual schedules</li>
+        <li>Wheelchair-friendly route and venues</li>
+        <li>Sensory-friendly areas and visual schedules</li>
         <li>Volunteer training and clear wayfinding</li>
         <li>Accessible parking/restrooms near start/finish</li>
       </ul>
@@ -134,14 +135,15 @@
   <section id="forms" class="max-w-6xl mx-auto px-4 py-16">
     <h2 class="text-2xl md:text-3xl font-bold">Register & Sign Up</h2>
     <p class="mt-2 text-slate-600">
-    Complete the form below to register, volunteer, or partner with Puzzles Marathon.
+      Complete the form below to register, volunteer, or partner with Puzzles Marathon.
     </p>
 
     <div class="mt-8 grid md:grid-cols-2 gap-8">
+
       <!-- Participants & Attendees -->
       <div class="bg-white rounded-2xl p-6 border shadow-sm">
         <h3 class="font-semibold text-lg mb-3">Participants & Attendees</h3>
-        <form id="participantForm" action="https://formspree.io/f/mqavdppa" method="POST" class="space-y-3">
+        <form id="participantForm" class="space-y-3">
           <input type="text" name="Full Name" placeholder="Full Name" required class="w-full border rounded-lg px-3 py-2" />
           <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-2" />
           <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-2" />
@@ -152,19 +154,25 @@
           </select>
           <select name="T-Shirt Size" required class="w-full border rounded-lg px-3 py-2">
             <option value="">Select T-Shirt Size</option>
-            <option>Small</option><option>Medium</option><option>Large</option><option>XL</option>
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+            <option>XL</option>
           </select>
           <input type="text" name="Emergency Contact" placeholder="Emergency Contact" required class="w-full border rounded-lg px-3 py-2" />
+
           <label class="flex items-center gap-2 text-sm">
             <input type="checkbox" name="Waiver Acknowledgement" required />
-          I acknowledge the event waiver.
+            I acknowledge the event waiver.
           </label>
-          <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-          Submit
+
+          <button type="button" onclick="handleParticipantPayment()" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
+            Pay & Submit
           </button>
+
           <p id="participantMessage" class="hidden text-green-600 font-medium mt-2"></p>
         </form>
-        </div>
+      </div>
 
       <!-- Volunteers -->
       <div class="bg-white rounded-2xl p-6 border shadow-sm">
@@ -183,11 +191,16 @@
           <input type="text" name="Availability" placeholder="Availability Window" required class="w-full border rounded-lg px-3 py-2" />
           <select name="T-Shirt Size" required class="w-full border rounded-lg px-3 py-2">
             <option value="">Select T-Shirt Size</option>
-            <option>Small</option><option>Medium</option><option>Large</option><option>XL</option>
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+            <option>XL</option>
           </select>
+
           <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-          Submit
+            Submit
           </button>
+
           <p id="volunteerMessage" class="hidden text-green-600 font-medium mt-2"></p>
         </form>
       </div>
@@ -195,33 +208,38 @@
       <!-- Sponsors & Partners -->
       <div class="bg-white rounded-2xl p-6 border shadow-sm md:col-span-2">
         <h3 class="font-semibold text-lg mb-3">Sponsors & Partners</h3>
-        <form id="sponsorForm" action="https://formspree.io/f/xangdejy" method="POST" enctype="multipart/form-data" class="space-y-3">
+        <form id="sponsorForm" class="space-y-3">
           <input type="text" name="Organization" placeholder="Organization" required class="w-full border rounded-lg px-3 py-2" />
           <input type="text" name="Contact Name" placeholder="Contact Name" required class="w-full border rounded-lg px-3 py-2" />
           <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-2" />
           <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-2" />
           <select name="Sponsorship Level" required class="w-full border rounded-lg px-3 py-2">
             <option value="">Select Sponsorship Level</option>
-            <option>Bronze</option><option>Silver</option><option>Gold</option><option>Community</option>
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Community</option>
           </select>
           <input type="url" name="Logo Link" placeholder="Logo Upload Link" class="w-full border rounded-lg px-3 py-2" />
           <input type="url" name="Website" placeholder="Website" class="w-full border rounded-lg px-3 py-2" />
           <textarea name="Notes" placeholder="Notes or Activation Ideas" rows="3" class="w-full border rounded-lg px-3 py-2"></textarea>
-          <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-          Submit
+
+          <button type="button" onclick="handleSponsorPayment()" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
+            Pay & Submit
           </button>
+
           <p id="sponsorMessage" class="hidden text-green-600 font-medium mt-2"></p>
         </form>
       </div>
+
     </div>
   </section>
 
+
+  <!-- SUBMIT BEHAVIOR — VOLUNTEERS ONLY -->
   <script>
-    // Apply thank-you message behavior
     const forms = [
-      { id: 'participantForm', messageId: 'participantMessage' },
       { id: 'volunteerForm', messageId: 'volunteerMessage' },
-      { id: 'sponsorForm', messageId: 'sponsorMessage' },
     ];
 
     forms.forEach(f => {
@@ -231,14 +249,15 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = new FormData(form);
+
         const response = await fetch(form.action, {
           method: 'POST',
           body: data,
           headers: { 'Accept': 'application/json' }
         });
+
         if (response.ok) {
-          msg.textContent =
-            "Thank you for registering, you should receive the payment link with the QR code to use at check-in of the event. Thank you for your support of the autism community in Danbury!";
+          msg.textContent = "Thank you for registering as a volunteer!";
           msg.classList.remove('hidden');
           form.reset();
         } else {
@@ -248,6 +267,43 @@
         }
       });
     });
+  </script>
+
+
+  <!-- Stripe -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe("pk_live_51SZ2bFFh9qMoW6v09WHxDld9GdnCeKrKPdPQCz9CmZA3b9SqjiNXUq7DOnsK8lyQm9PuGpKeubWb8k2Nm309Tz7V00ROWUwtuP");
+
+    // Participant Payment ($20)
+    function handleParticipantPayment() {
+      const form = document.getElementById("participantForm");
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      localStorage.setItem("participantFormData", JSON.stringify(data));
+
+      stripe.redirectToCheckout({
+        lineItems: [{ price: "price_1SZ3TSFh9qMoW6v0dSK33Rjn", quantity: 1 }],
+        mode: "payment",
+        successUrl: "https://puzzlesmarathon.com/payment-success-participant.html",
+        cancelUrl: "https://puzzlesmarathon.com",
+      });
+    }
+
+    // Sponsor Payment ($300)
+    function handleSponsorPayment() {
+      const form = document.getElementById("sponsorForm");
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      localStorage.setItem("sponsorFormData", JSON.stringify(data));
+
+      stripe.redirectToCheckout({
+        lineItems: [{ price: "price_1SZ3TyFh9qMoW6v0ShTRC0o2", quantity: 1 }],
+        mode: "payment",
+        successUrl: "https://puzzlesmarathon.com/payment-success-sponsor.html",
+        cancelUrl: "https://puzzlesmarathon.com",
+      });
+    }
   </script>
 
 
@@ -264,5 +320,6 @@
       </div>
     </div>
   </section>
+
 </body>
 </html>
