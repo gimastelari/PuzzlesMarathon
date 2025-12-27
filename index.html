@@ -11,315 +11,107 @@
     .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,.9); }
   </style>
 </head>
+
 <body class="bg-slate-50 text-slate-900">
 
-  <!-- Nav -->
-  <header class="sticky top-0 z-40 bg-white/90 border-b border-slate-200">
-    <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2 font-semibold text-xl">
-        <img src="assets/img/logo-heart.jpg" alt="Puzzles Marathon logo" class="w-8 h-8 rounded-full object-cover" />
-        Puzzles Marathon
-      </a>
-      <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <li><a href="#about" class="hover:text-blue-600">About</a></li>
-        <li><a href="#event" class="hover:text-blue-600">Event</a></li>
-        <li><a href="#community" class="hover:text-blue-600">Community</a></li>
-        <li><a href="#accessibility" class="hover:text-blue-600">Accessibility</a></li>
-        <li><a href="#forms" class="hover:text-blue-600">Register</a></li>
-        <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
-      </ul>
-      <a href="#forms" class="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded-lg shadow">Register</a>
-    </nav>
-  </header>
+<!-- ================= NAV ================= -->
+<header class="sticky top-0 z-40 bg-white/90 border-b border-slate-200">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 font-semibold text-xl">
+      <img src="assets/img/logo-heart.jpg" class="w-8 h-8 rounded-full" />
+      Puzzles Marathon
+    </a>
+    <ul class="hidden md:flex gap-6 text-sm font-medium">
+      <li><a href="#about">About</a></li>
+      <li><a href="#event">Event</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#accessibility">Accessibility</a></li>
+      <li><a href="#forms">Register</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <div class="glass rounded-2xl shadow-xl p-6 md:p-8">
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Run for Awareness. Celebrate Community.
-            </h1>
-            <p class="mt-4 text-slate-700">
-              An inclusive city-backed event supporting the autism community through connection and movement.
-            </p>
-            <p class="mt-3">
-              <strong>Date:</strong> April 25, 10:00 AM–1:00 PM<br />
-              <strong>Location:</strong> Main Street, Danbury, CT 06810<br />
-              <strong>Route:</strong> Start — Main Street • End — Rogers Park
-            </p>
-            <div class="mt-6 flex gap-3">
-              <a href="#forms" class="bg-blue-600 text-white px-5 py-3 rounded-xl shadow hover:brightness-95">Register Now</a>
-              <a href="#event" class="bg-white px-5 py-3 rounded-xl shadow hover:bg-slate-100">Event Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-center">
-          <img src="assets/img/logo-heart.jpg" alt="Puzzles Marathon Heart Logo"
-               class="w-64 h-64 md:w-72 md:h-72 rounded-full object-cover shadow-lg" />
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ================= HERO ================= -->
+<section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
+  <div class="glass p-8 rounded-2xl shadow">
+    <h1 class="text-4xl font-bold">Run for Awareness. Celebrate Community.</h1>
+    <p class="mt-4">April 25 · Main Street, Danbury CT</p>
+    <a href="#forms" class="inline-block mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl">Register Now</a>
+  </div>
+  <img src="assets/img/logo-heart.jpg" class="w-72 h-72 mx-auto rounded-full shadow" />
+</section>
 
-  <!-- About -->
-  <section id="about" class="max-w-6xl mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold">About the Marathon</h2>
-        <p class="mt-3 text-slate-700">
-          The Puzzles Marathon brings our city together to support autistic individuals and families. We focus on
-          <span class="font-semibold">awareness</span>, <span class="font-semibold">community</span>, and
-          <span class="font-semibold">accessibility</span> to ensure everyone can participate.
-        </p>
-        <ul class="mt-5 grid grid-cols-3 gap-3 text-center">
-          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">🧩</div><div class="text-xs mt-1">Awareness</div></li>
-          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">🤝</div><div class="text-xs mt-1">Community</div></li>
-          <li class="bg-white rounded-xl border p-3 shadow-sm"><div class="text-2xl">♿</div><div class="text-xs mt-1">Accessibility</div></li>
-        </ul>
-      </div>
-      <img src="assets/img/logo-heart.jpg" alt="Heart logo" class="w-full rounded-2xl shadow-lg border object-cover" />
-    </div>
-  </section>
+<!-- ================= FORMS ================= -->
+<section id="forms" class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-8">
 
-  <!-- Event -->
-  <section id="event" class="bg-white border-y">
-    <div class="max-w-6xl mx-auto px-4 py-16">
-      <h2 class="text-2xl md:text-3xl font-bold">Event Details</h2>
-      <div class="mt-6 grid md:grid-cols-2 gap-8">
-        <div class="bg-slate-50 rounded-2xl p-6 border">
-          <h3 class="font-semibold text-lg">Key Info</h3>
-          <ul class="mt-3 space-y-2 text-slate-700">
-            <li><strong>Date:</strong> April 25, 10:00 AM–1:00 PM</li>
-            <li><strong>Location:</strong> Main Street, Danbury, CT 06810</li>
-            <li><strong>Start:</strong> Main Street</li>
-            <li><strong>End:</strong> Rogers Park</li>
-            <li><strong>Distances:</strong> 5K • 10K • Family Mile</li>
-            <li><strong>Waivers:</strong> Required for all participants</li>
-          </ul>
-        </div>
-        <div class="bg-slate-50 rounded-2xl p-6 border">
-          <h3 class="font-semibold text-lg">Route (Draft)</h3>
-          <img src="assets/img/route.svg" alt="Placeholder route map" class="rounded-xl border" />
-          <p class="text-xs text-slate-500 mt-2">Final route coordinated with city and public safety.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- PARTICIPANT -->
+<div class="bg-white p-6 rounded-xl shadow">
+  <h3 class="font-semibold mb-3">Participants & Attendees</h3>
+  <form id="participantForm" class="space-y-3">
+    <input required placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
+    <input required type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
+    <input required placeholder="Phone" class="w-full border px-3 py-2 rounded" />
+    <select required class="w-full border px-3 py-2 rounded">
+      <option value="">Role</option>
+      <option>Runner</option>
+      <option>Attendee</option>
+    </select>
+    <button
+      type="button"
+      onclick="startCheckout('participant')"
+      class="bg-blue-600 text-white px-5 py-2 rounded"
+    >
+      Pay & Submit
+    </button>
+  </form>
+</div>
 
-  <!-- Community -->
-  <section id="community" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold">Community Impact</h2>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Awareness</h3><p class="text-slate-700 mt-2">Educational booths and local org spotlights at the finish festival.</p></div>
-      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Inclusion</h3><p class="text-slate-700 mt-2">Quiet spaces, sensory kits, pacing options, and family-friendly activities.</p></div>
-      <div class="bg-white rounded-2xl p-6 border shadow-sm"><h3 class="font-semibold">Support</h3><p class="text-slate-700 mt-2">Optional fundraising for programs chosen with community input.</p></div>
-    </div>
-  </section>
+<!-- SPONSOR -->
+<div class="bg-white p-6 rounded-xl shadow">
+  <h3 class="font-semibold mb-3">Sponsors & Partners</h3>
+  <form id="sponsorForm" class="space-y-3">
+    <input required placeholder="Organization" class="w-full border px-3 py-2 rounded" />
+    <input required placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
+    <input required type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
+    <button
+      type="button"
+      onclick="startCheckout('sponsor')"
+      class="bg-blue-600 text-white px-5 py-2 rounded"
+    >
+      Pay & Submit
+    </button>
+  </form>
+</div>
 
-  <!-- Accessibility -->
-  <section id="accessibility" class="bg-white border-y">
-    <div class="max-w-6xl mx-auto px-4 py-16">
-      <h2 class="text-2xl md:text-3xl font-bold">Accessibility Plan</h2>
-      <ul class="mt-4 grid md:grid-cols-2 gap-3 text-slate-700">
-        <li>Wheelchair-friendly route and venues</li>
-        <li>Sensory-friendly areas and visual schedules</li>
-        <li>Volunteer training and clear wayfinding</li>
-        <li>Accessible parking/restrooms near start/finish</li>
-      </ul>
-    </div>
-  </section>
+</section>
 
-  <!-- Forms -->
-  <section id="forms" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold">Register & Sign Up</h2>
-    <p class="mt-2 text-slate-600">
-      Complete the form below to register, volunteer, or partner with Puzzles Marathon.
-    </p>
-
-    <div class="mt-8 grid md:grid-cols-2 gap-8">
-
-      <!-- Participants & Attendees -->
-      <div class="bg-white rounded-2xl p-6 border shadow-sm">
-        <h3 class="font-semibold text-lg mb-3">Participants & Attendees</h3>
-        <form id="participantForm" class="space-y-3">
-          <input type="text" name="Full Name" placeholder="Full Name" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-2" />
-          <select name="Role" required class="w-full border rounded-lg px-3 py-2">
-            <option value="">Select Role</option>
-            <option value="Runner">Runner</option>
-            <option value="Attendee">Attendee</option>
-          </select>
-          <select name="T-Shirt Size" required class="w-full border rounded-lg px-3 py-2">
-            <option value="">Select T-Shirt Size</option>
-            <option>Small</option>
-            <option>Medium</option>
-            <option>Large</option>
-            <option>XL</option>
-          </select>
-          <input type="text" name="Emergency Contact" placeholder="Emergency Contact" required class="w-full border rounded-lg px-3 py-2" />
-
-          <label class="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="Waiver Acknowledgement" required />
-            I acknowledge the event waiver.
-          </label>
-
-          <button type="button" onclick="handleParticipantPayment()" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-            Pay & Submit
-          </button>
-
-          <p id="participantMessage" class="hidden text-green-600 font-medium mt-2"></p>
-        </form>
-      </div>
-
-      <!-- Volunteers -->
-      <div class="bg-white rounded-2xl p-6 border shadow-sm">
-        <h3 class="font-semibold text-lg mb-3">Volunteers</h3>
-        <form id="volunteerForm" action="https://formspree.io/f/xangdeey" method="POST" class="space-y-3">
-          <input type="text" name="Full Name" placeholder="Full Name" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-2" />
-          <select name="Preferred Role" required class="w-full border rounded-lg px-3 py-2">
-            <option value="">Select Preferred Role</option>
-            <option>Course Marshal</option>
-            <option>Water Station</option>
-            <option>Check-In</option>
-            <option>Sensory Support</option>
-          </select>
-          <input type="text" name="Availability" placeholder="Availability Window" required class="w-full border rounded-lg px-3 py-2" />
-          <select name="T-Shirt Size" required class="w-full border rounded-lg px-3 py-2">
-            <option value="">Select T-Shirt Size</option>
-            <option>Small</option>
-            <option>Medium</option>
-            <option>Large</option>
-            <option>XL</option>
-          </select>
-
-          <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-            Submit
-          </button>
-
-          <p id="volunteerMessage" class="hidden text-green-600 font-medium mt-2"></p>
-        </form>
-      </div>
-
-      <!-- Sponsors & Partners -->
-      <div class="bg-white rounded-2xl p-6 border shadow-sm md:col-span-2">
-        <h3 class="font-semibold text-lg mb-3">Sponsors & Partners</h3>
-        <form id="sponsorForm" class="space-y-3">
-          <input type="text" name="Organization" placeholder="Organization" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="text" name="Contact Name" placeholder="Contact Name" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-2" />
-          <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-2" />
-          <select name="Sponsorship Level" required class="w-full border rounded-lg px-3 py-2">
-            <option value="">Select Sponsorship Level</option>
-            <option>Bronze</option>
-            <option>Silver</option>
-            <option>Gold</option>
-            <option>Community</option>
-          </select>
-          <input type="url" name="Logo Link" placeholder="Logo Upload Link" class="w-full border rounded-lg px-3 py-2" />
-          <input type="url" name="Website" placeholder="Website" class="w-full border rounded-lg px-3 py-2" />
-          <textarea name="Notes" placeholder="Notes or Activation Ideas" rows="3" class="w-full border rounded-lg px-3 py-2"></textarea>
-
-          <button type="button" onclick="handleSponsorPayment()" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:brightness-95">
-            Pay & Submit
-          </button>
-
-          <p id="sponsorMessage" class="hidden text-green-600 font-medium mt-2"></p>
-        </form>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- SUBMIT BEHAVIOR — VOLUNTEERS ONLY -->
-  <script>
-    const forms = [
-      { id: 'volunteerForm', messageId: 'volunteerMessage' },
-    ];
-
-    forms.forEach(f => {
-      const form = document.getElementById(f.id);
-      const msg = document.getElementById(f.messageId);
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const data = new FormData(form);
-
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          msg.textContent = "Thank you for registering as a volunteer!";
-          msg.classList.remove('hidden');
-          form.reset();
-        } else {
-          msg.textContent = "Oops! Something went wrong, please try again.";
-          msg.classList.remove('hidden');
-          msg.classList.add('text-red-600');
-        }
-      });
-    });
-  </script>
-
-
-  <!-- Stripe -->
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    const stripe = Stripe("pk_live_51SZ2bFFh9qMoW6v09WHxDld9GdnCeKrKPdPQCz9CmZA3b9SqjiNXUq7DOnsK8lyQm9PuGpKeubWb8k2Nm309Tz7V00ROWUwtuP");
-
-    // Participant Payment ($20)
-    function handleParticipantPayment() {
-      const form = document.getElementById("participantForm");
-      const data = Object.fromEntries(new FormData(form).entries());
-
-      localStorage.setItem("participantFormData", JSON.stringify(data));
-
-      stripe.redirectToCheckout({
-        lineItems: [{ price: "price_1SZ3TSFh9qMoW6v0dSK33Rjn", quantity: 1 }],
-        mode: "payment",
-        successUrl: "https://puzzlesmarathon.com/payment-success-participant.html",
-        cancelUrl: "https://puzzlesmarathon.com",
-      });
+<!-- ================= STRIPE BACKEND INTEGRATION ================= -->
+<script>
+async function startCheckout(type) {
+  const response = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/create-session",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type })
     }
+  );
 
-    // Sponsor Payment ($300)
-    function handleSponsorPayment() {
-      const form = document.getElementById("sponsorForm");
-      const data = Object.fromEntries(new FormData(form).entries());
+  const data = await response.json();
 
-      localStorage.setItem("sponsorFormData", JSON.stringify(data));
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Payment failed. Please try again.");
+  }
+}
+</script>
 
-      stripe.redirectToCheckout({
-        lineItems: [{ price: "price_1SZ3TyFh9qMoW6v0ShTRC0o2", quantity: 1 }],
-        mode: "payment",
-        successUrl: "https://puzzlesmarathon.com/payment-success-sponsor.html",
-        cancelUrl: "https://puzzlesmarathon.com",
-      });
-    }
-  </script>
-
-
-
-  <!-- Contact -->
-  <section id="contact" class="bg-white border-t">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <div class="md:flex items-center justify-between gap-6">
-        <p class="text-slate-700">
-          Questions or partnership ideas?
-          <a href="mailto:info@puzzlesmarathon.com" class="text-blue-600 underline">info@puzzlesmarathon.com</a>
-        </p>
-        <p class="text-slate-500 text-sm">&copy; 2025 Puzzles Marathon</p>
-      </div>
-    </div>
-  </section>
+<!-- ================= FOOTER ================= -->
+<footer class="text-center py-10 text-sm text-slate-500">
+  © 2025 Puzzles Marathon
+</footer>
 
 </body>
 </html>
+
