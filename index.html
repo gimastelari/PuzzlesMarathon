@@ -131,6 +131,25 @@
   </form>
 </div>
 
+<!-- VENDOR  -->
+<div class="bg-white p-6 rounded-xl shadow">
+  <h3 class="font-semibold mb-3">Vendors</h3>
+  <form id='vendorForm' class="space-y-3">
+    <input required name="company" placeholder='Company Name' class="w-full border px-3 py-2 rounded" />
+    <input required name="contact" placeholder='Contact Name' class="w-full border px-3 py-2 rounded" />
+    <input required name="email" type="email" placeholder='Email' class="w-full border px-3 py-2 rounded" />
+    <input required name="phone" placeholder='Phone Number' class="w-full border px-3 py-2 rounded" />
+    <input required name="vendor_code" placeholder='Vendor Code' class="w-full border px-3 py-2 rounded" />
+    <button
+      type='button'
+      onClick="startVendorCheckout()"
+      class="bg-blue-600 text-white px-5 py-2 rounded"
+    >
+      Pay & Submit
+  </button>
+  </form>
+</div>
+
 </section>
 
 <!-- CONTACT -->
@@ -161,6 +180,31 @@ async function startCheckout(type) {
     alert("Payment failed. Please try again.");
   }
 }
+</script>
+
+<script>
+  function startVendorCheckout(){
+    const form = document.getElementById('vendorForm');
+    const vendorCode = form.vendor_code.value.trim()
+
+    // enforce vendor approval 
+    if (vendorCode !== 'VENDOR2026'){
+      alert('Invalid Vendor Code. PLease enter the approved code.')
+      return;
+    }
+
+    // Save vendor form data for Formspree (after payment)
+    localStorage.setItem('vendorForm', JSON.stringify({
+      company: form.company.value, 
+      contact: form.contact.value, 
+      email: form.email.value, 
+      phone: form.phone.value,
+      vendor_code: vendorCode
+    }));
+
+    // Reuse the SAME stripe flow 
+    startCheckout('vendor');
+  }
 </script>
 
 </body>
