@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Puzzles Marathon — Danbury, CT</title>
-  <meta name="description" content="Puzzles Marathon — April 25, 10am–1pm on Main Street, Danbury, CT." />
+  <meta name="description" content="Puzzles Marathon — April 25, 10am–2pm at Rogers Park, Danbury, CT." />
   <link rel="icon" href="assets/img/logo-heart.jpg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -39,7 +39,7 @@
 <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
   <div class="glass p-8 rounded-2xl shadow">
     <h1 class="text-4xl font-bold">Run for Awareness. Celebrate Community.</h1>
-    <p class="mt-4">April 25 · Main Street, Danbury CT</p>
+    <p class="mt-4">April 25 · Rogers Park, Danbury CT</p>
     <a href="#forms" class="inline-block mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl">
       Register Now
     </a>
@@ -95,19 +95,14 @@
 
 <!-- PARTICIPANT -->
 <div class="bg-white p-6 rounded-xl shadow">
-  <h3 class="font-semibold mb-3">Participants & Attendees</h3>
+  <h3 class="font-semibold mb-3">Runners</h3>
   <form id="participantForm" class="space-y-3">
     <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
-    <select required name="role" class="w-full border px-3 py-2 rounded">
-      <option value="">Role</option>
-      <option>Runner</option>
-      <option>Attendee</option>
-    </select>
     <button
       type="button"
-      onclick="startCheckout('participant')"
+      onclick="startCheckout('runner')"
       class="bg-blue-600 text-white px-5 py-2 rounded"
     >
       Pay & Submit
@@ -117,7 +112,7 @@
 
 <!-- SPONSOR -->
 <div class="bg-white p-6 rounded-xl shadow">
-  <h3 class="font-semibold mb-3">Sponsors & Partners</h3>
+  <h3 class="font-semibold mb-3">Sponsors</h3>
   <form id="sponsorForm" class="space-y-3">
     <input required name="organization" placeholder="Organization" class="w-full border px-3 py-2 rounded" />
     <input required name="contact" placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
