@@ -104,7 +104,7 @@
     <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
-    <label for="shirtSize">T-Shirt Size *</label>
+    <label for="shirtSize">T-Shirt Size</label>
     <select id="shirtSize" name="shirt_size" required>
       <option value="" disabled selected>Select your size</option>
       <option value="XS">Extra Small</option>
@@ -149,9 +149,32 @@
     <input required name="organization" placeholder="Organization" class="w-full border px-3 py-2 rounded" />
     <input required name="contact" placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
+    <label class="block text-sm font-medium">Sponsorship Level</label>
+    <select name="sponsorship_level" required class="w-full border px-3 py-2 rounded">
+      <option value="" disabled selected>Select a level</option>
+      <option value="Silver - $300">Silver – $300</option>
+      <option value="Gold - $150">Gold – $150</option>
+    </select>
+    <label class="flex items-center gap-2 text-sm">
+      <input
+        type="checkbox"
+        name="agreed_to_terms"
+        value="Yes"
+        required
+      />
+      I agree to the
+      <a
+      href="https://docs.google.com/document/d/1CEYrgBr7yb0ZxReJaFhZPm_Msfmo0yJg4jF4zYF7YRY/edit?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-blue-600 underline hover:text-blue-800"
+      >
+        Terms & Conditions and Waiver
+      </a>
+    </label>
     <button
       type="button"
-      onclick="startCheckout('sponsor')"
+      onclick="startSponsorCheckout()"
       class="bg-blue-600 text-white px-5 py-2 rounded"
     >
       Pay & Submit
@@ -250,6 +273,39 @@ async function startCheckout(type) {
   }
 </script>
 
+<script>
+  function startSponsorCheckout() {
+    const form = document.getElementById("sponsorForm");
+    const level = form.sponsorship_level.value;
+  
+    if (!level) {
+      alert("Please select a sponsorship level.");
+      return;
+    }
+  
+    // Determine price logic
+    let amountType;
+    if (level.includes("Gold")) {
+      amountType = "sponsor_gold";
+    } else if (level.includes("Silver")) {
+      amountType = "sponsor_silver";
+    }
+  
+    // Save data for Formspree after payment
+    localStorage.setItem("sponsorFormData", JSON.stringify({
+      organization: form.organization.value,
+      contact: form.contact.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      sponsorship_level: level,
+      agreed_to_terms: "Yes"
+    }));
+  
+    // Trigger Stripe checkout
+    startCheckout(amountType);
+  }
+</script>
+  
 </body>
 </html>
 
