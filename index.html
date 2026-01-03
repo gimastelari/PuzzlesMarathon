@@ -170,7 +170,7 @@
       rel="noopener noreferrer"
       class="text-blue-600 underline hover:text-blue-800"
       >
-        Terms & Conditions and Waiver
+        Terms & Conditions
       </a>
     </label>
     <button
@@ -192,6 +192,23 @@
     <input required name="email" type="email" placeholder='Email' class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder='Phone Number' class="w-full border px-3 py-2 rounded" />
     <input required name="vendor_code" placeholder='Vendor Code' class="w-full border px-3 py-2 rounded" />
+    <label class="flex items-center gap-2 text-sm">
+      <input
+        type="checkbox"
+        name="agreed_to_terms"
+        value="Yes"
+        required
+      />
+      I agree to the
+      <a
+      href="https://docs.google.com/document/d/1du90L0D3Pf4AfE9Q5Z5Wem_BHZeGdb8b9rvCFAWCRxE/edit?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-blue-600 underline hover:text-blue-800"
+      >
+        Terms & Conditions
+      </a>
+    </label>
     <button
       type='button'
       onClick="startVendorCheckout()"
