@@ -10,14 +10,14 @@
 
   <style>
     body {
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f8fafc 100%);
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 35%, #f1f5f9 100%);
     }
     .glass {
       backdrop-filter: blur(12px);
       background: rgba(255, 255, 255, 0.95);
     }
     .accent-bar {
-      height: 4px;
+      height: 5px;
       background: linear-gradient(
         90deg,
         #2563eb,
@@ -27,13 +27,16 @@
       );
       border-radius: 999px;
     }
+    .soft-panel {
+      background: linear-gradient(180deg, #f8fafc, #ffffff);
+    }
   </style>
 </head>
 
 <body class="text-slate-900">
 
 <!-- NAV -->
-<header class="sticky top-0 z-50 bg-white/90 border-b border-slate-200">
+<header class="sticky top-0 z-50 bg-white/90 border-b border-slate-200 backdrop-blur">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
     <a href="#" class="flex items-center gap-3 font-semibold text-xl">
       <img src="assets/img/logo-heart.jpg" class="w-9 h-9 rounded-full" />
@@ -49,15 +52,22 @@
       <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
     </ul>
 
-    <a href="#forms" class="hidden md:inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-xl shadow hover:bg-blue-700 transition">
-      Register
-    </a>
+    <div class="hidden md:flex gap-3">
+      <a href="#donate"
+        class="inline-flex items-center px-4 py-2 rounded-xl border border-blue-200 text-blue-600 font-semibold hover:bg-blue-50 transition">
+        Donate
+      </a>
+      <a href="#forms"
+        class="inline-flex items-center px-5 py-2 rounded-xl bg-blue-600 text-white shadow hover:bg-blue-700 transition">
+        Register
+      </a>
+    </div>
   </nav>
 </header>
 
 <!-- HERO -->
-<section class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-12 items-center">
-  <div class="glass p-10 rounded-3xl shadow-lg">
+<section class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-14 items-center">
+  <div class="glass p-10 rounded-3xl shadow-xl">
     <div class="accent-bar mb-6"></div>
     <h1 class="text-4xl md:text-5xl font-bold leading-tight">
       Run for Awareness.<br />
@@ -66,29 +76,38 @@
     <p class="mt-5 text-slate-700 text-lg">
       April 25 · 36 E Hayestown Rd, Danbury, CT
     </p>
-    <a href="#forms" class="inline-block mt-8 bg-blue-600 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow hover:bg-blue-700 transition">
-      Register Now
-    </a>
+    <div class="mt-8 flex gap-4 flex-wrap">
+      <a href="#forms"
+        class="bg-blue-600 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow hover:bg-blue-700 transition">
+        Register Now
+      </a>
+      <a href="#donate"
+        class="px-8 py-3 rounded-2xl text-lg font-semibold border border-blue-200 text-blue-600 hover:bg-blue-50 transition">
+        Donate
+      </a>
+    </div>
   </div>
 
   <div class="flex justify-center">
-    <img src="assets/img/logo-heart.jpg" class="w-80 h-80 rounded-full shadow-xl" />
+    <img src="assets/img/logo-heart.jpg" class="w-80 h-80 rounded-full shadow-2xl" />
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="max-w-6xl mx-auto px-4 py-20">
-  <h2 class="text-3xl font-bold mb-4">About the Marathon</h2>
-  <p class="text-slate-700 leading-relaxed max-w-4xl">
-    Puzzles Marathon is an inclusive, city-backed community run supporting the autism community through
-    awareness, accessibility, and connection. Our mission is to create a welcoming space where people
-    of all abilities can come together, move, connect, and celebrate neurodiversity.
-  </p>
+<section id="about" class="soft-panel border-t border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-24">
+    <h2 class="text-3xl font-bold mb-6">About the Marathon</h2>
+    <p class="text-slate-700 leading-relaxed max-w-4xl">
+      Puzzles Marathon is an inclusive, city-backed community run supporting the autism community through
+      awareness, accessibility, and connection. Our mission is to create a welcoming space where people
+      of all abilities can come together, move, connect, and celebrate neurodiversity.
+    </p>
+  </div>
 </section>
 
 <!-- EVENT -->
-<section id="event" class="bg-white border-y">
-  <div class="max-w-6xl mx-auto px-4 py-20">
+<section id="event" class="bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-24">
     <h2 class="text-3xl font-bold mb-6">Event Details</h2>
     <ul class="space-y-3 text-slate-700">
       <li><strong>Date:</strong> April 25, 10:00 AM – 2:00 PM</li>
@@ -100,29 +119,31 @@
 </section>
 
 <!-- COMMUNITY -->
-<section id="community" class="max-w-6xl mx-auto px-4 py-20">
-  <h2 class="text-3xl font-bold mb-4">Community Impact</h2>
-  <p class="text-slate-700 max-w-4xl">
-    Every step taken at Puzzles Marathon helps fund inclusive programming, accessibility initiatives,
-    and community-based organizations supporting autistic individuals and families.
-  </p>
+<section id="community" class="soft-panel border-y border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-24">
+    <h2 class="text-3xl font-bold mb-6">Community Impact</h2>
+    <p class="text-slate-700 max-w-4xl">
+      Every step taken at Puzzles Marathon helps fund inclusive programming, accessibility initiatives,
+      and community-based organizations supporting autistic individuals and families.
+    </p>
+  </div>
 </section>
 
 <!-- ACCESSIBILITY -->
-<section id="accessibility" class="bg-white border-y">
-  <div class="max-w-6xl mx-auto px-4 py-20">
-    <h2 class="text-3xl font-bold mb-6">Accessibility Commitment</h2>
-    <ul class="grid md:grid-cols-2 gap-4 text-slate-700">
+<section id="accessibility" class="bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-24">
+    <h2 class="text-3xl font-bold mb-8">Accessibility Commitment</h2>
+    <ul class="grid md:grid-cols-2 gap-6 text-slate-700">
       <li>✔ Wheelchair-accessible route</li>
       <li>✔ Sensory-friendly spaces</li>
-      <li>✔ Trained volunteers</li>
+      <li>✔ Trained and supportive volunteers</li>
       <li>✔ Clear signage and wayfinding</li>
     </ul>
   </div>
 </section>
 
 <!-- FORMS -->
-<section id="forms" class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10">
+<section id="forms" class="soft-panel border-t border-slate-200">
 
 <!-- RUNNERS -->
 <div class="bg-white p-8 rounded-2xl shadow-lg">
