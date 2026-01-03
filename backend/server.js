@@ -38,6 +38,37 @@ app.post("/create-session", async (req, res) => {
   }
 });
 
+app.post("/create-donation-session", async (req, res) => {
+  try {
+    const { amount } = req.body;
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Puzzles Marathon Donation"
+            },
+            unit_amount: amount * 100
+          },
+          quantity: 1
+        }
+      ],
+      success_url: "https://puzzlesmarathon.com/payment-success-donation.html",
+      cancel_url: "https://puzzlesmarathon.com"
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Stripe session creation failed" });
+  }
+});
+
+
 app.get("/", (req, res) => {
   res.send("Puzzles Marathon Stripe backend is running");
 });
