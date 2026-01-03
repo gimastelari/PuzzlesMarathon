@@ -14,6 +14,7 @@
 
 <body class="bg-slate-50 text-slate-900">
 
+
 <!-- NAV -->
 <header class="sticky top-0 z-40 bg-white/90 border-b border-slate-200">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -35,6 +36,7 @@
   </nav>
 </header>
 
+
 <!-- HERO -->
 <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
   <div class="glass p-8 rounded-2xl shadow">
@@ -46,6 +48,7 @@
   </div>
   <img src="assets/img/logo-heart.jpg" class="w-72 h-72 mx-auto rounded-full shadow" />
 </section>
+
 
 <!-- ABOUT -->
 <section id="about" class="max-w-6xl mx-auto px-4 py-16">
@@ -60,6 +63,7 @@
   </p>
 </section>
 
+
 <!-- EVENT -->
 <section id="event" class="bg-white border-y">
   <div class="max-w-6xl mx-auto px-4 py-16">
@@ -73,6 +77,7 @@
   </div>
 </section>
 
+
 <!-- COMMUNITY -->
 <section id="community" class="max-w-6xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold">Community Impact</h2>
@@ -80,6 +85,7 @@
     The event supports inclusive programming, education, and local organizations serving autistic individuals and families.
   </p>
 </section>
+
 
 <!-- ACCESSIBILITY -->
 <section id="accessibility" class="bg-white border-y">
@@ -94,8 +100,10 @@
   </div>
 </section>
 
+
 <!-- FORMS -->
 <section id="forms" class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-8">
+
 
 <!-- RUNNERS -->
 <div class="bg-white p-6 rounded-xl shadow">
@@ -142,6 +150,7 @@
   </form>
 </div>
 
+
 <!-- SPONSOR -->
 <div class="bg-white p-6 rounded-xl shadow">
   <h3 class="font-semibold mb-3">Sponsors</h3>
@@ -183,6 +192,7 @@
   </form>
 </div>
 
+
 <!-- VENDOR  -->
 <div class="bg-white p-6 rounded-xl shadow">
   <h3 class="font-semibold mb-3">Vendors</h3>
@@ -221,6 +231,61 @@
 
 </section>
 
+
+<!-- DONATIONS -->
+<section id="donate" class="bg-white border-y">
+  <div class="max-w-3xl mx-auto px-4 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-4">Support Puzzles Marathon 💙</h2>
+    <p class="text-slate-700 mb-8">
+      Your donation helps fund inclusive programming, accessibility resources,
+      and community outreach for autistic individuals and families.
+    </p>
+
+    <div class="bg-slate-50 p-6 rounded-xl shadow max-w-md mx-auto">
+      <form id="donationForm" class="space-y-4">
+        <input
+          required
+          name="name"
+          placeholder="Full Name"
+          class="w-full border px-3 py-2 rounded"
+        />
+
+        <input
+          required
+          name="email"
+          type="email"
+          placeholder="Email"
+          class="w-full border px-3 py-2 rounded"
+        />
+
+        <input
+          required
+          name="amount"
+          type="number"
+          min="1"
+          placeholder="Donation Amount (USD)"
+          class="w-full border px-3 py-2 rounded"
+        />
+
+        <textarea
+          name="message"
+          placeholder="Optional message"
+          class="w-full border px-3 py-2 rounded"
+        ></textarea>
+
+        <button
+          type="button"
+          onclick="startDonationCheckout()"
+          class="bg-blue-600 text-white w-full py-3 rounded-lg font-semibold"
+        >
+          Donate Now
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
 <!-- CONTACT -->
 <section id="contact" class="bg-white border-t">
   <div class="max-w-6xl mx-auto px-4 py-12 flex justify-between">
@@ -228,6 +293,7 @@
     <p class="text-sm text-slate-500">© 2025 Puzzles Marathon</p>
   </div>
 </section>
+
 
 <!-- STRIPE BACKEND CHECKOUT -->
 <script>
@@ -245,6 +311,7 @@
     startCheckout('participant');
 }
 </script>
+
 <script>
 async function startCheckout(type) {
   const response = await fetch(
@@ -323,6 +390,42 @@ async function startCheckout(type) {
     startCheckout(amountType);
   }
 </script>
+
+<script>
+  function startDonationCheckout() {
+    const form = document.getElementById("donationForm");
+  
+    const amount = Number(form.amount.value);
+  
+    if (!amount || amount < 1) {
+      alert("Please enter a valid donation amount.");
+      return;
+    }
+  
+    // Save donor info for Formspree after payment
+    localStorage.setItem("donationFormData", JSON.stringify({
+      name: form.name.value,
+      email: form.email.value,
+      amount: amount,
+      message: form.message.value || ""
+    }));
+  
+    // Call Stripe backend with dynamic amount
+    fetch("https://puzzles-marathon-backend.onrender.com/create-donation-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Payment failed. Please try again.");
+      }
+    });
+  }
+  </script>  
   
 </body>
 </html>
