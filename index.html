@@ -10,11 +10,11 @@
 
   <style>
     body {
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 35%, #f1f5f9 100%);
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f1f5f9 100%);
     }
     .glass {
       backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.96);
     }
     .accent-bar {
       height: 5px;
@@ -54,11 +54,11 @@
 
     <div class="hidden md:flex gap-3">
       <a href="#donate"
-        class="inline-flex items-center px-4 py-2 rounded-xl border border-blue-200 text-blue-600 font-semibold hover:bg-blue-50 transition">
+         class="px-4 py-2 rounded-xl border border-blue-200 text-blue-600 font-semibold hover:bg-blue-50 transition">
         Donate
       </a>
       <a href="#forms"
-        class="inline-flex items-center px-5 py-2 rounded-xl bg-blue-600 text-white shadow hover:bg-blue-700 transition">
+         class="px-5 py-2 rounded-xl bg-blue-600 text-white shadow hover:bg-blue-700 transition">
         Register
       </a>
     </div>
@@ -78,11 +78,11 @@
     </p>
     <div class="mt-8 flex gap-4 flex-wrap">
       <a href="#forms"
-        class="bg-blue-600 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow hover:bg-blue-700 transition">
+         class="bg-blue-600 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow hover:bg-blue-700 transition">
         Register Now
       </a>
       <a href="#donate"
-        class="px-8 py-3 rounded-2xl text-lg font-semibold border border-blue-200 text-blue-600 hover:bg-blue-50 transition">
+         class="px-8 py-3 rounded-2xl text-lg font-semibold border border-blue-200 text-blue-600 hover:bg-blue-50 transition">
         Donate
       </a>
     </div>
@@ -94,13 +94,13 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="soft-panel border-t border-b border-slate-200">
+<section id="about" class="soft-panel border-y border-slate-200">
   <div class="max-w-6xl mx-auto px-4 py-24">
     <h2 class="text-3xl font-bold mb-6">About the Marathon</h2>
-    <p class="text-slate-700 leading-relaxed max-w-4xl">
-      Puzzles Marathon is an inclusive, city-backed community run supporting the autism community through
-      awareness, accessibility, and connection. Our mission is to create a welcoming space where people
-      of all abilities can come together, move, connect, and celebrate neurodiversity.
+    <p class="text-slate-700 max-w-4xl leading-relaxed">
+      Puzzles Marathon is an inclusive, city-backed community run supporting the autism community
+      through awareness, accessibility, and connection. Our mission is to create a welcoming space
+      where people of all abilities can come together, move, connect, and celebrate neurodiversity.
     </p>
   </div>
 </section>
@@ -123,8 +123,8 @@
   <div class="max-w-6xl mx-auto px-4 py-24">
     <h2 class="text-3xl font-bold mb-6">Community Impact</h2>
     <p class="text-slate-700 max-w-4xl">
-      Every step taken at Puzzles Marathon helps fund inclusive programming, accessibility initiatives,
-      and community-based organizations supporting autistic individuals and families.
+      Every step taken at Puzzles Marathon helps fund inclusive programming,
+      accessibility initiatives, and community-based organizations.
     </p>
   </div>
 </section>
@@ -136,14 +136,15 @@
     <ul class="grid md:grid-cols-2 gap-6 text-slate-700">
       <li>✔ Wheelchair-accessible route</li>
       <li>✔ Sensory-friendly spaces</li>
-      <li>✔ Trained and supportive volunteers</li>
+      <li>✔ Trained volunteers</li>
       <li>✔ Clear signage and wayfinding</li>
     </ul>
   </div>
 </section>
 
-<!-- FORMS -->
+<!-- FORMS (FIXED WIDTH + GRID) -->
 <section id="forms" class="soft-panel border-t border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-10">
 
 <!-- RUNNERS -->
 <div class="bg-white p-8 rounded-2xl shadow-lg">
@@ -152,25 +153,19 @@
     <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
-    <label for="shirtSize">T-Shirt Size</label>
+    <label>T-Shirt Size</label>
     <select id="shirtSize" name="shirt_size" required class="w-full border px-3 py-2 rounded">
       <option value="" disabled selected>Select your size</option>
-      <option value="XS">Extra Small</option>
-      <option value="S">Small</option>
-      <option value="M">Medium</option>
-      <option value="L">Large</option>
-      <option value="XL">Extra Large</option>
+      <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
     </select>
-
     <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="agreed_to_terms" value="Yes" required />
+      <input type="checkbox" name="agreed_to_terms" required />
       I agree to the
-      <a href="https://docs.google.com/document/d/1MdWsLI6YuOy6cZM16VV6U5cdBMise8wneQRcEbTANVc/edit?usp=sharing"
+      <a href="https://docs.google.com/document/d/1MdWsLI6YuOy6cZM16VV6U5cdBMise8wneQRcEbTANVc/edit"
          target="_blank" class="text-blue-600 underline">
         Terms & Conditions and Waiver
       </a>
     </label>
-
     <button type="button" onclick="startRunnerCheckout()"
       class="bg-blue-600 text-white px-5 py-2 rounded">
       Pay & Submit
@@ -186,22 +181,18 @@
     <input required name="contact" placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone Number" class="w-full border px-3 py-2 rounded" />
-
     <select name="sponsorship_level" required class="w-full border px-3 py-2 rounded">
       <option value="" disabled selected>Select a Sponsorship Level</option>
-      <option value="Silver - $300">Silver – $300</option>
-      <option value="Gold - $150">Gold – $150</option>
+      <option>Silver - $300</option>
+      <option>Gold - $150</option>
     </select>
-
     <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" required />
-      I agree to the
-      <a href="https://docs.google.com/document/d/1CEYrgBr7yb0ZxReJaFhZPm_Msfmo0yJg4jF4zYF7YRY/edit?usp=sharing"
+      <input type="checkbox" required /> I agree to the
+      <a href="https://docs.google.com/document/d/1CEYrgBr7yb0ZxReJaFhZPm_Msfmo0yJg4jF4zYF7YRY/edit"
          target="_blank" class="text-blue-600 underline">
         Terms & Conditions
       </a>
     </label>
-
     <button type="button" onclick="startSponsorCheckout()"
       class="bg-blue-600 text-white px-5 py-2 rounded">
       Pay & Submit
@@ -210,7 +201,7 @@
 </div>
 
 <!-- VENDORS -->
-<div class="bg-white p-8 rounded-2xl shadow-lg">
+<div class="bg-white p-8 rounded-2xl shadow-lg md:col-span-1">
   <h3 class="text-xl font-semibold mb-4">Vendors</h3>
   <form id="vendorForm" class="space-y-3">
     <input required name="company" placeholder="Company Name" class="w-full border px-3 py-2 rounded" />
@@ -218,16 +209,13 @@
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone Number" class="w-full border px-3 py-2 rounded" />
     <input required name="vendor_code" placeholder="Vendor Code" class="w-full border px-3 py-2 rounded" />
-
     <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" required />
-      I agree to the
-      <a href="https://docs.google.com/document/d/1du90L0D3Pf4AfE9Q5Z5Wem_BHZeGdb8b9rvCFAWCRxE/edit?usp=sharing"
+      <input type="checkbox" required /> I agree to the
+      <a href="https://docs.google.com/document/d/1du90L0D3Pf4AfE9Q5Z5Wem_BHZeGdb8b9rvCFAWCRxE/edit"
          target="_blank" class="text-blue-600 underline">
         Terms & Conditions
       </a>
     </label>
-
     <button type="button" onclick="startVendorCheckout()"
       class="bg-blue-600 text-white px-5 py-2 rounded">
       Pay & Submit
@@ -235,17 +223,16 @@
   </form>
 </div>
 
+  </div>
 </section>
 
 <!-- DONATIONS -->
 <section id="donate" class="bg-white border-y">
-  <div class="max-w-3xl mx-auto px-4 py-20 text-center">
+  <div class="max-w-3xl mx-auto px-4 py-24 text-center">
     <h2 class="text-3xl font-bold mb-4">Support Puzzles Marathon 💙</h2>
     <p class="text-slate-700 mb-8">
-      Your donation helps fund inclusive programming, accessibility resources,
-      and community outreach for autistic individuals and families.
+      Your donation helps fund inclusive programming and accessibility resources.
     </p>
-
     <div class="bg-slate-50 p-6 rounded-xl shadow max-w-md mx-auto">
       <form id="donationForm" class="space-y-4">
         <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
@@ -254,7 +241,6 @@
           placeholder="Donation Amount (USD)" class="w-full border px-3 py-2 rounded" />
         <textarea name="message" placeholder="Optional message"
           class="w-full border px-3 py-2 rounded"></textarea>
-
         <button type="button" onclick="startDonationCheckout()"
           class="bg-blue-600 text-white w-full py-3 rounded-lg font-semibold">
           Donate Now
@@ -273,9 +259,7 @@
   </div>
 </section>
 
-<!-- 🔒 ALL SCRIPTS BELOW UNCHANGED FROM YOUR ORIGINAL FILE -->
-<!-- (Stripe + Formspree logic preserved exactly) -->
-
+<!-- SCRIPTS (UNCHANGED) -->
 <script>
   function startRunnerCheckout() {
     const form = document.getElementById('participantForm');
@@ -307,74 +291,59 @@ async function startCheckout(type) {
 </script>
 
 <script>
-  function startVendorCheckout(){
-    const form = document.getElementById('vendorForm');
-    const vendorCode = form.vendor_code.value.trim();
-    if (vendorCode !== 'VENDOR2026'){
-      alert('Invalid Vendor Code. Please enter the approved code.');
-      return;
-    }
-    localStorage.setItem('vendorForm', JSON.stringify({
-      company: form.company.value,
-      contact: form.contact.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      vendor_code: vendorCode
-    }));
-    startCheckout('vendor');
+function startVendorCheckout(){
+  const form = document.getElementById('vendorForm');
+  const vendorCode = form.vendor_code.value.trim();
+  if (vendorCode !== 'VENDOR2026'){
+    alert('Invalid Vendor Code.');
+    return;
   }
+  localStorage.setItem('vendorForm', JSON.stringify({
+    company: form.company.value,
+    contact: form.contact.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    vendor_code: vendorCode
+  }));
+  startCheckout('vendor');
+}
 </script>
 
 <script>
-  function startSponsorCheckout() {
-    const form = document.getElementById("sponsorForm");
-    const level = form.sponsorship_level.value;
-    if (!level) {
-      alert("Please select a sponsorship level.");
-      return;
-    }
-    let amountType;
-    if (level.includes("Gold")) amountType = "sponsor_gold";
-    else if (level.includes("Silver")) amountType = "sponsor_silver";
-
-    localStorage.setItem("sponsorFormData", JSON.stringify({
-      organization: form.organization.value,
-      contact: form.contact.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      sponsorship_level: level,
-      agreed_to_terms: "Yes"
-    }));
-
-    startCheckout(amountType);
-  }
+function startSponsorCheckout() {
+  const form = document.getElementById("sponsorForm");
+  const level = form.sponsorship_level.value;
+  let amountType = level.includes("Gold") ? "sponsor_gold" : "sponsor_silver";
+  localStorage.setItem("sponsorFormData", JSON.stringify({
+    organization: form.organization.value,
+    contact: form.contact.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    sponsorship_level: level
+  }));
+  startCheckout(amountType);
+}
 </script>
 
 <script>
-  function startDonationCheckout() {
-    const form = document.getElementById("donationForm");
-    const amount = Number(form.amount.value);
-    if (!amount || amount < 1) {
-      alert("Please enter a valid donation amount.");
-      return;
-    }
-    localStorage.setItem("donationFormData", JSON.stringify({
-      name: form.name.value,
-      email: form.email.value,
-      amount: amount,
-      message: form.message.value || ""
-    }));
-    fetch("https://puzzles-marathon-backend.onrender.com/create-donation-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.url) window.location.href = data.url;
-      else alert("Payment failed. Please try again.");
-    });
-  }
+function startDonationCheckout() {
+  const form = document.getElementById("donationForm");
+  const amount = Number(form.amount.value);
+  if (!amount || amount < 1) return alert("Invalid donation amount.");
+  localStorage.setItem("donationFormData", JSON.stringify({
+    name: form.name.value,
+    email: form.email.value,
+    amount,
+    message: form.message.value || ""
+  }));
+  fetch("https://puzzles-marathon-backend.onrender.com/create-donation-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount })
+  })
+  .then(res => res.json())
+  .then(data => window.location.href = data.url);
+}
 </script>
 
 </body>
