@@ -16,7 +16,8 @@ app.post("/create-session", async (req, res) => {
 
   const PRICE_IDS = {
     participant: "price_1SZ3TSFh9qMoW6v0dSK33Rjn",
-    sponsor: "price_1SZ3TyFh9qMoW6v0ShTRC0o2",
+    sponsor_silver: "price_1SZ3TyFh9qMoW6v0ShTRC0o2",
+    sponsor_gold: "price_1SlLbtFh9qMoW6v0dDLLUa4Y",
     vendor: "price_1SkqHdFh9qMoW6v06M0gd1ro"
   };
 
