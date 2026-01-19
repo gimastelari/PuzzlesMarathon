@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "Stripe backend for Puzzles Marathon",
     "main": "server.js",
-    "type": "module",
     "scripts": {
         "start": "node server.js"
     },
@@ -13,7 +12,9 @@
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^17.2.3",
-        "express": "^5.2.1",
+        "express": "^4.19.2",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.7",
         "stripe": "^20.1.0"
     }
 }
