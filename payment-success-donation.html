@@ -17,38 +17,26 @@
   </div>
 
 <script>
-async function submitDonationData() {
-  const saved = localStorage.getItem("donationFormData");
-
-  if (!saved) {
-    document.getElementById("status").innerText =
-      "No donation data found. Please contact support.";
-    return;
-  }
-
-  const data = JSON.parse(saved);
-
-  const response = await fetch("https://formspree.io/f/xlgdlbvl", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(data)
-  });
-
-  if (response.ok) {
-    document.getElementById("status").innerText =
-      "Your donation has been received. Thank you for supporting our mission 💙";
-    localStorage.removeItem("donationFormData");
-  } else {
-    document.getElementById("status").innerText =
-      "There was a problem submitting your donation.";
-  }
-}
-
-submitDonationData();
+const sessionId = new URLSearchParams(window.location.search).get("session_id");
+    
+fetch("https://puzzles-marathon-backend.onrender.com/finalize-registration", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    sessionId,
+    formspreeUrl: "https://formspree.io/f/YOUR_DONATION_FORM_ID"
+  })
+})
+.then(() => {
+  document.getElementById("status").innerText =
+    "Thank you! Your donation has been received 💙";
+})
+.catch(() => {
+  document.getElementById("status").innerText =
+    "Donation received. Finalizing details.";
+});
 </script>
+    
 
 </body>
 </html>
