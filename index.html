@@ -271,91 +271,154 @@
 </section>
 
 <!-- SCRIPTS (UNCHANGED) -->
-<script>
-  function startRunnerCheckout() {
-    const form = document.getElementById('participantForm');
-    localStorage.setItem('participantFormData', JSON.stringify({
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      shirt_size: form.shirt_size.value,
-      agreed_to_terms: form.agreed_to_terms.checked ? "Yes" : "No"
-    }));
-    startCheckout('participant');
-  }
-</script>
+async function startRunnerCheckout() {
+  const form = document.getElementById("participantForm");
 
-<script>
-async function startCheckout(type) {
+  const response = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/save-registration",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "participant",
+        data: {
+          name: form.name.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          shirt_size: form.shirt_size.value,
+          agreed_to_terms: form.agreed_to_terms.checked ? "Yes" : "No"
+        }
+      })
+    }
+  );
+
+  const { registrationId } = await response.json();
+
+  startCheckout("participant", registrationId);
+}
+
+async function startCheckout(type, registrationId) {
   const response = await fetch(
     "https://puzzles-marathon-backend.onrender.com/create-session",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type })
+      body: JSON.stringify({ type, registrationId })
     }
   );
-  const data = await response.json();
-  if (data.url) window.location.href = data.url;
-  else alert("Payment failed. Please try again.");
-}
-</script>
 
-<script>
-function startVendorCheckout(){
-  const form = document.getElementById('vendorForm');
+  const data = await response.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Payment failed. Please try again.");
+  }
+}
+
+async function startVendorCheckout() {
+  const form = document.getElementById("vendorForm");
   const vendorCode = form.vendor_code.value.trim();
-  if (vendorCode !== 'VENDOR2026'){
-    alert('Invalid Vendor Code.');
+
+  if (vendorCode !== "VENDOR2026") {
+    alert("Invalid Vendor Code.");
     return;
   }
-  localStorage.setItem('vendorForm', JSON.stringify({
-    company: form.company.value,
-    contact: form.contact.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    vendor_code: vendorCode
-  }));
-  startCheckout('vendor');
-}
-</script>
 
-<script>
-function startSponsorCheckout() {
+  const response = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/save-registration",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "vendor",
+        data: {
+          company: form.company.value,
+          contact: form.contact.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          vendor_code: vendorCode
+        }
+      })
+    }
+  );
+
+  const { registrationId } = await response.json();
+  startCheckout("vendor", registrationId);
+}
+
+async function startSponsorCheckout() {
   const form = document.getElementById("sponsorForm");
   const level = form.sponsorship_level.value;
-  let amountType = level.includes("Gold") ? "sponsor_gold" : "sponsor_silver";
-  localStorage.setItem("sponsorFormData", JSON.stringify({
-    organization: form.organization.value,
-    contact: form.contact.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    sponsorship_level: level
-  }));
-  startCheckout(amountType);
-}
-</script>
 
-<script>
-function startDonationCheckout() {
+  const amountType = level.includes("Gold")
+    ? "sponsor_gold"
+    : "sponsor_silver";
+
+  const response = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/save-registration",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: amountType,
+        data: {
+          organization: form.organization.value,
+          contact: form.contact.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          sponsorship_level: level
+        }
+      })
+    }
+  );
+
+  const { registrationId } = await response.json();
+  startCheckout(amountType, registrationId);
+}
+
+
+async function startDonationCheckout() {
   const form = document.getElementById("donationForm");
   const amount = Number(form.amount.value);
-  if (!amount || amount < 1) return alert("Invalid donation amount.");
-  localStorage.setItem("donationFormData", JSON.stringify({
-    name: form.name.value,
-    email: form.email.value,
-    amount,
-    message: form.message.value || ""
-  }));
-  fetch("https://puzzles-marathon-backend.onrender.com/create-donation-session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount })
-  })
-  .then(res => res.json())
-  .then(data => window.location.href = data.url);
+
+  if (!amount || amount < 1) {
+    alert("Invalid donation amount.");
+    return;
+  }
+
+  const response = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/save-registration",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "donation",
+        data: {
+          name: form.name.value,
+          email: form.email.value,
+          amount,
+          message: form.message.value || ""
+        }
+      })
+    }
+  );
+
+  const { registrationId } = await response.json();
+
+  const sessionResponse = await fetch(
+    "https://puzzles-marathon-backend.onrender.com/create-donation-session",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount, registrationId })
+    }
+  );
+
+  const data = await sessionResponse.json();
+  window.location.href = data.url;
 }
-</script>
+
 
 </body>
 </html>
