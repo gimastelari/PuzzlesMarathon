@@ -1,4 +1,3 @@
-// server.js (CommonJS – Render Safe)
 
 const express = require("express");
 const cors = require("cors");
@@ -12,21 +11,21 @@ dotenv.config();
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ============================
+// =====================
 // MIDDLEWARE
-// ============================
+// =====================
 app.use(cors());
 app.use(express.json());
 
-// ============================
+// =====================
 // DATABASE (SQLite)
-// ============================
+// =====================
 let db;
 
 (async () => {
   db = await open({
     filename: "./registrations.db",
-    driver: sqlite3.Database
+    driver: sqlite3.Database,
   });
 
   await db.exec(`
@@ -41,16 +40,16 @@ let db;
   console.log("Database ready");
 })();
 
-// ============================
-// HEALTH CHECK (IMPORTANT)
-// ============================
+// =====================
+// HEALTH CHECK
+// =====================
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-// ============================
-// SAVE REGISTRATION
-// ============================
+// =====================
+// SAVE REGISTRATION (PRE-PAYMENT)
+// =====================
 app.post("/save-registration", async (req, res) => {
   try {
     const { type, data } = req.body;
@@ -68,9 +67,9 @@ app.post("/save-registration", async (req, res) => {
   }
 });
 
-// ============================
-// CREATE STRIPE CHECKOUT SESSION
-// ============================
+// =====================
+// CREATE CHECKOUT SESSION (PARTICIPANT / VENDOR / SPONSOR)
+// =====================
 app.post("/create-session", async (req, res) => {
   try {
     const { type, registrationId } = req.body;
@@ -79,14 +78,20 @@ app.post("/create-session", async (req, res) => {
       participant: 2500,
       vendor: 10000,
       sponsor_silver: 30000,
-      sponsor_gold: 15000
+      sponsor_gold: 15000,
     };
 
     const amount = priceMap[type];
-
     if (!amount) {
       return res.status(400).json({ error: "Invalid checkout type" });
     }
+
+    const successPageMap = {
+      participant: "payment-success-participant.html",
+      vendor: "payment-success-vendor.html",
+      sponsor_silver: "payment-success-sponsor.html",
+      sponsor_gold: "payment-success-sponsor.html",
+    };
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -96,19 +101,19 @@ app.post("/create-session", async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `Puzzles Marathon – ${type}`
+              name: `Puzzles Marathon – ${type}`,
             },
-            unit_amount: amount
+            unit_amount: amount,
           },
-          quantity: 1
-        }
+          quantity: 1,
+        },
       ],
-      success_url: "https://puzzlesmarathon.com/success.html",
-      cancel_url: "https://puzzlesmarathon.com/cancel.html",
+      success_url: `https://puzzlesmarathon.com/${successPageMap[type]}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: "https://puzzlesmarathon.com",
       metadata: {
         registrationId,
-        type
-      }
+        type,
+      },
     });
 
     res.json({ url: session.url });
@@ -118,9 +123,9 @@ app.post("/create-session", async (req, res) => {
   }
 });
 
-// ============================
+// =====================
 // CREATE DONATION SESSION
-// ============================
+// =====================
 app.post("/create-donation-session", async (req, res) => {
   try {
     const { amount, registrationId } = req.body;
@@ -133,19 +138,20 @@ app.post("/create-donation-session", async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Puzzles Marathon Donation"
+              name: "Puzzles Marathon Donation",
             },
-            unit_amount: amount * 100
+            unit_amount: amount * 100,
           },
-          quantity: 1
-        }
+          quantity: 1,
+        },
       ],
-      success_url: "https://puzzlesmarathon.com/success.html",
-      cancel_url: "https://puzzlesmarathon.com/cancel.html",
+      success_url:
+        "https://puzzlesmarathon.com/payment-success-donation.html?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "https://puzzlesmarathon.com",
       metadata: {
         registrationId,
-        type: "donation"
-      }
+        type: "donation",
+      },
     });
 
     res.json({ url: session.url });
@@ -155,11 +161,48 @@ app.post("/create-donation-session", async (req, res) => {
   }
 });
 
-// ============================
-// START SERVER
-// ============================
-const PORT = process.env.PORT || 3000;
+// =====================
+// FINALIZE REGISTRATION (POST-PAYMENT)
+// =====================
+app.post("/finalize-registration", async (req, res) => {
+  try {
+    const { sessionId, formspreeUrl } = req.body;
 
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (session.payment_status !== "paid") {
+      return res.status(400).json({ error: "Payment not completed" });
+    }
+
+    const registrationId = session.metadata.registrationId;
+
+    const row = await db.get(
+      "SELECT data FROM registrations WHERE id = ?",
+      registrationId
+    );
+
+    if (!row) {
+      return res.status(404).json({ error: "Registration not found" });
+    }
+
+    await fetch(formspreeUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: row.data,
+    });
+
+    res.json({ status: "ok" });
+  } catch (err) {
+    console.error("Finalize failed:", err);
+    res.status(500).json({ error: "Finalize failed" });
+  }
+});
+
+// =====================
+// START SERVER
+// =====================
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
 });
+
