@@ -22,27 +22,26 @@
     </p>
   </div>
 
-  <script>
-    // Retrieve vendor form data saved before Stripe redirect
-    const vendorData = JSON.parse(localStorage.getItem("vendorForm"));
-
-    if (vendorData) {
-      fetch("https://formspree.io/f/xykzkwzv", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(vendorData)
-      })
-      .then(() => {
-        // Clear stored data after successful submission
-        localStorage.removeItem("vendorForm");
-      })
-      .catch(err => {
-        console.error("Formspree submission failed:", err);
-      });
-    }
-  </script>
-
+<script>
+const sessionId = new URLSearchParams(window.location.search).get("session_id");
+    
+fetch("https://puzzles-marathon-backend.onrender.com/finalize-registration", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    sessionId,
+    formspreeUrl: "https://formspree.io/f/xykzkwzv"
+  })
+})
+.then(() => {
+  document.getElementById("status").innerText =
+    "Payment confirmed. Vendor registration complete 🎉";
+})
+.catch(() => {
+  document.getElementById("status").innerText =
+    "Payment confirmed. Vendor registration is being finalized.";
+});
+</script>
+    
 </body>
 </html>
