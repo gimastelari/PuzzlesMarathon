@@ -76,7 +76,7 @@ app.post("/create-session", async (req, res) => {
 
     const priceMap = {
       participant: 2500,
-      vendor: 10000,
+      vendor: 5000,
       sponsor_silver: 30000,
       sponsor_gold: 15000,
     };
