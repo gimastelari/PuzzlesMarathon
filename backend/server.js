@@ -90,11 +90,18 @@ app.post("/create-session", async (req, res) => {
     /*
     CHECK DISCOUNT CODE FOR PARTICIPANTS
     */
-    if (type === "participant") {
+    if (type === "participant" && registrationId) {
 
-      const registration = db.prepare(
-        "SELECT data FROM registrations WHERE id = ?"
-      ).get(registrationId);
+      const registration = await new Promise((resolve, reject) => {
+        db.get(
+          "SELECT data FROM registrations WHERE id = ?",
+          [registrationId], 
+          (err, row) => {
+            if (err) reject(err);
+            else resolve(row);
+          }
+        );
+      }); 
 
       let code = ""; 
 
