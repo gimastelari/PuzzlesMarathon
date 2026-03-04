@@ -164,6 +164,7 @@
     <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
+    <input name="'discount_code" placeholder="Discount Code (optional)" class="w-full border px-3 py-2 rounded" />
     <label>T-Shirt Size</label>
     <select id="shirtSize" name="shirt_size" required class="w-full border px-3 py-2 rounded">
       <option value="" disabled selected>Select your size</option>
@@ -288,6 +289,7 @@ async function startRunnerCheckout() {
           email: form.email.value,
           phone: form.phone.value,
           shirt_size: form.shirt_size.value,
+          discount_code: form.discount_code.value || "",
           agreed_to_terms: form.agreed_to_terms.checked ? "Yes" : "No"
         }
       })
