@@ -81,9 +81,33 @@ app.post("/create-session", async (req, res) => {
       sponsor_gold: 15000,
     };
 
-    const amount = priceMap[type];
+    let amount = priceMap[type];
+
     if (!amount) {
       return res.status(400).json({ error: "Invalid checkout type" });
+    }
+
+    /*
+    CHECK DISCOUNT CODE FOR PARTICIPANTS
+    */
+    if (type === "participant") {
+
+      const registration = db.prepare(
+        "SELECT data FROM registrations WHERE id = ?"
+      ).get(registrationId);
+
+      let code = ""; 
+
+      if(registration) {
+        const formData = JSON.parse(registration.data);
+        code = (formData.discount_code || "").trim().toUpperCase();
+      }
+
+      const validCodes = ["STUDENT2026", "OTF2026"]; 
+
+      if (validCodes.includes(code)) {
+        amount = 2000; // $20 instead of $25
+      }
     }
 
     const successPageMap = {
