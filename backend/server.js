@@ -92,16 +92,10 @@ app.post("/create-session", async (req, res) => {
     */
     if (type === "participant" && registrationId) {
 
-      const registration = await new Promise((resolve, reject) => {
-        db.get(
+      const registration = await db.get(
           "SELECT data FROM registrations WHERE id = ?",
-          [registrationId], 
-          (err, row) => {
-            if (err) reject(err);
-            else resolve(row);
-          }
-        );
-      }); 
+          registrationId, 
+      );
 
       let code = ""; 
 
