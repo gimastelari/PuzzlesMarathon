@@ -296,9 +296,19 @@ async function startRunnerCheckout() {
     }
   );
 
-  const { registrationId } = await response.json();
+  if(!response.ok) {
+    alert("Registration failed. Please try again.");
+    return;
+  }
 
-  startCheckout("participant", registrationId);
+  const data = await response.json();
+
+  if(!data.registrationId) {
+    alert("Registration ID missing"); 
+    return; 
+  }
+  
+  startCheckout("participant", data.registrationId);
 }
 </script>
 
