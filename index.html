@@ -165,6 +165,24 @@
     <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
     <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
     <input name="discount_code" placeholder="Discount Code (optional)" class="w-full border px-3 py-2 rounded" />
+    <label class="block font-medium">Would you like your run to be officially timed for race results?</label>
+    <select id="timedRun" name="timed_run" class="w-full border px-3 py-2 rounded">
+      <option value="no" selected>No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <div id="timingFields" class="space-y-3 hidden">
+      <input name="age" type="number" placeholder="Age"
+        class="w-full border px-3 py-2 rounded" />
+
+      <select name="gender" class="w-full border px-3 py-2 rounded">
+        <option value="" disabled selected>Select Gender</option>
+        <option>Female</option>
+        <option>Male</option>
+        <option>Non-binary</option>
+        <option>Prefer not to say</option>
+      </select>
+    </div>
     <label>T-Shirt Size</label>
     <select id="shirtSize" name="shirt_size" required class="w-full border px-3 py-2 rounded">
       <option value="" disabled selected>Select your size</option>
@@ -290,6 +308,9 @@ async function startRunnerCheckout() {
           phone: form.phone.value,
           shirt_size: form.shirt_size.value,
           discount_code: form.discount_code.value || "",
+          timed_run: form.timed_run.value,
+          age: form.age?.value || "",
+          gender: form.gender?.value || "",
           agreed_to_terms: form.agreed_to_terms.checked ? "Yes" : "No"
         }
       })
@@ -439,6 +460,19 @@ async function startDonationCheckout() {
   const data = await sessionResponse.json();
   window.location.href = data.url;
 }
+</script>
+
+<script>
+  const timedRun = document.getElementById("timedRun");
+  const timingFields = document.getElementById("timingFields");
+  
+  timedRun.addEventListener("change", () => {
+    if (timedRun.value === "yes") {
+      timingFields.classList.remove("hidden");
+    } else {
+      timingFields.classList.add("hidden");
+    }
+  });
 </script>
 
 </body>
