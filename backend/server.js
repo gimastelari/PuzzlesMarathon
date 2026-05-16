@@ -228,7 +228,7 @@ app.post("/finalize-registration", async (req, res) => {
 
 app.get("/api/gallery", (req, res) => {
 
-  const galleryPath = path.join(__dirname, "assets/img/gallery/");
+  const galleryPath = path.join(__dirname, "assets/img/gallery");
 
   fs.readdir(galleryPath, (err, files) => {
 
@@ -248,7 +248,7 @@ app.get("/api/gallery", (req, res) => {
 
 });
 
-app.use("/gallery", express.static(path.join(__dirname, "assets/img/gallery/")));
+app.use("/gallery", express.static(path.join(__dirname, "assets/img/gallery")));
 
 // =====================
 // START SERVER
