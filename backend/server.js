@@ -6,6 +6,9 @@ const dotenv = require("dotenv");
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
 
+const fs = require("fs");
+const path = require("path");
+
 dotenv.config();
 
 const app = express();
@@ -222,6 +225,30 @@ app.post("/finalize-registration", async (req, res) => {
     res.status(500).json({ error: "Finalize failed" });
   }
 });
+
+app.get("/api/gallery", (req, res) => {
+
+  const galleryPath = path.join(__dirname, "gallery");
+
+  fs.readdir(galleryPath, (err, files) => {
+
+    if (err) {
+      return res.status(500).json({ error: "Unable to load gallery" });
+    }
+
+    const imageFiles = files.filter(file =>
+      file.toLowerCase().endsWith(".jpg") ||
+      file.toLowerCase().endsWith(".jpeg") ||
+      file.toLowerCase().endsWith(".png")
+    );
+
+    res.json(imageFiles);
+
+  });
+
+});
+
+app.use("/gallery", express.static(path.join(__dirname, "gallery")));
 
 // =====================
 // START SERVER
