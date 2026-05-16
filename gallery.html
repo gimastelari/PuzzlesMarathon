@@ -40,52 +40,50 @@
 
 <!-- GALLERY -->
 <section class="max-w-7xl mx-auto px-4 pb-20">
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  
-      <!-- IMAGE -->
-      <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <img src="gallery/DSC00004.JPG"
-             class="w-full h-72 object-cover" />
-  
-        <div class="p-4">
-          <a href="gallery/DSC00004.JPG"
-             download
-             class="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-            Download
-          </a>
-        </div>
-      </div>
-  
-      <!-- IMAGE -->
-      <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <img src="gallery/DSC00009.JPG"
-             class="w-full h-72 object-cover" />
-  
-        <div class="p-4">
-          <a href="gallery/DSC00009.JPG"
-             download
-             class="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-            Download
-          </a>
-        </div>
-      </div>
-  
-      <!-- IMAGE -->
-      <div class="bg-white rounded-2xl shadow overflow-hidden">
-        <img src="gallery/DSC00018.JPG"
-             class="w-full h-72 object-cover" />
-  
-        <div class="p-4">
-          <a href="gallery/DSC00018.JPG"
-             download
-             class="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
-            Download
-          </a>
-        </div>
-      </div>
-    </div>
+  <div id="galleryGrid"
+       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  </div>
 </section>
+
+<script>
+
+  async function loadGallery() {
+  
+    const response = await fetch("/api/gallery");
+  
+    const images = await response.json();
+  
+    const galleryGrid = document.getElementById("galleryGrid");
+  
+    images.forEach(image => {
+  
+      const card = document.createElement("div");
+  
+      card.className =
+        "bg-white rounded-2xl shadow overflow-hidden";
+  
+      card.innerHTML = `
+        <img src="/gallery/${image}"
+             class="w-full h-72 object-cover" />
+  
+        <div class="p-4">
+          <a href="/gallery/${image}"
+             download
+             class="inline-block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">
+            Download
+          </a>
+        </div>
+      `;
+  
+      galleryGrid.appendChild(card);
+  
+    });
+  
+  }
+  
+  loadGallery();
+  
+</script>
 
 </body>
 </html>
