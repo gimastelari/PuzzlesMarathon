@@ -1,426 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Puzzles Marathon — Danbury, CT</title>
-  <meta name="description" content="Images from the Puzzles 5K & Festival are out now!" />
-  <link rel="icon" href="assets/img/logo-heart.jpg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Puzzles Community</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f1f5f9 100%);
+      background: #ffffff;
+      overflow-x: hidden;
     }
-    .glass {
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.96);
+
+    /* ===== Hamburger Sidebar ===== */
+    .sidebar {
+      width: 80px;
+      transition: all 0.35s ease;
     }
-    .accent-bar {
-      height: 5px;
+
+    .sidebar:hover {
+      width: 260px;
+    }
+
+    .sidebar:hover .menu-text {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .menu-text {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    /* ===== Hero Overlay ===== */
+    .hero-overlay {
       background: linear-gradient(
         90deg,
-        #2563eb,
-        #22c55e,
-        #eab308,
-        #ef4444
-      );
-      border-radius: 999px;
-    }
-    .soft-panel {
-      background: linear-gradient(
-      135deg,
-      rgba(37, 99, 235, 0.06),   /* blue */
-      rgba(34, 197, 94, 0.05),   /* green */
-      rgba(234, 179, 8, 0.05),   /* yellow */
-      rgba(239, 68, 68, 0.04)    /* red */
+        rgba(0,0,0,0.7) 0%,
+        rgba(0,0,0,0.45) 40%,
+        rgba(0,0,0,0.1) 100%
       );
     }
 
-    .soft-panel {
-      background-size: 200% 200%;
+    /* ===== Floating Cards ===== */
+    .glass {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
+    /* ===== Section Animations ===== */
+    .hover-card {
+      transition: all 0.3s ease;
+    }
+
+    .hover-card:hover {
+      transform: translateY(-8px);
+    }
   </style>
 </head>
 
-<body class="text-slate-900">
+<body class="text-gray-900">
 
-<!-- NAV -->
-<header class="sticky top-0 z-50 bg-white/90 border-b border-slate-200 backdrop-blur">
-  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-3 font-semibold text-xl">
-      <img src="assets/img/logo-heart.jpg" class="w-9 h-9 rounded-full" />
-      Puzzles Marathon
-    </a>
+  <!-- ================================================= -->
+  <!-- SIDEBAR -->
+  <!-- ================================================= -->
 
-    <ul class="hidden md:flex gap-6 text-sm font-medium text-slate-700">
-      <li><a href="#forms" class="hover:text-blue-600">Register</a></li>
-      <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
-    </ul>
+  <aside class="sidebar fixed left-0 top-0 h-screen z-50 bg-[#0B1F3A] shadow-2xl flex flex-col">
 
-    <div class="hidden md:flex gap-3">
-      <a href="gallery.html"
-         class="px-5 py-2 rounded-xl bg-blue-600 text-white shadow hover:bg-blue-700 transition">
-        View Images
-      </a>
-    </div>
-  </nav>
-</header>
+    <!-- Logo -->
+    <div class="flex items-center gap-4 p-6 border-b border-white/10">
+      <div class="text-white text-3xl">
+        ☰
+      </div>
 
-<!-- HERO -->
-<section class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-14 items-center">
-  <div class="glass p-10 rounded-3xl shadow-xl">
-    <div class="accent-bar mb-6"></div>
-    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-      Run for Awareness.<br />
-      <span class="text-blue-600">Celebrate Community.</span>
-    </h1>
-    <p class="mt-5 text-slate-700 text-lg">
-      Images from the Puzzles 5K & Festival are out now!
-    </p>
-
-    <div class="mt-8 flex gap-4 flex-wrap">
-      <a href="gallery.html"
-         class="bg-blue-600 text-white px-8 py-3 rounded-2xl text-lg font-semibold shadow hover:bg-blue-700 transition">
-        View Images
-      </a>
+      <div class="menu-text">
+        <h1 class="text-white font-bold text-xl tracking-wide">
+          PUZZLES
+        </h1>
+      </div>
     </div>
 
-  </div>
+    <!-- Navigation -->
+    <nav class="flex flex-col mt-8 px-4 gap-3">
 
-  <div class="flex justify-center">
-    <img src="assets/img/logo-heart.jpg" class="w-80 h-80 rounded-full shadow-2xl" />
-  </div>
-</section>
-
-<!-- FORMS (FIXED WIDTH + GRID) -->
-<section id="forms" class="soft-panel border-t border-slate-200">
-  <div class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-10">
-
-<!-- RUNNERS -->
-<div class="bg-white p-8 rounded-2xl shadow-lg max-w-md mx-auto">
-  <h3 class="text-xl font-semibold mb-4">Runners</h3>
-  <form id="participantForm" class="space-y-3">
-    <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
-    <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
-    <input required name="phone" placeholder="Phone" class="w-full border px-3 py-2 rounded" />
-    <input name="discount_code" placeholder="Discount Code (optional)" class="w-full border px-3 py-2 rounded" />
-    <label class="block font-medium">Would you like your run to be officially timed for race results?</label>
-    <select id="timedRun" name="timed_run" class="w-full border px-3 py-2 rounded">
-      <option value="no" selected>No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <div id="timingFields" class="space-y-3 hidden">
-      <input name="age" type="number" placeholder="Age"
-        class="w-full border px-3 py-2 rounded" />
-
-      <select name="gender" class="w-full border px-3 py-2 rounded">
-        <option value="" disabled selected>Select Gender</option>
-        <option>Female</option>
-        <option>Male</option>
-        <option>Non-binary</option>
-        <option>Prefer not to say</option>
-      </select>
-    </div>
-    <label>T-Shirt Size</label>
-    <select id="shirtSize" name="shirt_size" required class="w-full border px-3 py-2 rounded">
-      <option value="" disabled selected>Select your size</option>
-      <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
-    </select>
-    <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="agreed_to_terms" required />
-      I agree to the
-      <a href="https://docs.google.com/document/d/1MdWsLI6YuOy6cZM16VV6U5cdBMise8wneQRcEbTANVc/edit"
-         target="_blank" class="text-blue-600 underline">
-        Terms & Conditions and Waiver
+      <a href="#home"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">🏠</span>
+        <span class="menu-text font-medium">Home</span>
       </a>
-    </label>
-    <button type="button" onclick="startRunnerCheckout()"
-      class="bg-blue-600 text-white px-5 py-2 rounded">
-      Pay & Submit
-    </button>
-  </form>
-</div>
 
-<!-- SPONSORS -->
-<div class="bg-white p-8 rounded-2xl shadow-lg max-w-md mx-auto">
-  <h3 class="text-xl font-semibold mb-4">Sponsors</h3>
-  <form id="sponsorForm" class="space-y-3">
-    <input required name="organization" placeholder="Organization" class="w-full border px-3 py-2 rounded" />
-    <input required name="contact" placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
-    <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
-    <input required name="phone" placeholder="Phone Number" class="w-full border px-3 py-2 rounded" />
-    <select name="sponsorship_level" required class="w-full border px-3 py-2 rounded">
-      <option value="" disabled selected>Select a Sponsorship Level</option>
-      <option>Silver - $300</option>
-      <option>Gold - $150</option>
-    </select>
-    <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" required /> I agree to the
-      <a href="https://docs.google.com/document/d/1CEYrgBr7yb0ZxReJaFhZPm_Msfmo0yJg4jF4zYF7YRY/edit"
-         target="_blank" class="text-blue-600 underline">
-        Terms & Conditions
+      <a href="#mission"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">💙</span>
+        <span class="menu-text font-medium">Our Mission</span>
       </a>
-    </label>
-    <button type="button" onclick="startSponsorCheckout()"
-      class="bg-blue-600 text-white px-5 py-2 rounded">
-      Pay & Submit
-    </button>
-  </form>
-</div>
 
-<!-- VENDORS -->
-<div class="bg-white p-8 rounded-2xl shadow-lg max-w-md mx-auto">
-  <h3 class="text-xl font-semibold mb-4">Vendors</h3>
-  <form id="vendorForm" class="space-y-3">
-    <input required name="company" placeholder="Company Name" class="w-full border px-3 py-2 rounded" />
-    <input required name="contact" placeholder="Contact Name" class="w-full border px-3 py-2 rounded" />
-    <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
-    <input required name="phone" placeholder="Phone Number" class="w-full border px-3 py-2 rounded" />
-    <input required name="vendor_code" placeholder="Vendor Code" class="w-full border px-3 py-2 rounded" />
-    <label class="flex items-center gap-2 text-sm">
-      <input type="checkbox" required /> I agree to the
-      <a href="https://docs.google.com/document/d/1du90L0D3Pf4AfE9Q5Z5Wem_BHZeGdb8b9rvCFAWCRxE/edit"
-         target="_blank" class="text-blue-600 underline">
-        Terms & Conditions
+      <a href="#programs"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">🌱</span>
+        <span class="menu-text font-medium">Programs</span>
       </a>
-    </label>
-    <button type="button" onclick="startVendorCheckout()"
-      class="bg-blue-600 text-white px-5 py-2 rounded">
-      Pay & Submit
-    </button>
-  </form>
-</div>
 
-  </div>
-</section>
-
-<!-- DONATIONS -->
-<section id="donate" class="bg-white border-y">
-  <div class="max-w-3xl mx-auto px-4 py-24 text-center">
-    <h2 class="text-3xl font-bold mb-4">Support Puzzles Marathon 💙</h2>
-    <p class="text-slate-700 mb-8">
-      Your donation helps fund inclusive programming and accessibility resources.
-    </p>
-    <p class="text-sm text-blue-600 font-medium mb-8">
-      <a href="funds.html" class="hover:underline flex items-center justify-center gap-1">
-        Learn More About Our Funds
-        <span>→</span>
+      <a href="#events"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">🎉</span>
+        <span class="menu-text font-medium">Events</span>
       </a>
-    </p>
-    <div class="bg-slate-50 p-6 rounded-xl shadow max-w-md mx-auto">
-      <form id="donationForm" class="space-y-4">
-        <input required name="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" />
-        <input required name="email" type="email" placeholder="Email" class="w-full border px-3 py-2 rounded" />
-        <input required name="amount" type="number" min="1"
-          placeholder="Donation Amount (USD)" class="w-full border px-3 py-2 rounded" />
-        <textarea name="message" placeholder="Optional message"
-          class="w-full border px-3 py-2 rounded"></textarea>
-        <button type="button" onclick="startDonationCheckout()"
-          class="bg-blue-600 text-white w-full py-3 rounded-lg font-semibold">
-          Donate Now
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<section id="contact" class="bg-white border-t">
-  <div class="max-w-6xl mx-auto px-4 py-10 flex justify-between">
-    <p>Questions? <a href="mailto:info@puzzlesmarathon.com" class="text-blue-600 underline">
-      info@puzzlesmarathon.com</a></p>
-    <p class="text-sm text-slate-500">© 2025 Puzzles Marathon</p>
-  </div>
-</section>
+      <a href="#community"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">🧩</span>
+        <span class="menu-text font-medium">Community</span>
+      </a>
 
-<!-- SCRIPTS -->
+      <a href="#contact"
+         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
+        <span class="text-2xl">✉️</span>
+        <span class="menu-text font-medium">Contact</span>
+      </a>
 
-<script>
-async function startRunnerCheckout() {
-  const form = document.getElementById("participantForm");
+    </nav>
+  </aside>
 
-  const response = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/save-registration",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "participant",
-        data: {
-          name: form.name.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          shirt_size: form.shirt_size.value,
-          discount_code: form.discount_code.value || "",
-          timed_run: form.timed_run.value,
-          age: form.age?.value || "",
-          gender: form.gender?.value || "",
-          agreed_to_terms: form.agreed_to_terms.checked ? "Yes" : "No"
-        }
-      })
-    }
-  );
+  <!-- ================================================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ================================================= -->
 
-  if(!response.ok) {
-    alert("Registration failed. Please try again.");
-    return;
-  }
+  <main class="ml-[80px]">
 
-  const data = await response.json();
+    <!-- ================================================= -->
+    <!-- HERO -->
+    <!-- ================================================= -->
 
-  if(!data.registrationId) {
-    alert("Registration ID missing"); 
-    return; 
-  }
-  
-  startCheckout("participant", data.registrationId);
-}
-</script>
+    <section id="home"
+             class="relative h-screen flex items-center overflow-hidden">
 
-<script>
-async function startCheckout(type, registrationId) {
-  const response = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/create-session",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, registrationId })
-    }
-  );
+      <!-- Background -->
+      <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2000&auto=format&fit=crop"
+           class="absolute inset-0 w-full h-full object-cover" />
 
-  const data = await response.json();
+      <!-- Overlay -->
+      <div class="hero-overlay absolute inset-0"></div>
 
-  if (data.url) {
-    window.location.href = data.url;
-  } else {
-    alert("Payment failed. Please try again.");
-  }
-}
-</script>
+      <!-- Hero Content -->
+      <div class="relative z-10 max-w-6xl px-10 lg:px-20">
 
-<script>
-async function startVendorCheckout() {
-  const form = document.getElementById("vendorForm");
-  const vendorCode = form.vendor_code.value.trim();
+        <div class="glass inline-block px-5 py-2 rounded-full mb-6">
+          <p class="text-white text-sm tracking-[0.25em] uppercase">
+            Puzzles Community
+          </p>
+        </div>
 
-  if (vendorCode !== "VENDOR2026") {
-    alert("Invalid Vendor Code.");
-    return;
-  }
+        <h1 class="text-white text-5xl md:text-7xl font-extrabold leading-tight max-w-4xl">
+          Building Inclusive
+          Communities Through
+          Events & Programs
+        </h1>
 
-  const response = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/save-registration",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "vendor",
-        data: {
-          company: form.company.value,
-          contact: form.contact.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          vendor_code: vendorCode
-        }
-      })
-    }
-  );
+        <p class="text-white/90 text-lg md:text-xl mt-8 max-w-2xl leading-relaxed">
+          Puzzles creates meaningful experiences, support systems,
+          and community-driven programs for individuals with autism
+          and their families.
+        </p>
 
-  const { registrationId } = await response.json();
-  startCheckout("vendor", registrationId);
-}
-</script>
+        <div class="flex flex-wrap gap-5 mt-10">
 
-<script>
-async function startSponsorCheckout() {
-  const form = document.getElementById("sponsorForm");
-  const level = form.sponsorship_level.value;
+          <a href="#events"
+             class="bg-[#1E90FF] hover:bg-[#1877F2] text-white px-8 py-4 rounded-full font-semibold transition">
+            Explore Events
+          </a>
 
-  const amountType = level.includes("Gold")
-    ? "sponsor_gold"
-    : "sponsor_silver";
+          <a href="#mission"
+             class="border border-white/40 hover:bg-white hover:text-black text-white px-8 py-4 rounded-full font-semibold transition">
+            Learn More
+          </a>
 
-  const response = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/save-registration",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: amountType,
-        data: {
-          organization: form.organization.value,
-          contact: form.contact.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          sponsorship_level: level
-        }
-      })
-    }
-  );
+        </div>
 
-  const { registrationId } = await response.json();
-  startCheckout(amountType, registrationId);
-}
-</script>
+      </div>
+    </section>
 
-<script>
-async function startDonationCheckout() {
-  const form = document.getElementById("donationForm");
-  const amount = Number(form.amount.value);
+    <!-- ================================================= -->
+    <!-- MISSION -->
+    <!-- ================================================= -->
 
-  if (!amount || amount < 1) {
-    alert("Invalid donation amount.");
-    return;
-  }
+    <section id="mission" class="py-28 px-8 lg:px-20 bg-white">
 
-  const response = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/save-registration",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "donation",
-        data: {
-          name: form.name.value,
-          email: form.email.value,
-          amount,
-          message: form.message.value || ""
-        }
-      })
-    }
-  );
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-  const { registrationId } = await response.json();
+        <div>
+          <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
+            Our Mission
+          </p>
 
-  const sessionResponse = await fetch(
-    "https://puzzles-marathon-backend.onrender.com/create-donation-session",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount, registrationId })
-    }
-  );
+          <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-8">
+            Empowering families through connection, inclusion, and opportunity.
+          </h2>
 
-  const data = await sessionResponse.json();
-  window.location.href = data.url;
-}
-</script>
+          <p class="text-gray-600 text-lg leading-relaxed mb-6">
+            Puzzles was created to build experiences that bring people together —
+            from large-scale community events and festivals to educational,
+            wellness, and life-skills programs.
+          </p>
 
-<script>
-  const timedRun = document.getElementById("timedRun");
-  const timingFields = document.getElementById("timingFields");
-  
-  timedRun.addEventListener("change", () => {
-    if (timedRun.value === "yes") {
-      timingFields.classList.remove("hidden");
-    } else {
-      timingFields.classList.add("hidden");
-    }
-  });
-</script>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            Every initiative is designed to support individuals with autism
+            while creating stronger, more connected communities.
+          </p>
+        </div>
+
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1600&auto=format&fit=crop"
+               class="rounded-[40px] shadow-2xl w-full object-cover h-[650px]" />
+
+          <div class="absolute bottom-8 left-8 glass rounded-3xl p-8 text-white max-w-sm">
+            <h3 class="text-4xl font-bold mb-2">800+</h3>
+            <p class="text-white/90">
+              Participants joined the first-ever Puzzles 5K Festival.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================= -->
+    <!-- PROGRAMS -->
+    <!-- ================================================= -->
+
+    <section id="programs"
+             class="py-28 px-8 lg:px-20 bg-[#F5F9FF]">
+
+      <div class="max-w-7xl mx-auto">
+
+        <div class="mb-16">
+          <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
+            Programs
+          </p>
+
+          <h2 class="text-4xl md:text-5xl font-bold">
+            Community Programs Designed For Impact
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+          <!-- Card -->
+          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
+            <div class="text-5xl mb-6">🌱</div>
+
+            <h3 class="text-2xl font-bold mb-4">
+              Gardening Program
+            </h3>
+
+            <p class="text-gray-600 leading-relaxed">
+              Hands-on gardening experiences designed to encourage
+              wellness, sensory engagement, teamwork, and independence.
+            </p>
+          </div>
+
+          <!-- Card -->
+          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
+            <div class="text-5xl mb-6">🎨</div>
+
+            <h3 class="text-2xl font-bold mb-4">
+              Creative Workshops
+            </h3>
+
+            <p class="text-gray-600 leading-relaxed">
+              Interactive art, music, and creativity sessions that
+              promote confidence, expression, and social interaction.
+            </p>
+          </div>
+
+          <!-- Card -->
+          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
+            <div class="text-5xl mb-6">🎉</div>
+
+            <h3 class="text-2xl font-bold mb-4">
+              Community Events
+            </h3>
+
+            <p class="text-gray-600 leading-relaxed">
+              Festivals, fundraisers, and social experiences that
+              bring families and the local community together.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================= -->
+    <!-- EVENTS -->
+    <!-- ================================================= -->
+
+    <section id="events"
+             class="py-28 px-8 lg:px-20 bg-[#0B1F3A] text-white">
+
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+
+        <div>
+
+          <p class="uppercase tracking-[0.25em] text-[#4EA3FF] font-semibold mb-5">
+            Upcoming Events
+          </p>
+
+          <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-8">
+            Discover what’s happening next with Puzzles.
+          </h2>
+
+          <p class="text-white/75 text-lg leading-relaxed mb-10">
+            From inclusive wellness initiatives to community festivals,
+            every Puzzles event is designed to create connection,
+            belonging, and meaningful impact.
+          </p>
+
+          <a href="#"
+             class="inline-block bg-[#1E90FF] hover:bg-[#1877F2] px-8 py-4 rounded-full font-semibold transition">
+            View All Events
+          </a>
+
+        </div>
+
+        <div class="grid gap-6">
+
+          <div class="bg-white/10 border border-white/10 rounded-3xl p-8">
+            <p class="text-[#4EA3FF] font-semibold mb-3">
+              AUGUST 2026
+            </p>
+
+            <h3 class="text-2xl font-bold mb-3">
+              Puzzles Gardening Program
+            </h3>
+
+            <p class="text-white/75">
+              Interactive gardening and sustainability program for
+              children, teens, and adults with autism.
+            </p>
+          </div>
+
+          <div class="bg-white/10 border border-white/10 rounded-3xl p-8">
+            <p class="text-[#4EA3FF] font-semibold mb-3">
+              FALL 2026
+            </p>
+
+            <h3 class="text-2xl font-bold mb-3">
+              Community Farmers Market
+            </h3>
+
+            <p class="text-white/75">
+              Featuring crops grown through the Puzzles gardening initiative,
+              with proceeds supporting future programs.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================= -->
+    <!-- COMMUNITY -->
+    <!-- ================================================= -->
+
+    <section id="community"
+             class="py-28 px-8 lg:px-20 bg-white">
+
+      <div class="max-w-7xl mx-auto text-center">
+
+        <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
+          Community
+        </p>
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          Built With The Community, For The Community
+        </h2>
+
+        <p class="max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
+          Puzzles believes in listening directly to families,
+          individuals, educators, and local organizations to build
+          programs that truly make a difference.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
+
+    <footer id="contact"
+            class="bg-[#071427] text-white py-16 px-8 lg:px-20">
+
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
+
+        <div>
+          <h2 class="text-3xl font-bold mb-4">
+            PUZZLES
+          </h2>
+
+          <p class="text-white/70 max-w-md">
+            Creating inclusive experiences and empowering communities
+            through impactful programs and events.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <a href="#" class="text-white/70 hover:text-white transition">
+            Instagram
+          </a>
+
+          <a href="#" class="text-white/70 hover:text-white transition">
+            Facebook
+          </a>
+
+          <a href="#" class="text-white/70 hover:text-white transition">
+            Contact Us
+          </a>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
 
 </body>
 </html>
