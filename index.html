@@ -2,448 +2,817 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Puzzles Community</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      font-family: 'Poppins', sans-serif;
+
+    *{
+      font-family:'Poppins',sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
+    body{
+      background:#fffdf8;
+      overflow-x:hidden;
+      color:#16324F;
     }
 
-    body {
-      background: #ffffff;
-      overflow-x: hidden;
+    h1,h2,h3,h4{
+      font-family:'Fredoka',sans-serif;
     }
 
-    /* ===== Hamburger Sidebar ===== */
-    .sidebar {
-      width: 80px;
-      transition: all 0.35s ease;
+    html{
+      scroll-behavior:smooth;
     }
 
-    .sidebar:hover {
-      width: 260px;
+    /* ========================================= */
+    /* SCRAPBOOK BACKGROUND ELEMENTS */
+    /* ========================================= */
+
+    .floating-puzzle{
+      position:absolute;
+      opacity:0.08;
+      z-index:0;
+      pointer-events:none;
     }
 
-    .sidebar:hover .menu-text {
-      opacity: 1;
-      transform: translateX(0);
+    .scribble{
+      position:absolute;
+      opacity:0.18;
+      z-index:0;
     }
 
-    .menu-text {
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: all 0.25s ease;
-      white-space: nowrap;
+    /* ========================================= */
+    /* HERO VIDEO */
+    /* ========================================= */
+
+    .hero-video{
+      position:relative;
+      width:100%;
+      height:88vh;
+      overflow:hidden;
+      background:black;
     }
 
-    /* ===== Hero Overlay ===== */
-    .hero-overlay {
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0.7) 0%,
-        rgba(0,0,0,0.45) 40%,
-        rgba(0,0,0,0.1) 100%
+    .hero-video video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.15)
       );
     }
 
-    /* ===== Floating Cards ===== */
-    .glass {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.15);
+    .play-button{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    /* ===== Section Animations ===== */
-    .hover-card {
-      transition: all 0.3s ease;
+    .play-circle{
+      width:100px;
+      height:100px;
+      border-radius:9999px;
+      background:rgba(255,255,255,0.22);
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.3s ease;
+      cursor:pointer;
     }
 
-    .hover-card:hover {
-      transform: translateY(-8px);
+    .play-circle:hover{
+      transform:scale(1.08);
     }
+
+    /* ========================================= */
+    /* SCRAPBOOK IMAGE FRAME */
+    /* ========================================= */
+
+    .photo-frame{
+      background:white;
+      padding:16px;
+      border-radius:30px;
+      box-shadow:
+      0 20px 40px rgba(0,0,0,0.08);
+      transform:rotate(-2deg);
+      position:relative;
+    }
+
+    .photo-frame::before{
+      content:'';
+      position:absolute;
+      top:-12px;
+      left:40px;
+      width:80px;
+      height:30px;
+      background:#8ED1FF;
+      border-radius:8px;
+      transform:rotate(-8deg);
+    }
+
+    /* ========================================= */
+    /* SUPPORT CARDS */
+    /* ========================================= */
+
+    .support-card{
+      transition:0.35s ease;
+    }
+
+    .support-card:hover{
+      transform:translateY(-10px);
+    }
+
+    /* ========================================= */
+    /* BULLETIN BOARD */
+    /* ========================================= */
+
+    .bulletin-board{
+      background:#E7CFA3;
+      border:18px solid #C79D63;
+      border-radius:30px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.12);
+      position:relative;
+    }
+
+    .note{
+      background:#FFF9D9;
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      transform:rotate(-1deg);
+    }
+
+    .note:nth-child(even){
+      transform:rotate(1deg);
+    }
+
+    /* ========================================= */
+    /* THANK YOU SLIDER */
+    /* ========================================= */
+
+    .slider{
+      overflow:hidden;
+      position:relative;
+    }
+
+    .slide-track{
+      display:flex;
+      width:calc(300px * 12);
+      animation:scroll 25s linear infinite;
+      gap:30px;
+    }
+
+    .slide{
+      width:300px;
+      flex-shrink:0;
+    }
+
+    @keyframes scroll{
+      0%{
+        transform:translateX(0);
+      }
+
+      100%{
+        transform:translateX(calc(-300px * 6));
+      }
+    }
+
+    /* ========================================= */
+    /* FOOTER */
+    /* ========================================= */
+
+    .footer-link:hover{
+      color:#8ED1FF;
+    }
+
   </style>
 </head>
 
-<body class="text-gray-900">
+<body>
 
-  <!-- ================================================= -->
-  <!-- SIDEBAR -->
-  <!-- ================================================= -->
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
 
-  <aside class="sidebar fixed left-0 top-0 h-screen z-50 bg-[#0B1F3A] shadow-2xl flex flex-col">
+  <header class="bg-[#0B3C6D] py-5 shadow-lg sticky top-0 z-50">
 
-    <!-- Logo -->
-    <div class="flex items-center gap-4 p-6 border-b border-white/10">
-      <div class="text-white text-3xl">
-        ☰
+    <div class="max-w-7xl mx-auto px-6 flex justify-center items-center">
+
+      <!-- Replace with your logo -->
+      <div class="flex items-center gap-4">
+
+        <img src="logo.png"
+             alt="Puzzles Logo"
+             class="h-16 w-auto object-contain">
+
       </div>
 
-      <div class="menu-text">
-        <h1 class="text-white font-bold text-xl tracking-wide">
-          PUZZLES
-        </h1>
-      </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="flex flex-col mt-8 px-4 gap-3">
+  </header>
 
-      <a href="#home"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">🏠</span>
-        <span class="menu-text font-medium">Home</span>
-      </a>
+  <!-- ========================================= -->
+  <!-- HERO VIDEO -->
+  <!-- ========================================= -->
 
-      <a href="#mission"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">💙</span>
-        <span class="menu-text font-medium">Our Mission</span>
-      </a>
+  <section class="hero-video">
 
-      <a href="#programs"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">🌱</span>
-        <span class="menu-text font-medium">Programs</span>
-      </a>
+    <!-- Replace with your video -->
+    <video id="heroVideo"
+           poster="hero-thumbnail.jpg">
 
-      <a href="#events"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">🎉</span>
-        <span class="menu-text font-medium">Events</span>
-      </a>
+      <source src="hero-video.mp4" type="video/mp4">
 
-      <a href="#community"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">🧩</span>
-        <span class="menu-text font-medium">Community</span>
-      </a>
+    </video>
 
-      <a href="#contact"
-         class="flex items-center gap-4 text-white hover:bg-white/10 rounded-xl px-4 py-4 transition">
-        <span class="text-2xl">✉️</span>
-        <span class="menu-text font-medium">Contact</span>
-      </a>
+    <div class="hero-overlay"></div>
 
-    </nav>
-  </aside>
+    <!-- Play Button -->
+    <div class="play-button">
 
-  <!-- ================================================= -->
-  <!-- MAIN CONTENT -->
-  <!-- ================================================= -->
+      <div class="play-circle" onclick="toggleVideo()">
 
-  <main class="ml-[80px]">
+        <svg id="playIcon"
+             xmlns="http://www.w3.org/2000/svg"
+             width="42"
+             height="42"
+             fill="white"
+             viewBox="0 0 16 16">
 
-    <!-- ================================================= -->
-    <!-- HERO -->
-    <!-- ================================================= -->
+          <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
 
-    <section id="home"
-             class="relative h-screen flex items-center overflow-hidden">
+        </svg>
 
-      <!-- Background -->
-      <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2000&auto=format&fit=crop"
-           class="absolute inset-0 w-full h-full object-cover" />
+      </div>
 
-      <!-- Overlay -->
-      <div class="hero-overlay absolute inset-0"></div>
+    </div>
 
-      <!-- Hero Content -->
-      <div class="relative z-10 max-w-6xl px-10 lg:px-20">
+  </section>
 
-        <div class="glass inline-block px-5 py-2 rounded-full mb-6">
-          <p class="text-white text-sm tracking-[0.25em] uppercase">
-            Puzzles Community
-          </p>
-        </div>
+  <!-- ========================================= -->
+  <!-- MISSION SECTION -->
+  <!-- ========================================= -->
 
-        <h1 class="text-white text-5xl md:text-7xl font-extrabold leading-tight max-w-4xl">
-          Building Inclusive
-          Communities Through
-          Events & Programs
+  <section class="relative py-28 overflow-hidden">
+
+    <!-- Background Decorations -->
+    <div class="floating-puzzle top-10 left-10 text-[180px]">🧩</div>
+    <div class="floating-puzzle bottom-10 right-10 text-[180px]">✨</div>
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+
+      <!-- Image -->
+      <div class="photo-frame">
+
+        <img src="your-photo.jpg"
+             alt="Puzzles Community"
+             class="rounded-2xl w-full h-[550px] object-cover">
+
+      </div>
+
+      <!-- Text -->
+      <div>
+
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight text-[#0B3C6D]">
+          One Piece Closer
         </h1>
 
-        <p class="text-white/90 text-lg md:text-xl mt-8 max-w-2xl leading-relaxed">
-          Puzzles creates meaningful experiences, support systems,
-          and community-driven programs for individuals with autism
-          and their families.
+        <p class="mt-8 text-xl text-gray-700 leading-relaxed">
+
+          We take tiny steps every day to build a more inclusive society
+          for neurodivergent and autistic individuals through community,
+          accessibility, education, awareness, and meaningful experiences.
+
         </p>
 
         <div class="flex flex-wrap gap-5 mt-10">
 
-          <a href="#events"
-             class="bg-[#1E90FF] hover:bg-[#1877F2] text-white px-8 py-4 rounded-full font-semibold transition">
-            Explore Events
+          <a href="#"
+             class="bg-[#0B3C6D] hover:bg-[#072746] text-white px-8 py-4 rounded-full font-semibold transition">
+
+            About Us
+
           </a>
-
-          <a href="#mission"
-             class="border border-white/40 hover:bg-white hover:text-black text-white px-8 py-4 rounded-full font-semibold transition">
-            Learn More
-          </a>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================================================= -->
-    <!-- MISSION -->
-    <!-- ================================================= -->
-
-    <section id="mission" class="py-28 px-8 lg:px-20 bg-white">
-
-      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-
-        <div>
-          <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
-            Our Mission
-          </p>
-
-          <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-8">
-            Empowering families through connection, inclusion, and opportunity.
-          </h2>
-
-          <p class="text-gray-600 text-lg leading-relaxed mb-6">
-            Puzzles was created to build experiences that bring people together —
-            from large-scale community events and festivals to educational,
-            wellness, and life-skills programs.
-          </p>
-
-          <p class="text-gray-600 text-lg leading-relaxed">
-            Every initiative is designed to support individuals with autism
-            while creating stronger, more connected communities.
-          </p>
-        </div>
-
-        <div class="relative">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1600&auto=format&fit=crop"
-               class="rounded-[40px] shadow-2xl w-full object-cover h-[650px]" />
-
-          <div class="absolute bottom-8 left-8 glass rounded-3xl p-8 text-white max-w-sm">
-            <h3 class="text-4xl font-bold mb-2">800+</h3>
-            <p class="text-white/90">
-              Participants joined the first-ever Puzzles 5K Festival.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================================================= -->
-    <!-- PROGRAMS -->
-    <!-- ================================================= -->
-
-    <section id="programs"
-             class="py-28 px-8 lg:px-20 bg-[#F5F9FF]">
-
-      <div class="max-w-7xl mx-auto">
-
-        <div class="mb-16">
-          <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
-            Programs
-          </p>
-
-          <h2 class="text-4xl md:text-5xl font-bold">
-            Community Programs Designed For Impact
-          </h2>
-        </div>
-
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-
-          <!-- Card -->
-          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
-            <div class="text-5xl mb-6">🌱</div>
-
-            <h3 class="text-2xl font-bold mb-4">
-              Gardening Program
-            </h3>
-
-            <p class="text-gray-600 leading-relaxed">
-              Hands-on gardening experiences designed to encourage
-              wellness, sensory engagement, teamwork, and independence.
-            </p>
-          </div>
-
-          <!-- Card -->
-          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
-            <div class="text-5xl mb-6">🎨</div>
-
-            <h3 class="text-2xl font-bold mb-4">
-              Creative Workshops
-            </h3>
-
-            <p class="text-gray-600 leading-relaxed">
-              Interactive art, music, and creativity sessions that
-              promote confidence, expression, and social interaction.
-            </p>
-          </div>
-
-          <!-- Card -->
-          <div class="hover-card bg-white rounded-[32px] p-10 shadow-lg">
-            <div class="text-5xl mb-6">🎉</div>
-
-            <h3 class="text-2xl font-bold mb-4">
-              Community Events
-            </h3>
-
-            <p class="text-gray-600 leading-relaxed">
-              Festivals, fundraisers, and social experiences that
-              bring families and the local community together.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================================================= -->
-    <!-- EVENTS -->
-    <!-- ================================================= -->
-
-    <section id="events"
-             class="py-28 px-8 lg:px-20 bg-[#0B1F3A] text-white">
-
-      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-
-        <div>
-
-          <p class="uppercase tracking-[0.25em] text-[#4EA3FF] font-semibold mb-5">
-            Upcoming Events
-          </p>
-
-          <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-8">
-            Discover what’s happening next with Puzzles.
-          </h2>
-
-          <p class="text-white/75 text-lg leading-relaxed mb-10">
-            From inclusive wellness initiatives to community festivals,
-            every Puzzles event is designed to create connection,
-            belonging, and meaningful impact.
-          </p>
 
           <a href="#"
-             class="inline-block bg-[#1E90FF] hover:bg-[#1877F2] px-8 py-4 rounded-full font-semibold transition">
-            View All Events
+             class="bg-[#8ED1FF] hover:bg-[#76c4f7] text-[#0B3C6D] px-8 py-4 rounded-full font-semibold transition">
+
+            Events & Programs
+
           </a>
 
         </div>
 
-        <div class="grid gap-6">
-
-          <div class="bg-white/10 border border-white/10 rounded-3xl p-8">
-            <p class="text-[#4EA3FF] font-semibold mb-3">
-              AUGUST 2026
-            </p>
-
-            <h3 class="text-2xl font-bold mb-3">
-              Puzzles Gardening Program
-            </h3>
-
-            <p class="text-white/75">
-              Interactive gardening and sustainability program for
-              children, teens, and adults with autism.
-            </p>
-          </div>
-
-          <div class="bg-white/10 border border-white/10 rounded-3xl p-8">
-            <p class="text-[#4EA3FF] font-semibold mb-3">
-              FALL 2026
-            </p>
-
-            <h3 class="text-2xl font-bold mb-3">
-              Community Farmers Market
-            </h3>
-
-            <p class="text-white/75">
-              Featuring crops grown through the Puzzles gardening initiative,
-              with proceeds supporting future programs.
-            </p>
-          </div>
-
-        </div>
-
       </div>
-    </section>
 
-    <!-- ================================================= -->
-    <!-- COMMUNITY -->
-    <!-- ================================================= -->
+    </div>
 
-    <section id="community"
-             class="py-28 px-8 lg:px-20 bg-white">
+  </section>
 
-      <div class="max-w-7xl mx-auto text-center">
+  <!-- ========================================= -->
+  <!-- SUPPORT SECTION -->
+  <!-- ========================================= -->
 
-        <p class="text-[#1E90FF] font-semibold uppercase tracking-[0.25em] mb-4">
-          Community
-        </p>
+  <section class="relative py-28 bg-[#F7FBFF] overflow-hidden">
 
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          Built With The Community, For The Community
+    <div class="floating-puzzle top-0 right-0 text-[220px]">🧩</div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+      <div class="text-center mb-20">
+
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">
+          How You Can Support This Mission
         </h2>
 
-        <p class="max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
-          Puzzles believes in listening directly to families,
-          individuals, educators, and local organizations to build
-          programs that truly make a difference.
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-10">
+
+        <!-- CARD -->
+        <div class="support-card">
+
+          <img src="donate.jpg"
+               class="rounded-[30px] h-72 w-full object-cover shadow-lg">
+
+          <div class="mt-6 text-center">
+
+            <a href="#"
+               class="inline-block bg-[#0B3C6D] text-white px-8 py-4 rounded-full font-semibold">
+
+              Donate
+
+            </a>
+
+            <p class="mt-4 text-gray-600 leading-relaxed">
+              Help fund inclusive events, programs, and resources.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="support-card">
+
+          <img src="volunteer.jpg"
+               class="rounded-[30px] h-72 w-full object-cover shadow-lg">
+
+          <div class="mt-6 text-center">
+
+            <a href="#"
+               class="inline-block bg-[#0B3C6D] text-white px-8 py-4 rounded-full font-semibold">
+
+              Volunteer
+
+            </a>
+
+            <p class="mt-4 text-gray-600 leading-relaxed">
+              Join our team and help create meaningful experiences.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="support-card">
+
+          <img src="partner.jpg"
+               class="rounded-[30px] h-72 w-full object-cover shadow-lg">
+
+          <div class="mt-6 text-center">
+
+            <a href="#"
+               class="inline-block bg-[#0B3C6D] text-white px-8 py-4 rounded-full font-semibold">
+
+              Partner
+
+            </a>
+
+            <p class="mt-4 text-gray-600 leading-relaxed">
+              Collaborate with us to expand our community impact.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="support-card">
+
+          <img src="connect.jpg"
+               class="rounded-[30px] h-72 w-full object-cover shadow-lg">
+
+          <div class="mt-6 text-center">
+
+            <a href="#"
+               class="inline-block bg-[#0B3C6D] text-white px-8 py-4 rounded-full font-semibold">
+
+              Connect
+
+            </a>
+
+            <p class="mt-4 text-gray-600 leading-relaxed">
+              Stay involved and grow alongside our mission.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- BULLETIN BOARD -->
+  <!-- ========================================= -->
+
+  <section class="py-28 px-6">
+
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">
+          Community News & What's Next
+        </h2>
+
+      </div>
+
+      <div class="bulletin-board p-10">
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+          <div class="note">
+
+            <h3 class="text-2xl font-bold mb-4">
+              Puzzles 5K Festival
+            </h3>
+
+            <p class="text-gray-700">
+              Nearly 800 runners joined our first-ever community festival.
+            </p>
+
+          </div>
+
+          <div class="note">
+
+            <h3 class="text-2xl font-bold mb-4">
+              $1,000 Donation
+            </h3>
+
+            <p class="text-gray-700">
+              Donated to Autism Behavioral Health to support local families.
+            </p>
+
+          </div>
+
+          <div class="note">
+
+            <h3 class="text-2xl font-bold mb-4">
+              CVS Pharmacy Partnership
+            </h3>
+
+            <p class="text-gray-700">
+              Received a $2,500 contribution to help support future programs.
+            </p>
+
+          </div>
+
+          <div class="note">
+
+            <h3 class="text-2xl font-bold mb-4">
+              What's Next
+            </h3>
+
+            <p class="text-gray-700">
+              Launching our gardening program and expanding community resources.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- THANK YOU SLIDER -->
+  <!-- ========================================= -->
+
+  <section class="py-28 bg-[#F7FBFF] overflow-hidden">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16">
+
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">
+          Special Thanks
+        </h2>
+
+        <p class="mt-6 text-gray-600 text-lg">
+          To the people and organizations helping make this mission possible.
         </p>
 
       </div>
-    </section>
 
-    <!-- ================================================= -->
-    <!-- FOOTER -->
-    <!-- ================================================= -->
+      <div class="slider">
 
-    <footer id="contact"
-            class="bg-[#071427] text-white py-16 px-8 lg:px-20">
+        <div class="slide-track">
 
-      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
+          <!-- SLIDES -->
 
-        <div>
-          <h2 class="text-3xl font-bold mb-4">
-            PUZZLES
-          </h2>
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor1.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
 
-          <p class="text-white/70 max-w-md">
-            Creating inclusive experiences and empowering communities
-            through impactful programs and events.
-          </p>
+            <h3 class="text-2xl font-bold">
+              Community Partner
+            </h3>
+          </div>
+
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor2.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
+
+            <h3 class="text-2xl font-bold">
+              Volunteer Team
+            </h3>
+          </div>
+
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor3.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
+
+            <h3 class="text-2xl font-bold">
+              Local Sponsor
+            </h3>
+          </div>
+
+          <!-- DUPLICATE FOR LOOP EFFECT -->
+
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor1.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
+
+            <h3 class="text-2xl font-bold">
+              Community Partner
+            </h3>
+          </div>
+
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor2.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
+
+            <h3 class="text-2xl font-bold">
+              Volunteer Team
+            </h3>
+          </div>
+
+          <div class="slide bg-white rounded-[30px] p-10 shadow-lg text-center">
+            <img src="sponsor3.jpg"
+                 class="w-24 h-24 rounded-full mx-auto object-cover mb-6">
+
+            <h3 class="text-2xl font-bold">
+              Local Sponsor
+            </h3>
+          </div>
+
         </div>
 
-        <div class="flex flex-col gap-3">
-          <a href="#" class="text-white/70 hover:text-white transition">
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- GARDENING PROGRAM -->
+  <!-- ========================================= -->
+
+  <section class="py-28 px-6">
+
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+
+      <!-- Video -->
+      <div>
+
+        <div class="rounded-[40px] overflow-hidden shadow-2xl">
+
+          <iframe width="100%"
+                  height="500"
+                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                  title="Gardening Program"
+                  frameborder="0"
+                  allowfullscreen>
+
+          </iframe>
+
+        </div>
+
+      </div>
+
+      <!-- Text -->
+      <div>
+
+        <h2 class="text-5xl font-bold text-[#0B3C6D] leading-tight">
+          Learn About Our Gardening Program
+        </h2>
+
+        <p class="mt-8 text-lg text-gray-700 leading-relaxed">
+
+          Our gardening program creates opportunities for neurodivergent
+          and autistic individuals to build confidence, connection,
+          independence, and hands-on life skills through gardening,
+          sustainability, and community engagement.
+
+        </p>
+
+        <a href="#"
+           class="inline-block mt-10 bg-[#0B3C6D] hover:bg-[#072746] text-white px-8 py-4 rounded-full font-semibold transition">
+
+          Learn More
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+
+  <footer class="bg-[#0B3C6D] text-white py-24">
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-16">
+
+      <!-- Mission -->
+      <div>
+
+        <h3 class="text-3xl font-bold mb-6">
+          PUZZLES
+        </h3>
+
+        <p class="text-white/80 leading-relaxed">
+
+          Puzzles is dedicated to building a more inclusive world for
+          neurodivergent and autistic individuals through community,
+          accessibility, education, awareness, and meaningful experiences.
+
+        </p>
+
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+
+        <h4 class="text-2xl font-bold mb-6">
+          Quick Links
+        </h4>
+
+        <div class="flex flex-col gap-4">
+
+          <a href="#" class="footer-link transition">
+            Programs
+          </a>
+
+          <a href="#" class="footer-link transition">
+            Events
+          </a>
+
+          <a href="#" class="footer-link transition">
+            About Us
+          </a>
+
+          <a href="#" class="footer-link transition">
+            Donate
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Connect -->
+      <div>
+
+        <h4 class="text-2xl font-bold mb-6">
+          Connect
+        </h4>
+
+        <div class="flex flex-col gap-4">
+
+          <a href="#" class="footer-link transition">
+            Contact Form
+          </a>
+
+          <a href="#" class="footer-link transition">
+            Get In Touch With The Board
+          </a>
+
+          <a href="#" class="footer-link transition">
+            Volunteer Opportunities
+          </a>
+
+          <a href="#" class="footer-link transition">
             Instagram
           </a>
 
-          <a href="#" class="text-white/70 hover:text-white transition">
-            Facebook
-          </a>
-
-          <a href="#" class="text-white/70 hover:text-white transition">
-            Contact Us
-          </a>
         </div>
 
       </div>
-    </footer>
 
-  </main>
+      <!-- Newsletter -->
+      <div>
+
+        <h4 class="text-2xl font-bold mb-6">
+          Join Our Email List
+        </h4>
+
+        <p class="text-white/80 mb-6">
+          Stay informed on events, programs, and community updates.
+        </p>
+
+        <div class="flex flex-col gap-4">
+
+          <input type="email"
+                 placeholder="Enter your email"
+                 class="px-5 py-4 rounded-full text-black outline-none">
+
+          <button class="bg-[#8ED1FF] hover:bg-[#76c4f7] text-[#0B3C6D] px-6 py-4 rounded-full font-bold transition">
+
+            Subscribe
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ========================================= -->
+  <!-- VIDEO SCRIPT -->
+  <!-- ========================================= -->
+
+  <script>
+
+    const video = document.getElementById('heroVideo');
+    const playIcon = document.getElementById('playIcon');
+
+    function toggleVideo(){
+
+      if(video.paused){
+
+        video.play();
+
+        playIcon.innerHTML = `
+          <path d="M5.5 3.5h2v9h-2zm3 0h2v9h-2z"/>
+        `;
+
+      } else {
+
+        video.pause();
+
+        playIcon.innerHTML = `
+          <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+        `;
+      }
+    }
+
+  </script>
 
 </body>
 </html>
