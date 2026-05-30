@@ -229,12 +229,6 @@ app.post("/create-gardening-session", async (req, res) => {
       success_url: `https://puzzlesmarathon.com/gardening-success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `https://puzzlesmarathon.com/gardening.html`,
       metadata: { registrationId, type },
-      // ✅ Stripe sends an automatic receipt to the customer's email
-      payment_intent_data: {
-        receipt_email: null, // Stripe auto-fills from customer email entered at checkout
-        description: labelMap[type],
-        metadata: { registrationId, type },
-      },
     });
 
     res.json({ url: session.url });
