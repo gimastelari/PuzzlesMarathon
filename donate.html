@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate — Puzzles Community</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #fffdf8; color: #16324F; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    .form-input {
+      width: 100%;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid #d6d6d6;
+      outline: none;
+      background: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+    .form-input:focus { border-color: #0B3C6D; }
+
+    .donate-btn {
+      background: #0B3C6D;
+      color: white;
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .donate-btn:hover { background: #072746; }
+
+    .amount-chip {
+      border: 2px solid #0B3C6D;
+      color: #0B3C6D;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+      background: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    .amount-chip:hover,
+    .amount-chip.selected {
+      background: #0B3C6D;
+      color: white;
+    }
+
+    .impact-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      padding: 2rem;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+    .impact-card:hover { transform: translateY(-6px); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
+  <header class="bg-[#0B3C6D] py-5 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html">
+        <img src="assets/img/logo.png" class="h-16 object-contain">
+      </a>
+      <a href="index.html"
+         class="bg-[#8ED1FF] text-[#0B3C6D] px-6 py-3 rounded-full font-bold">
+        Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- ========================================= -->
+  <!-- HERO -->
+  <!-- ========================================= -->
+  <section class="py-24 px-6 text-center bg-[#F7FBFF]">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-5xl mb-6">💙</div>
+      <h1 class="text-6xl font-bold text-[#0B3C6D] leading-tight">
+        Support Our Mission
+      </h1>
+      <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+        Your donation helps fund inclusive programs, community events, and
+        accessibility resources for neurodivergent and autistic individuals.
+        Every contribution — big or small — makes a real difference.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- IMPACT SECTION -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-[#0B3C6D]">Your Gift In Action</h2>
+        <p class="mt-4 text-gray-600">See how donations directly power our community programs.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div class="impact-card">
+          <div class="text-4xl mb-4">🌱</div>
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">$25</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Supplies seeds, soil, and tools for one participant in our Gardening Program.
+          </p>
+        </div>
+
+        <div class="impact-card">
+          <div class="text-4xl mb-4">🎽</div>
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">$50</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Sponsors a participant's registration for the Puzzles 5K & Festival.
+          </p>
+        </div>
+
+        <div class="impact-card">
+          <div class="text-4xl mb-4">🧩</div>
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">$100</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Funds sensory-friendly materials and accessibility resources for a program session.
+          </p>
+        </div>
+
+        <div class="impact-card">
+          <div class="text-4xl mb-4">🌟</div>
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">$250+</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Helps sponsor an entire community event, bringing dozens of families together.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- DONATION FORM -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6 bg-[#F7FBFF]">
+    <div class="max-w-xl mx-auto">
+
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#0B3C6D]">Make a Donation</h2>
+        <p class="mt-4 text-gray-600">Choose an amount or enter your own below.</p>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-xl p-10 space-y-6">
+
+        <!-- Quick Amount Chips -->
+        <div>
+          <label class="font-semibold block mb-3">Select Amount</label>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" class="amount-chip" onclick="setAmount(25)">$25</button>
+            <button type="button" class="amount-chip" onclick="setAmount(50)">$50</button>
+            <button type="button" class="amount-chip" onclick="setAmount(100)">$100</button>
+            <button type="button" class="amount-chip" onclick="setAmount(250)">$250</button>
+            <button type="button" class="amount-chip" onclick="setAmount(500)">$500</button>
+          </div>
+        </div>
+
+        <!-- Custom Amount -->
+        <div>
+          <label class="font-semibold block mb-3">Or Enter a Custom Amount (USD)</label>
+          <div class="relative">
+            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 font-semibold">$</span>
+            <input
+              type="number"
+              id="donationAmount"
+              name="amount"
+              min="1"
+              placeholder="0.00"
+              class="form-input pl-10"
+              oninput="clearChips()"
+            >
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold block mb-3">First Name</label>
+            <input type="text" id="donorFirst" name="first_name" class="form-input" required>
+          </div>
+          <div>
+            <label class="font-semibold block mb-3">Last Name</label>
+            <input type="text" id="donorLast" name="last_name" class="form-input" required>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="font-semibold block mb-3">Email</label>
+          <input type="email" id="donorEmail" name="email" class="form-input" required>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label class="font-semibold block mb-3">Leave a Message <span class="text-gray-400 font-normal">(optional)</span></label>
+          <textarea id="donorMessage" name="message" rows="4" class="form-input" placeholder="Share why you're supporting Puzzles…"></textarea>
+        </div>
+
+        <!-- Summary -->
+        <div id="donateSummary" class="bg-[#F0F8FF] rounded-2xl p-5 hidden">
+          <p class="font-semibold text-[#0B3C6D]">Donation Summary</p>
+          <p id="donateSummaryText" class="mt-1 text-gray-700 text-lg font-bold"></p>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button type="button" id="donateBtn" class="donate-btn">
+            Donate Now 💙
+          </button>
+        </div>
+
+        <p class="text-center text-sm text-gray-400">
+          Secure payment powered by Stripe. You'll receive a receipt by email.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+  <footer class="bg-[#0B3C6D] text-white py-20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="assets/img/logo.png" class="h-20 mx-auto mb-8">
+      <p class="text-white/80 max-w-2xl mx-auto leading-relaxed">
+        Puzzles is dedicated to building a more inclusive world for neurodivergent
+        and autistic individuals through community programs, accessibility,
+        education, and meaningful experiences.
+      </p>
+      <p class="mt-8 text-white/50 text-sm">© 2026 Puzzles Community</p>
+    </div>
+  </footer>
+
+  <!-- ========================================= -->
+  <!-- SCRIPT -->
+  <!-- ========================================= -->
+  <script>
+    const BACKEND = "https://puzzles-marathon-backend.onrender.com";
+
+    // ── Quick-amount chip logic ──────────────────────────────
+    function setAmount(val) {
+      document.getElementById("donationAmount").value = val;
+      document.querySelectorAll(".amount-chip").forEach(c => c.classList.remove("selected"));
+      event.target.classList.add("selected");
+      updateSummary(val);
+    }
+
+    function clearChips() {
+      document.querySelectorAll(".amount-chip").forEach(c => c.classList.remove("selected"));
+      const val = document.getElementById("donationAmount").value;
+      updateSummary(val);
+    }
+
+    function updateSummary(val) {
+      const summary = document.getElementById("donateSummary");
+      const text    = document.getElementById("donateSummaryText");
+      if (val && Number(val) > 0) {
+        summary.classList.remove("hidden");
+        text.textContent = `$${Number(val).toFixed(2)} donation to Puzzles Community`;
+      } else {
+        summary.classList.add("hidden");
+      }
+    }
+
+    document.getElementById("donationAmount").addEventListener("input", function() {
+      updateSummary(this.value);
+    });
+
+    // ── Submit ───────────────────────────────────────────────
+    document.getElementById("donateBtn").addEventListener("click", async () => {
+      const amount = Number(document.getElementById("donationAmount").value);
+      const first  = document.getElementById("donorFirst").value.trim();
+      const last   = document.getElementById("donorLast").value.trim();
+      const email  = document.getElementById("donorEmail").value.trim();
+      const msg    = document.getElementById("donorMessage").value.trim();
+
+      if (!amount || amount < 1) { alert("Please enter a donation amount."); return; }
+      if (!first || !last)       { alert("Please enter your name."); return; }
+      if (!email)                { alert("Please enter your email address."); return; }
+
+      document.getElementById("donateBtn").textContent = "Processing…";
+      document.getElementById("donateBtn").disabled = true;
+
+      try {
+        // Save registration
+        const saveRes = await fetch(`${BACKEND}/save-registration`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "donation",
+            data: {
+              name:    `${first} ${last}`,
+              first_name: first,
+              last_name:  last,
+              email,
+              amount,
+              message: msg,
+              formspreeUrl: "https://formspree.io/f/xlgdlbvl",
+            }
+          })
+        });
+
+        if (!saveRes.ok) throw new Error("Save failed");
+        const { registrationId } = await saveRes.json();
+
+        // Create Stripe session
+        const sessionRes = await fetch(`${BACKEND}/create-donation-session`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount, registrationId })
+        });
+
+        const { url } = await sessionRes.json();
+        if (url) window.location.href = url;
+        else throw new Error("No checkout URL");
+
+      } catch (err) {
+        alert("Something went wrong. Please try again.");
+        document.getElementById("donateBtn").textContent = "Donate Now 💙";
+        document.getElementById("donateBtn").disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
