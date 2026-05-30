@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registration Confirmed — Puzzles Gardening Program</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #F7FBFF; }
+    h1, h2 { font-family: 'Fredoka', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-16">
+
+  <div class="bg-white rounded-3xl shadow-xl max-w-lg w-full p-10 text-center">
+
+    <div class="text-6xl mb-4">🌱</div>
+
+    <h1 class="text-4xl font-bold text-[#0B3C6D]">You're Registered!</h1>
+
+    <p class="mt-3 text-gray-500 text-sm">Processing your registration...</p>
+
+    <!-- Confirmation card — filled in by JS -->
+    <div id="confirmationCard" class="hidden mt-8 bg-[#F0F8FF] rounded-2xl p-6 text-left space-y-3">
+      <h2 class="text-xl font-bold text-[#0B3C6D] text-center mb-4">Confirmation Details</h2>
+      <div class="flex justify-between text-sm">
+        <span class="text-gray-500 font-medium">Order #</span>
+        <span id="conf-order" class="font-semibold text-[#0B3C6D]"></span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-gray-500 font-medium">Registration Type</span>
+        <span id="conf-type" class="font-semibold text-gray-800"></span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-gray-500 font-medium">Amount Paid</span>
+        <span id="conf-amount" class="font-semibold text-gray-800"></span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-gray-500 font-medium">Date Confirmed</span>
+        <span id="conf-date" class="font-semibold text-gray-800"></span>
+      </div>
+      <div id="conf-session-row" class="flex justify-between text-sm hidden">
+        <span class="text-gray-500 font-medium">Session</span>
+        <span id="conf-session" class="font-semibold text-gray-800"></span>
+      </div>
+      <div id="conf-eventday-row" class="flex justify-between text-sm hidden">
+        <span class="text-gray-500 font-medium">Event Day</span>
+        <span id="conf-eventday" class="font-semibold text-gray-800"></span>
+      </div>
+    </div>
+
+    <div id="thankYou" class="hidden mt-8">
+      <p class="text-gray-700 leading-relaxed">
+        Thank you for being part of the <strong>Puzzles Gardening Program</strong>. 
+        We can't wait to grow together with you this season. 🌻
+      </p>
+      <p class="mt-4 text-sm text-gray-500">
+        A receipt has been sent to your email. If you have any questions, 
+        reach out to us at 
+        <a href="mailto:info@puzzles.org" class="text-[#0B3C6D] underline font-medium">info@puzzles.org</a>.
+      </p>
+    </div>
+
+    <div id="errorMsg" class="hidden mt-6 text-red-500 text-sm">
+      Registration confirmed — we'll follow up with your details shortly.
+    </div>
+
+  </div>
+
+</body>
+<script>
+const sessionId = new URLSearchParams(window.location.search).get("session_id");
+
+const labelMap = {
+  participant_full: "Participant — Full Program Pass",
+  participant_day:  "Participant — Single Day Pass",
+  vendor:           "Food Vendor",
+  sponsor_weekly:   "Weekly Sponsor",
+  sponsor_main:     "Main Sponsor",
+};
+
+const amountMap = {
+  participant_full: "$80.00",
+  participant_day:  "$30.00",
+  vendor:           "$55.00",
+  sponsor_weekly:   "$150.00",
+  sponsor_main:     "$500.00",
+};
+
+fetch("https://puzzles-marathon-backend.onrender.com/finalize-registration", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ sessionId })
+})
+.then(r => r.json())
+.then(data => {
+  // Pull metadata from the finalize response if you extend it,
+  // or decode from sessionId via a lightweight /get-session endpoint.
+  // For now we show what we can from the URL and timestamp.
+
+  const type    = data.type || "";
+  const regId   = data.registrationId || sessionId.slice(-8).toUpperCase();
+  const session = data.session_selection || "";
+  const eventDay= data.event_day || "";
+
+  document.getElementById("conf-order").textContent   = "#GRD-" + regId;
+  document.getElementById("conf-type").textContent    = labelMap[type] || type || "Registration";
+  document.getElementById("conf-amount").textContent  = amountMap[type] || "—";
+  document.getElementById("conf-date").textContent    = new Date().toLocaleDateString("en-US", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric"
+  });
+
+  if (session) {
+    document.getElementById("conf-session").textContent = session;
+    document.getElementById("conf-session-row").classList.remove("hidden");
+  }
+  if (eventDay) {
+    document.getElementById("conf-eventday").textContent = eventDay;
+    document.getElementById("conf-eventday-row").classList.remove("hidden");
+  }
+
+  document.getElementById("confirmationCard").classList.remove("hidden");
+  document.getElementById("thankYou").classList.remove("hidden");
+  document.querySelector("p.text-gray-500.text-sm").classList.add("hidden");
+})
+.catch(() => {
+  document.getElementById("errorMsg").classList.remove("hidden");
+  document.getElementById("thankYou").classList.remove("hidden");
+});
+</script>
+</html>

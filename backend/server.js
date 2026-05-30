@@ -190,11 +190,66 @@ app.post("/create-donation-session", async (req, res) => {
 });
 
 // =====================
+// GARDENING PROGRAM — CREATE CHECKOUT SESSION
+// =====================
+app.post("/create-gardening-session", async (req, res) => {
+  try {
+    const { type, registrationId } = req.body;
+
+    const priceMap = {
+      participant_full: 8000,   // $80
+      participant_day:  3000,   // $30
+      vendor:           5500,   // $55
+      sponsor_weekly:   15000,  // $150
+      sponsor_main:     50000,  // $500
+    };
+
+    const amount = priceMap[type];
+    if (!amount) return res.status(400).json({ error: "Invalid type" });
+
+    const labelMap = {
+      participant_full: "Gardening Program — Full Pass",
+      participant_day:  "Gardening Program — Single Day Pass",
+      vendor:           "Gardening Program — Food Vendor",
+      sponsor_weekly:   "Gardening Program — Weekly Sponsor",
+      sponsor_main:     "Gardening Program — Main Sponsor",
+    };
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [{
+        price_data: {
+          currency: "usd",
+          product_data: { name: labelMap[type] },
+          unit_amount: amount,
+        },
+        quantity: 1,
+      }],
+      success_url: `https://puzzlesmarathon.com/gardening-success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url:  `https://puzzlesmarathon.com/gardening.html`,
+      metadata: { registrationId, type },
+      // ✅ Stripe sends an automatic receipt to the customer's email
+      payment_intent_data: {
+        receipt_email: null, // Stripe auto-fills from customer email entered at checkout
+        description: labelMap[type],
+        metadata: { registrationId, type },
+      },
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error("Gardening session error:", err);
+    res.status(500).json({ error: "Stripe error" });
+  }
+});
+
+// =====================
 // FINALIZE REGISTRATION (POST-PAYMENT)
 // =====================
 app.post("/finalize-registration", async (req, res) => {
   try {
-    const { sessionId, formspreeUrl } = req.body;
+    const { sessionId } = req.body;
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
@@ -213,13 +268,26 @@ app.post("/finalize-registration", async (req, res) => {
       return res.status(404).json({ error: "Registration not found" });
     }
 
-    await fetch(formspreeUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: row.data,
-    });
+    const parsedData = JSON.parse(row.data);
 
-    res.json({ status: "ok" });
+    // formspreeUrl is stored in the payload — fall back to req.body for old marathon registrations
+    const formspreeUrl = parsedData.formspreeUrl || req.body.formspreeUrl;
+
+    if (formspreeUrl) {
+      await fetch(formspreeUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: row.data,
+      });
+    }
+
+    res.json({
+      status: "ok",
+      type: session.metadata.type,
+      registrationId,
+      session_selection: parsedData.session || "",
+      event_day: parsedData.event_day || parsedData.vendor_date || parsedData.sponsor_date || "",
+    });
   } catch (err) {
     console.error("Finalize failed:", err);
     res.status(500).json({ error: "Finalize failed" });

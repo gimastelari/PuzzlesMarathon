@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Puzzles Gardening Program</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *{ font-family:'Poppins',sans-serif; }
+
+    body{
+      background:#fffdf8;
+      color:#16324F;
+      overflow-x:hidden;
+    }
+
+    h1,h2,h3,h4{ font-family:'Fredoka',sans-serif; }
+
+    html{ scroll-behavior:smooth; }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      min-height:90vh;
+      overflow:hidden;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.72),
+        rgba(0,0,0,0.25)
+      );
+    }
+
+    .glass{
+      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+
+    .section-card{
+      background:white;
+      border-radius:30px;
+      box-shadow:0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .pricing-card{ transition:0.3s ease; }
+    .pricing-card:hover{ transform:translateY(-8px); }
+
+    .form-input{
+      width:100%;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid #d6d6d6;
+      outline:none;
+      background:#fff;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .form-input:focus{ border-color:#0B3C6D; }
+
+    .register-btn{
+      background:#0B3C6D;
+      color:white;
+      padding:16px 28px;
+      border-radius:999px;
+      font-weight:600;
+      transition:0.3s ease;
+      cursor:pointer;
+      border:none;
+    }
+
+    .register-btn:hover{ background:#072746; }
+
+    /* What We Grow section */
+    .grow-card{
+      background:white;
+      border-radius:20px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.07);
+      padding:2rem;
+      text-align:center;
+      transition:0.3s ease;
+    }
+
+    .grow-card:hover{ transform:translateY(-5px); }
+
+    .grow-icon{ font-size:2.5rem; margin-bottom:1rem; }
+
+    /* Form section transitions */
+    .form-field{ transition:opacity 0.3s ease, transform 0.3s ease; }
+
+    .hidden-field{
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
+  <header class="bg-[#0B3C6D] py-5 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html">
+        <img src="assets/img/logo.png" class="h-16 object-contain">
+      </a>
+      <a href="#registration" class="bg-[#8ED1FF] text-[#0B3C6D] px-6 py-3 rounded-full font-bold">
+        Register Now
+      </a>
+    </div>
+  </header>
+
+  <!-- ========================================= -->
+  <!-- HERO  (public garden image, no people)   -->
+  <!-- ========================================= -->
+  <section class="hero">
+
+    <!-- Unsplash public garden/plants image — no people -->
+    <img
+      class="hero-bg"
+      src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=80&fit=crop"
+      alt="Lush garden rows with green plants"
+    >
+
+    <div class="overlay"></div>
+
+    <div class="relative z-10 min-height:90vh flex items-center" style="min-height:90vh;display:flex;align-items:center;">
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl">
+
+          <div class="glass inline-block px-6 py-3 rounded-full text-white mb-8">
+            PUZZLES COMMUNITY PROGRAM
+          </div>
+
+          <h1 class="text-6xl md:text-8xl font-bold text-white leading-tight">
+            Gardening Program
+          </h1>
+
+          <p class="mt-8 text-xl text-white/90 leading-relaxed">
+            Building confidence, wellness, independence, and community
+            through hands-on gardening experiences for autistic and
+            neurodivergent individuals.
+          </p>
+
+          <div class="flex flex-wrap gap-5 mt-10">
+            <a href="#registration" class="bg-[#8ED1FF] text-[#0B3C6D] px-8 py-4 rounded-full font-bold">
+              Register
+            </a>
+            <a href="#details" class="glass text-white px-8 py-4 rounded-full font-bold">
+              Learn More
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- WHAT WE WILL GROW                         -->
+  <!-- ========================================= -->
+  <section class="py-28 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-20">
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">What We'll Grow</h2>
+        <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+          Each week participants will get hands-on experience planting, tending, and harvesting a
+          variety of vegetables, herbs, and flowers. Here's a look at what we'll be cultivating together:
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div class="grow-card">
+          <div class="grow-icon">🍅</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Tomatoes</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Learn to stake, prune, and water tomato plants while watching them ripen from green to red.
+          </p>
+        </div>
+
+        <div class="grow-card">
+          <div class="grow-icon">🥬</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Lettuce</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Lettuce — fast-growing and rewarding to harvest fresh from the earth.
+          </p>
+        </div>
+
+        <div class="grow-card">
+          <div class="grow-icon">🌿</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Basil</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Learning to interact with growing herbs. Enjoy the sesnsory experience by smelling and tating fresh herbs.
+          </p>
+        </div>
+
+        <div class="grow-card">
+          <div class="grow-icon">🌻</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Sunflowers</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            A beloved favorite — plant seeds and watch these cheerful giants reach for the sky.
+          </p>
+        </div>
+
+        <div class="grow-card">
+          <div class="grow-icon">🥒</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Cucumbers</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Fast-growing vines that teach patience and observation as they climb and sprawl.
+          </p>
+        </div>
+
+        <div class="grow-card">
+          <div class="grow-icon">🌿</div>
+          <h3 class="text-xl font-bold text-[#0B3C6D] mb-2">Cilantro</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Learning to interact with growing herbs. Enjoy the sesnsory experience by smelling and tating fresh herbs.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="mt-16 section-card p-10 text-center max-w-3xl mx-auto">
+        <p class="text-lg text-gray-700 leading-relaxed">
+          🌱 <strong>No experience needed.</strong> Every session is led by experienced gardeners who will guide
+          participants through each step — from planting seeds to understanding why plants need sunlight,
+          water, and care. All tools and materials are provided.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- EVENT DETAILS -->
+  <!-- ========================================= -->
+  <section id="details" class="py-28 px-6 bg-[#F7FBFF]">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-20">
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">Program Details</h2>
+        <p class="mt-6 text-lg text-gray-600">
+          A 4-week gardening experience focused on growth,
+          connection, sustainability, and inclusion.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-10">
+
+        <!-- Dates -->
+        <div class="section-card p-10">
+          <h3 class="text-3xl font-bold mb-8 text-[#0B3C6D]">Program Dates</h3>
+          <div class="space-y-5 text-lg">
+            <div>🌱 August 23rd</div>
+            <div>🌱 August 30th</div>
+            <div>🌱 September 6th</div>
+            <div>🌱 September 14th</div>
+          </div>
+        </div>
+
+        <!-- Sessions -->
+        <div class="section-card p-10">
+          <h3 class="text-3xl font-bold mb-8 text-[#0B3C6D]">Session Times</h3>
+          <div class="space-y-8">
+
+            <div>
+              <h4 class="font-bold text-xl">Kids Session</h4>
+              <p class="mt-1 text-[#0B3C6D] font-semibold">Ages 4 – 12</p>
+              <p class="mt-2 text-gray-600">9:30 AM – 11:00 AM</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-xl">Teens &amp; Adults</h4>
+              <p class="mt-1 text-[#0B3C6D] font-semibold">Ages 13 and older</p>
+              <p class="mt-2 text-gray-600">11:00 AM – 12:30 PM</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Capacity -->
+        <div class="section-card p-10">
+          <h3 class="text-3xl font-bold mb-8 text-[#0B3C6D]">Capacity</h3>
+          <div class="space-y-5">
+            <p class="text-lg text-gray-700">Maximum of 50 participants per session.</p>
+            <p class="text-lg text-gray-700">Early registration is highly recommended.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- PRICING -->
+  <!-- ========================================= -->
+  <section class="py-28 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-20">
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">Registration Options</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-10">
+
+        <!-- Participant -->
+        <div class="pricing-card section-card p-10">
+          <h3 class="text-3xl font-bold text-[#0B3C6D]">Participants</h3>
+          <div class="mt-8 space-y-8">
+            <div>
+              <p class="text-5xl font-bold">$80</p>
+              <p class="mt-2 text-gray-600">Full Program Pass</p>
+            </div>
+            <div>
+              <p class="text-5xl font-bold">$30</p>
+              <p class="mt-2 text-gray-600">Single Day Pass</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vendor -->
+        <div class="pricing-card section-card p-10">
+          <h3 class="text-3xl font-bold text-[#0B3C6D]">Food Vendors</h3>
+          <div class="mt-8">
+            <p class="text-5xl font-bold">$55</p>
+            <p class="mt-2 text-gray-600">Per Day</p>
+            <p class="mt-6 text-gray-700">Limited to one vendor per event day.</p>
+          </div>
+        </div>
+
+        <!-- Sponsor -->
+        <div class="pricing-card section-card p-10">
+          <h3 class="text-3xl font-bold text-[#0B3C6D]">Sponsors</h3>
+          <div class="mt-8 space-y-8">
+            <div>
+              <p class="text-5xl font-bold">$150</p>
+              <p class="mt-2 text-gray-600">Weekly Sponsor</p>
+            </div>
+            <div>
+              <p class="text-5xl font-bold">$500</p>
+              <p class="mt-2 text-gray-600">Main Sponsor</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- REGISTRATION -->
+  <!-- ========================================= -->
+  <section id="registration" class="py-28 px-6 bg-[#F7FBFF]">
+    <div class="max-w-4xl mx-auto">
+
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-[#0B3C6D]">Register For The Program</h2>
+        <p class="mt-6 text-lg text-gray-600">Complete the form below to reserve your spot.</p>
+      </div>
+
+      <div id="gardenForm" class="section-card p-10 space-y-6">
+
+        <!-- Registration Type -->
+        <div>
+          <label class="font-semibold block mb-3">Registration Type</label>
+          <select id="registrationType" class="form-input">
+            <option value="participant">Participant</option>
+            <option value="vendor">Food Vendor</option>
+            <option value="sponsor">Sponsor</option>
+          </select>
+        </div>
+
+        <!-- ===== PARTICIPANT FIELDS ===== -->
+
+        <!-- Name (shared by all) -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="font-semibold block mb-3">First Name</label>
+            <input type="text" id="first_name" name="first_name" class="form-input" required>
+          </div>
+          <div>
+            <label class="font-semibold block mb-3">Last Name</label>
+            <input type="text" id="last_name" name="last_name" class="form-input" required>
+          </div>
+        </div>
+
+        <!-- Age — participant only -->
+        <div id="field-age">
+          <label class="font-semibold block mb-3">Age</label>
+          <input type="number" id="age" name="age" min="1" max="120" class="form-input" required>
+        </div>
+
+        <!-- +1 — participant only -->
+        <div id="field-plusone">
+          <label class="font-semibold block mb-3">Are you bringing a +1?</label>
+          <select id="plusOneSelect" class="form-input">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+
+        <!-- +1 name — participant only, conditional -->
+        <div id="field-plusone-name" class="hidden-field">
+          <label class="font-semibold block mb-3">Guest's Full Name</label>
+          <div class="grid md:grid-cols-2 gap-6">
+            <input type="text" id="plus_one_first" name="plus_one_first" placeholder="Guest First Name" class="form-input">
+            <input type="text" id="plus_one_last" name="plus_one_last" placeholder="Guest Last Name" class="form-input">
+          </div>
+        </div>
+
+        <!-- Autism spectrum — participant only -->
+        <div id="field-spectrum">
+          <label class="font-semibold block mb-3">Do you identify as being on the autism spectrum?</label>
+          <select id="autism_spectrum" name="autism_spectrum" class="form-input">
+            <option value="">Prefer not to say</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <p class="text-sm text-gray-500 mt-2">This helps us ensure our programming is appropriately supported. Your answer is confidential.</p>
+        </div>
+
+        <!-- Contact (shared) -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="font-semibold block mb-3">Email</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+          </div>
+          <div>
+            <label class="font-semibold block mb-3">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-input" required>
+          </div>
+        </div>
+
+        <!-- Business Name — vendor & sponsor only -->
+        <div id="field-business" class="hidden-field">
+          <label class="font-semibold block mb-3">Business Name</label>
+          <input type="text" id="business_name" name="business_name" class="form-input">
+        </div>
+
+        <!-- Session Selection — participant only -->
+        <div id="field-session">
+          <label class="font-semibold block mb-3">Session Selection</label>
+          <select id="session" name="session" class="form-input">
+            <option>Kids Session — Ages 4–12 (9:30 AM – 11:00 AM)</option>
+            <option>Teens &amp; Adults — Ages 13+ (11:00 AM – 12:30 PM)</option>
+          </select>
+        </div>
+
+        <!-- Pass Type — participant only -->
+        <div id="field-passtype">
+          <label class="font-semibold block mb-3">Pass Type</label>
+          <select id="passType" class="form-input">
+            <option value="full">Full Program Pass — $80</option>
+            <option value="day">Single Day Pass — $30</option>
+          </select>
+        </div>
+
+        <!-- Day Selector — participant single day only -->
+        <div id="field-dayselect" class="hidden-field">
+          <label class="font-semibold block mb-3">Select Event Day</label>
+          <select id="event_day" name="event_day" class="form-input">
+            <option>August 23rd</option>
+            <option>August 30th</option>
+            <option>September 6th</option>
+            <option>September 14th</option>
+          </select>
+        </div>
+
+        <!-- Vendor Date Selection — vendor only -->
+        <div id="field-vendordate" class="hidden-field">
+          <label class="font-semibold block mb-3">Which date would you like to be a food vendor?</label>
+          <select id="vendor_date" name="vendor_date" class="form-input">
+            <option>August 23rd</option>
+            <option>August 30th</option>
+            <option>September 6th</option>
+            <option>September 14th</option>
+          </select>
+          <p class="text-sm text-gray-500 mt-2">Vendors are present for the full event day (both sessions). Standard fee: <strong>$55/day</strong>.</p>
+        </div>
+
+        <!-- Sponsor Type — sponsor only -->
+        <div id="field-sponsortype" class="hidden-field">
+          <label class="font-semibold block mb-3">Sponsorship Level</label>
+          <select id="sponsorTypeSelect" class="form-input">
+            <option value="">Select sponsorship level…</option>
+            <option value="weekly">Weekly Sponsor — $150</option>
+            <option value="main">Main Sponsor — $500</option>
+          </select>
+        </div>
+
+        <!-- Sponsor Week Selector — sponsor weekly only -->
+        <div id="field-sponsorweek" class="hidden-field">
+          <label class="font-semibold block mb-3">Which date would you like to sponsor?</label>
+          <select id="sponsor_date" name="sponsor_date" class="form-input">
+            <option>August 23rd</option>
+            <option>August 30th</option>
+            <option>September 6th</option>
+            <option>September 14th</option>
+          </select>
+        </div>
+
+        <!-- Hope to get out — participant only -->
+        <div id="field-hope">
+          <label class="font-semibold block mb-3">What do you hope to get out of this experience?</label>
+          <textarea id="hope_outcome" name="hope_outcome" rows="4" class="form-input" placeholder="Share your goals, hopes, or what excites you about this program…"></textarea>
+        </div>
+
+        <!-- Notes (shared) -->
+        <div>
+          <label class="font-semibold block mb-3">Special Accommodations / Notes</label>
+          <textarea id="accommodations" name="accommodations" rows="5" class="form-input"></textarea>
+        </div>
+
+        <!-- Terms — vendor & sponsor only -->
+        <div id="field-terms" class="hidden-field">
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" id="termsCheck" class="mt-1 w-5 h-5 rounded" required>
+            <span class="text-gray-700 text-sm leading-relaxed">
+              I accept the <a href="#" class="text-[#0B3C6D] underline font-semibold">Terms and Conditions</a> for participating in the Puzzles Gardening Program.
+            </span>
+          </label>
+        </div>
+
+        <!-- Pricing Summary -->
+        <div id="price-summary" class="bg-[#F0F8FF] rounded-2xl p-6">
+          <p class="font-semibold text-[#0B3C6D]">Summary</p>
+          <p id="price-text" class="mt-2 text-gray-700 text-lg"></p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4">
+          <button type="button" id="submitBtn" class="register-btn w-full">
+            Continue To Checkout
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+  <footer class="bg-[#0B3C6D] text-white py-20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="assets/img/logo.png" class="h-20 mx-auto mb-8">
+      <p class="text-white/80 max-w-2xl mx-auto leading-relaxed">
+        Puzzles is dedicated to building a more inclusive world
+        for neurodivergent and autistic individuals through
+        community programs, accessibility, education, and meaningful experiences.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ========================================= -->
+  <!-- SCRIPT -->
+  <!-- ========================================= -->
+
+  <script>
+
+    // ─── Show/hide helpers ────────────────────────────────────
+    const regType           = document.getElementById('registrationType');
+    const passType          = document.getElementById('passType');
+    const plusOneSelect     = document.getElementById('plusOneSelect');
+    const sponsorTypeSelect = document.getElementById('sponsorTypeSelect');
+
+    const fAge         = document.getElementById('field-age');
+    const fPlusone     = document.getElementById('field-plusone');
+    const fPlusoneName = document.getElementById('field-plusone-name');
+    const fSpectrum    = document.getElementById('field-spectrum');
+    const fBusiness    = document.getElementById('field-business');
+    const fSession     = document.getElementById('field-session');
+    const fPasstype    = document.getElementById('field-passtype');
+    const fDayselect   = document.getElementById('field-dayselect');
+    const fVendordate  = document.getElementById('field-vendordate');
+    const fSponsortype = document.getElementById('field-sponsortype');
+    const fSponsorweek = document.getElementById('field-sponsorweek');
+    const fHope        = document.getElementById('field-hope');
+    const fTerms       = document.getElementById('field-terms');
+    const priceText    = document.getElementById('price-text');
+
+    function show(el){ el.classList.remove('hidden-field'); }
+    function hide(el){ el.classList.add('hidden-field'); }
+
+    function updateForm(){
+      const type = regType.value;
+      hide(fAge); hide(fPlusone); hide(fPlusoneName); hide(fSpectrum);
+      hide(fBusiness); hide(fSession); hide(fPasstype); hide(fDayselect);
+      hide(fVendordate); hide(fSponsortype); hide(fSponsorweek);
+      hide(fHope); hide(fTerms);
+
+      if(type === 'participant'){
+        show(fAge); show(fPlusone);
+        if(plusOneSelect.value === 'yes') show(fPlusoneName);
+        show(fSpectrum); show(fSession); show(fPasstype);
+        if(passType.value === 'day') show(fDayselect);
+        show(fHope);
+        priceText.textContent = passType.value === 'full' ? 'Full Program Pass — $80' : 'Single Day Pass — $30';
+      } else if(type === 'vendor'){
+        show(fBusiness); show(fVendordate); show(fTerms);
+        priceText.textContent = 'Food Vendor (Standard Fee) — $55/day';
+      } else if(type === 'sponsor'){
+        show(fBusiness); show(fSponsortype);
+        if(sponsorTypeSelect.value === 'weekly') show(fSponsorweek);
+        show(fTerms);
+        const sp = sponsorTypeSelect.value;
+        priceText.textContent = sp === 'weekly' ? 'Weekly Sponsor — $150' : sp === 'main' ? 'Main Sponsor — $500' : 'Please select a sponsorship level above.';
+      }
+    }
+
+    regType.addEventListener('change', updateForm);
+    passType.addEventListener('change', () => {
+      if(passType.value === 'day') show(fDayselect); else hide(fDayselect);
+      priceText.textContent = passType.value === 'full' ? 'Full Program Pass — $80' : 'Single Day Pass — $30';
+    });
+    plusOneSelect.addEventListener('change', () => {
+      if(plusOneSelect.value === 'yes') show(fPlusoneName); else hide(fPlusoneName);
+    });
+    sponsorTypeSelect.addEventListener('change', () => {
+      if(sponsorTypeSelect.value === 'weekly'){
+        show(fSponsorweek);
+        priceText.textContent = 'Weekly Sponsor — $150';
+      } else {
+        hide(fSponsorweek);
+        priceText.textContent = sponsorTypeSelect.value === 'main' ? 'Main Sponsor — $500' : 'Please select a sponsorship level above.';
+      }
+    });
+
+    updateForm();
+
+    // ─── Checkout ─────────────────────────────────────────────
+    const BACKEND = "https://puzzles-marathon-backend.onrender.com";
+
+    const FORMSPREE = {
+      participant: "https://formspree.io/f/mdajjwrg",
+      vendor:      "https://formspree.io/f/xbdbbzvl",   // ← paste Gardening Vendors URL
+      sponsor:     "https://formspree.io/f/xjgzzaqy",  // ← paste Gardening Sponsors URL
+    };
+
+    document.getElementById("submitBtn").addEventListener("click", async () => {
+      const type = document.getElementById("registrationType").value;
+      let checkoutType, payload, formspreeUrl;
+
+      if (type === "participant") {
+        const passVal = document.getElementById("passType").value;
+        checkoutType = passVal === "full" ? "participant_full" : "participant_day";
+        formspreeUrl = FORMSPREE.participant;
+        payload = {
+          reg_type:        "Participant",
+          first_name:      document.getElementById("first_name").value,
+          last_name:       document.getElementById("last_name").value,
+          age:             document.getElementById("age").value,
+          email:           document.getElementById("email").value,
+          phone:           document.getElementById("phone").value,
+          autism_spectrum: document.getElementById("autism_spectrum").value,
+          plus_one:        document.getElementById("plusOneSelect").value,
+          plus_one_first:  document.getElementById("plus_one_first")?.value || "",
+          plus_one_last:   document.getElementById("plus_one_last")?.value || "",
+          session:         document.getElementById("session").value,
+          pass_type:       passVal === "full" ? "Full Program Pass - $80" : "Single Day Pass - $30",
+          event_day:       passVal === "day" ? document.getElementById("event_day").value : "All dates",
+          hope_outcome:    document.getElementById("hope_outcome").value,
+          accommodations:  document.getElementById("accommodations").value,
+          formspreeUrl,
+        };
+
+      } else if (type === "vendor") {
+        if (!document.getElementById("termsCheck").checked) { alert("Please accept the Terms and Conditions."); return; }
+        checkoutType = "vendor";
+        formspreeUrl = FORMSPREE.vendor;
+        payload = {
+          reg_type:       "Food Vendor",
+          first_name:     document.getElementById("first_name").value,
+          last_name:      document.getElementById("last_name").value,
+          email:          document.getElementById("email").value,
+          phone:          document.getElementById("phone").value,
+          business_name:  document.getElementById("business_name").value,
+          vendor_date:    document.getElementById("vendor_date").value,
+          accommodations: document.getElementById("accommodations").value,
+          formspreeUrl,
+        };
+
+      } else if (type === "sponsor") {
+        if (!document.getElementById("termsCheck").checked) { alert("Please accept the Terms and Conditions."); return; }
+        const level = document.getElementById("sponsorTypeSelect").value;
+        if (!level) { alert("Please select a sponsorship level."); return; }
+        checkoutType = level === "weekly" ? "sponsor_weekly" : "sponsor_main";
+        formspreeUrl = FORMSPREE.sponsor;
+        payload = {
+          reg_type:       "Sponsor",
+          first_name:     document.getElementById("first_name").value,
+          last_name:      document.getElementById("last_name").value,
+          email:          document.getElementById("email").value,
+          phone:          document.getElementById("phone").value,
+          business_name:  document.getElementById("business_name").value,
+          sponsor_level:  level === "weekly" ? "Weekly Sponsor - $150" : "Main Sponsor - $500",
+          sponsor_date:   level === "weekly" ? document.getElementById("sponsor_date").value : "Full program",
+          accommodations: document.getElementById("accommodations").value,
+          formspreeUrl,
+        };
+      }
+
+      const saveRes = await fetch(`${BACKEND}/save-registration`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: checkoutType, data: payload })
+      });
+      if (!saveRes.ok) { alert("Registration failed. Please try again."); return; }
+      const { registrationId } = await saveRes.json();
+
+      const sessionRes = await fetch(`${BACKEND}/create-gardening-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: checkoutType, registrationId })
+      });
+      const { url } = await sessionRes.json();
+      if (url) window.location.href = url;
+      else alert("Payment error. Please try again.");
+    });
+
+  </script>
+
+</body>
+</html>
