@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — Puzzles Community</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+    body { background: #fffdf8; color: #16324F; overflow-x: hidden; margin: 0; }
+    h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Fade-in on scroll ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Hero ── */
+    .hero-about {
+      position: relative;
+      background: #0B3C6D;
+      overflow: hidden;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-about::before {
+      content: '';
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: rgba(142, 209, 255, 0.12);
+      top: -200px;
+      right: -150px;
+    }
+
+    .hero-about::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(142, 209, 255, 0.07);
+      bottom: -100px;
+      left: -80px;
+    }
+
+    /* ── Stat cards ── */
+    .stat-card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #0B3C6D, #8ED1FF);
+    }
+    .stat-card:hover { transform: translateY(-8px); }
+
+    /* ── Values ── */
+    .value-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border-left: 5px solid #0B3C6D;
+      transition: 0.3s ease;
+    }
+    .value-card:hover {
+      border-left-color: #8ED1FF;
+      transform: translateX(6px);
+    }
+
+    /* ── Thank you banner ── */
+    .thanks-banner {
+      background: linear-gradient(135deg, #0B3C6D 0%, #1a5fa0 100%);
+      border-radius: 32px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .thanks-banner::before {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: rgba(142, 209, 255, 0.1);
+      top: -100px;
+      right: -80px;
+    }
+
+    /* ── Gen Z badge ── */
+    .genz-section {
+      background: #F7FBFF;
+      border-radius: 32px;
+      padding: 4rem;
+    }
+
+    .pill-tag {
+      display: inline-block;
+      background: #8ED1FF;
+      color: #0B3C6D;
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Divider ── */
+    .section-divider {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #0B3C6D, #8ED1FF);
+      border-radius: 999px;
+      margin: 1.5rem auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
+  <header class="bg-[#0B3C6D] py-5 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html">
+        <img src="assets/img/logo.png" class="h-16 object-contain">
+      </a>
+      <a href="index.html"
+         class="bg-[#8ED1FF] text-[#0B3C6D] px-6 py-3 rounded-full font-bold transition hover:bg-[#76c4f7]">
+        Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- ========================================= -->
+  <!-- HERO -->
+  <!-- ========================================= -->
+  <section class="hero-about px-6">
+    <div class="max-w-7xl mx-auto relative z-10 py-24 w-full">
+      <div class="max-w-3xl reveal">
+        <span class="pill-tag mb-6 inline-block">About Us</span>
+        <h1 class="text-6xl md:text-8xl font-bold text-white leading-tight mt-4">
+          One Piece<br>Closer.
+        </h1>
+        <p class="mt-8 text-xl text-white/80 leading-relaxed max-w-2xl">
+          Puzzles is a Gen Z-led organization building a more inclusive and accessible
+          society for people with autism and neurodivergence — one program, one event,
+          and one community at a time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- IMPACT STATS -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid sm:grid-cols-3 gap-8">
+
+        <div class="stat-card reveal">
+          <p class="text-6xl font-bold text-[#0B3C6D]">800+</p>
+          <p class="mt-3 text-gray-600 font-medium">Runners at our first ever Puzzles 5K Festival</p>
+        </div>
+
+        <div class="stat-card reveal" style="transition-delay:0.1s">
+          <p class="text-6xl font-bold text-[#0B3C6D]">1,600+</p>
+          <p class="mt-3 text-gray-600 font-medium">Total attendees at the Puzzles 5K & Festival</p>
+        </div>
+
+        <div class="stat-card reveal" style="transition-delay:0.2s">
+          <p class="text-6xl font-bold text-[#0B3C6D]">1</p>
+          <p class="mt-3 text-gray-600 font-medium">Big dream — a summer camp built for the neurodivergent community</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- MISSION & VISION -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6 bg-[#F7FBFF]">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Mission -->
+      <div class="reveal">
+        <span class="pill-tag">Our Mission</span>
+        <div class="section-divider" style="margin-left:0; margin-top:1.5rem;"></div>
+        <h2 class="text-5xl font-bold text-[#0B3C6D] mt-2 leading-tight">
+          Build a Society That Belongs to Everyone
+        </h2>
+        <p class="mt-6 text-lg text-gray-700 leading-relaxed">
+          Our mission is to build a society that is truly inclusive and accessible
+          for people with autism and on the neurodivergent spectrum. We believe
+          that every person deserves to feel seen, celebrated, and supported in
+          their community — not as an afterthought, but by design.
+        </p>
+      </div>
+
+      <!-- Vision -->
+      <div class="reveal" style="transition-delay:0.15s">
+        <span class="pill-tag">Our Vision</span>
+        <div class="section-divider" style="margin-left:0; margin-top:1.5rem;"></div>
+        <h2 class="text-5xl font-bold text-[#0B3C6D] mt-2 leading-tight">
+          A Summer Camp Like No Other
+        </h2>
+        <p class="mt-6 text-lg text-gray-700 leading-relaxed">
+          Every event and program we run brings us one step closer to our ultimate
+          vision — a summer camp purpose-built for autistic, neurodivergent, and
+          disabled individuals. A place with the best programming, the most
+          inclusive environment, and a team that truly understands the community
+          it serves.
+        </p>
+        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+          That's what we're building toward. Every registration, every donation,
+          every volunteer hour moves us forward.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- OUR VALUES -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16 reveal">
+        <span class="pill-tag">What We Stand For</span>
+        <h2 class="text-5xl font-bold text-[#0B3C6D] mt-4">Our Values</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <div class="value-card reveal">
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">Inclusion by Design</h3>
+          <p class="text-gray-600 leading-relaxed">
+            We don't add accessibility as an afterthought. Every program, event,
+            and experience is built with the neurodivergent community at the center.
+          </p>
+        </div>
+
+        <div class="value-card reveal" style="transition-delay:0.1s">
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">Community First</h3>
+          <p class="text-gray-600 leading-relaxed">
+            We exist because of and for the community we serve. Real relationships,
+            real impact — not just programming.
+          </p>
+        </div>
+
+        <div class="value-card reveal" style="transition-delay:0.15s">
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">Entrepreneurship With Purpose</h3>
+          <p class="text-gray-600 leading-relaxed">
+            As a Gen Z organization, we bring a fresh approach — blending
+            entrepreneurial thinking with genuine social impact to build something
+            that lasts.
+          </p>
+        </div>
+
+        <div class="value-card reveal" style="transition-delay:0.2s">
+          <h3 class="text-2xl font-bold text-[#0B3C6D] mb-2">Accountability & Transparency</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Every dollar raised and every decision made is in service of the people
+            we're here for. We share our progress openly and hold ourselves to it.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- SPECIAL THANKS -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6 bg-[#F7FBFF]">
+    <div class="max-w-5xl mx-auto">
+      <div class="thanks-banner p-12 md:p-16 reveal">
+        <div class="relative z-10">
+          <span class="pill-tag mb-6 inline-block" style="background:rgba(142,209,255,0.25); color:white;">Special Thanks</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mt-4 leading-tight">
+            Thank You, Danbury Recreation
+          </h2>
+          <p class="mt-6 text-white/80 text-lg leading-relaxed max-w-2xl">
+            Our first event — the Puzzles 5K & Festival — would not have been possible
+            without the support of the Danbury Recreation Department. Their partnership
+            allowed us to welcome over 800 runners and more than 1,600 people total to
+            a day that proved what this community is capable of. We are deeply grateful.
+          </p>
+          <a href="index.html"
+             class="inline-block mt-8 bg-[#8ED1FF] text-[#0B3C6D] px-8 py-4 rounded-full font-bold transition hover:bg-white">
+            See Our Programs
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- GEN Z SECTION -->
+  <!-- ========================================= -->
+  <section class="py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="genz-section reveal">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="pill-tag mb-4 inline-block">A New Kind of Organization</span>
+            <h2 class="text-4xl font-bold text-[#0B3C6D] mt-4 leading-tight">
+              Entrepreneurship Meets Social Impact
+            </h2>
+            <p class="mt-6 text-gray-700 leading-relaxed text-lg">
+              We're a Gen Z organization, and we're not afraid to say it. That means
+              we bring a fresh, creative, and unfiltered energy to everything we build.
+              We believe the next generation of social impact looks different — it's
+              faster, more community-driven, and unapologetically ambitious.
+            </p>
+            <p class="mt-4 text-gray-700 leading-relaxed text-lg">
+              We're not just fundraising. We're building a brand, a movement, and
+              ultimately a place — a summer camp where neurodivergent and autistic
+              individuals can thrive on their own terms.
+            </p>
+          </div>
+          <div class="space-y-5">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <p class="font-bold text-[#0B3C6D] text-lg">Fresh Perspective</p>
+              <p class="text-gray-600 mt-1">We challenge the way social impact organizations have traditionally operated.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <p class="font-bold text-[#0B3C6D] text-lg">Driven by Community</p>
+              <p class="text-gray-600 mt-1">Every decision comes back to the people we're here to serve.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <p class="font-bold text-[#0B3C6D] text-lg">Built to Last</p>
+              <p class="text-gray-600 mt-1">We're playing the long game — programs today, a summer camp tomorrow.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- CTA -->
+  <!-- ========================================= -->
+  <section class="py-24 px-6 bg-[#0B3C6D] text-center">
+    <div class="max-w-3xl mx-auto reveal">
+      <h2 class="text-5xl font-bold text-white leading-tight">
+        Be Part of the Mission
+      </h2>
+      <p class="mt-6 text-white/80 text-lg leading-relaxed">
+        Whether you register for a program, volunteer your time, or make a donation —
+        you're helping us get one piece closer.
+      </p>
+      <div class="flex flex-wrap gap-5 justify-center mt-10">
+        <a href="donate.html"
+           class="bg-[#8ED1FF] text-[#0B3C6D] px-8 py-4 rounded-full font-bold transition hover:bg-white">
+          Donate
+        </a>
+        <a href="gardening.html"
+           class="border-2 border-white text-white px-8 py-4 rounded-full font-bold transition hover:bg-white hover:text-[#0B3C6D]">
+          View Programs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+  <footer class="bg-[#072746] text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="assets/img/logo.png" class="h-16 mx-auto mb-6">
+      <p class="text-white/60 max-w-xl mx-auto text-sm leading-relaxed">
+        Puzzles is dedicated to building a more inclusive world for neurodivergent
+        and autistic individuals through community programs, accessibility,
+        education, and meaningful experiences.
+      </p>
+      <p class="mt-8 text-white/30 text-xs">© 2026 Puzzles Community</p>
+    </div>
+  </footer>
+
+  <!-- ========================================= -->
+  <!-- SCROLL REVEAL SCRIPT -->
+  <!-- ========================================= -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
