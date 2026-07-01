@@ -200,8 +200,8 @@ app.post("/create-gardening-session", async (req, res) => {
       participant_full: 8000,   // $80
       participant_day:  3000,   // $30
       vendor:           5500,   // $55
-      sponsor_weekly:   15000,  // $150
-      sponsor_main:     50000,  // $500
+      sponsor_weekly:   10000,  // $100
+      sponsor_main:     25000,  // $250
     };
 
     const amount = priceMap[type];

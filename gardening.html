@@ -266,6 +266,7 @@
         <p class="mt-6 text-lg text-gray-600">
           A 4-week gardening experience focused on growth,
           connection, sustainability, and inclusion.
+          <br> 100 Putnam Park Rd, Bethel, CT, 06801
         </p>
       </div>
 
@@ -357,11 +358,11 @@
           <h3 class="text-3xl font-bold text-[#0B3C6D]">Sponsors</h3>
           <div class="mt-8 space-y-8">
             <div>
-              <p class="text-5xl font-bold">$150</p>
+              <p class="text-5xl font-bold">$100</p>
               <p class="mt-2 text-gray-600">Weekly Sponsor</p>
             </div>
             <div>
-              <p class="text-5xl font-bold">$500</p>
+              <p class="text-5xl font-bold">$250</p>
               <p class="mt-2 text-gray-600">Main Sponsor</p>
             </div>
           </div>
@@ -507,8 +508,8 @@
           <label class="font-semibold block mb-3">Sponsorship Level</label>
           <select id="sponsorTypeSelect" class="form-input">
             <option value="">Select sponsorship level…</option>
-            <option value="weekly">Weekly Sponsor — $150</option>
-            <option value="main">Main Sponsor — $500</option>
+            <option value="weekly">Weekly Sponsor — $100</option>
+            <option value="main">Main Sponsor — $250</option>
           </select>
         </div>
 
@@ -628,7 +629,7 @@
         if(sponsorTypeSelect.value === 'weekly') show(fSponsorweek);
         show(fTerms);
         const sp = sponsorTypeSelect.value;
-        priceText.textContent = sp === 'weekly' ? 'Weekly Sponsor — $150' : sp === 'main' ? 'Main Sponsor — $500' : 'Please select a sponsorship level above.';
+        priceText.textContent = sp === 'weekly' ? 'Weekly Sponsor — $100' : sp === 'main' ? 'Main Sponsor — $250' : 'Please select a sponsorship level above.';
       }
     }
 
@@ -643,10 +644,10 @@
     sponsorTypeSelect.addEventListener('change', () => {
       if(sponsorTypeSelect.value === 'weekly'){
         show(fSponsorweek);
-        priceText.textContent = 'Weekly Sponsor — $150';
+        priceText.textContent = 'Weekly Sponsor — $100';
       } else {
         hide(fSponsorweek);
-        priceText.textContent = sponsorTypeSelect.value === 'main' ? 'Main Sponsor — $500' : 'Please select a sponsorship level above.';
+        priceText.textContent = sponsorTypeSelect.value === 'main' ? 'Main Sponsor — $250' : 'Please select a sponsorship level above.';
       }
     });
 
@@ -717,7 +718,7 @@
           email:          document.getElementById("email").value,
           phone:          document.getElementById("phone").value,
           business_name:  document.getElementById("business_name").value,
-          sponsor_level:  level === "weekly" ? "Weekly Sponsor - $150" : "Main Sponsor - $500",
+          sponsor_level:  level === "weekly" ? "Weekly Sponsor - $100" : "Main Sponsor - $250",
           sponsor_date:   level === "weekly" ? document.getElementById("sponsor_date").value : "Full program",
           accommodations: document.getElementById("accommodations").value,
           formspreeUrl,
