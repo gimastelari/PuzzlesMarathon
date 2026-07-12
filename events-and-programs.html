@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Events & Programs — Puzzles Community</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+    body { background: #fffdf8; color: #16324F; margin: 0; }
+    h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
+
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-live { background: #2FA84F; }
+    .dot-past { background: #A3A3A3; }
+
+    .event-row {
+      border-bottom: 1px solid #EAE6DA;
+      transition: background 0.2s ease;
+    }
+    .event-row:hover { background: #FBF9F3; }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .tag-upcoming { background: #E7F3FF; color: #0B3C6D; }
+    .tag-past { background: #F0F0F0; color: #6B6B6B; }
+
+    .thumb {
+      border-radius: 16px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="max-w-5xl mx-auto px-6 pt-16 pb-28">
+
+    <!-- ========================================= -->
+    <!-- PAGE TITLE -->
+    <!-- ========================================= -->
+    <div class="mb-16">
+      <a href="index.html" class="text-sm font-semibold text-[#0B3C6D]/60 hover:text-[#0B3C6D] transition">← Back to Home</a>
+      <h1 class="text-4xl md:text-5xl font-bold text-[#0B3C6D] mt-4">Events & Programs</h1>
+      <p class="mt-3 text-gray-600 text-lg max-w-2xl">
+        Everything Puzzles Community is hosting — what's coming up, and what we've already done together.
+      </p>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- UPCOMING -->
+    <!-- ========================================= -->
+    <section class="mb-20">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="status-dot dot-live"></span>
+        <h2 class="text-xl font-bold text-[#16324F] uppercase tracking-wide">Upcoming</h2>
+      </div>
+
+      <div>
+        <!-- GARDENING PROGRAM -->
+        <a href="gardening.html" class="event-row flex flex-col sm:flex-row gap-6 py-8 items-center">
+          <img src="assets/img/donate.jpg" class="thumb w-full sm:w-40 h-40 sm:h-28 flex-shrink-0" alt="Gardening Program">
+          <div class="flex-1">
+            <span class="tag tag-upcoming">Summer 2026</span>
+            <h3 class="text-2xl font-bold text-[#16324F] mt-3">Gardening Program</h3>
+            <p class="mt-2 text-gray-600 leading-relaxed">
+              4 weeks of hands-on planting, tending, and harvesting — building confidence and community. Aug 23 – Sep 14, Danbury CT.
+            </p>
+          </div>
+          <span class="text-[#D84B4B] font-bold text-2xl flex-shrink-0">›</span>
+        </a>
+
+        <!-- GAME SHOW -->
+        <a href="#" class="event-row flex flex-col sm:flex-row gap-6 py-8 items-center">
+          <img src="assets/img/partner.jpg" class="thumb w-full sm:w-40 h-40 sm:h-28 flex-shrink-0" alt="Game Show">
+          <div class="flex-1">
+            <span class="tag tag-upcoming">Fall 2026</span>
+            <h3 class="text-2xl font-bold text-[#16324F] mt-3">Game Show</h3>
+            <p class="mt-2 text-gray-600 leading-relaxed">
+              A live community game show fundraiser — friendly competition for a good cause. Date & location coming soon.
+            </p>
+          </div>
+          <span class="text-[#D84B4B] font-bold text-2xl flex-shrink-0">›</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PAST -->
+    <!-- ========================================= -->
+    <section>
+      <div class="flex items-center gap-3 mb-8">
+        <span class="status-dot dot-past"></span>
+        <h2 class="text-xl font-bold text-[#16324F] uppercase tracking-wide">Past</h2>
+      </div>
+
+      <div>
+        <!-- PUZZLES 5K FESTIVAL -->
+        <a href="#" class="event-row flex flex-col sm:flex-row gap-6 py-8 items-center">
+          <img src="assets/img/One_Piece_Closer.jpeg" class="thumb w-full sm:w-40 h-40 sm:h-28 flex-shrink-0 opacity-90" alt="Puzzles 5K Festival">
+          <div class="flex-1">
+            <span class="tag tag-past">April 2026</span>
+            <h3 class="text-2xl font-bold text-[#16324F] mt-3">Puzzles 5K Festival</h3>
+            <p class="mt-2 text-gray-600 leading-relaxed">
+              Our first-ever community festival — nearly 800 runners joined to support autism awareness.
+            </p>
+          </div>
+          <span class="text-gray-400 font-bold text-2xl flex-shrink-0">›</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
