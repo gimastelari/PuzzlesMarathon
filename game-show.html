@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puzzles Game Show — Presented by Puzzles Community</title>
+<meta name="description" content="Puzzles Game Show — a night of trivia, teamwork, and community, benefiting neurodivergent-inclusive programs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<style>
+  /* =========================================================
+     CONFIG — edit ticket prices / copy here, styles below.
+     Payment + form endpoints are configured in the JS block
+     near the bottom of this file (search "EDIT ME").
+     ========================================================= */
+
+  :root{
+    --ink:        #1B1B3A;   /* marquee navy — dark bg */
+    --ink-2:      #26264d;   /* lifted navy panel */
+    --gold:       #F4B942;   /* marquee gold — primary accent */
+    --teal:       #2EC4B6;   /* puzzle teal — secondary accent */
+    --coral:      #FF6B6B;   /* puzzle coral — tertiary accent */
+    --cloud:      #FAF9F6;   /* light bg */
+    --charcoal:   #2A2A3C;   /* body text on light */
+    --charcoal-70: rgba(42,42,60,0.7);
+    --line:       rgba(42,42,60,0.14);
+    --line-dark:  rgba(250,249,246,0.16);
+
+    --display: 'Bungee', system-ui, sans-serif;
+    --body: 'Work Sans', system-ui, -apple-system, sans-serif;
+
+    --radius: 18px;
+    --radius-sm: 10px;
+    --container: 1120px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--charcoal);
+    background:var(--cloud);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:var(--display); font-weight:400; letter-spacing:0.01em; margin:0; }
+  p{ margin:0; }
+  button{ font-family:var(--body); cursor:pointer; }
+
+  .wrap{ max-width:var(--container); margin:0 auto; padding:0 24px; }
+  section{ position:relative; }
+
+  :focus-visible{
+    outline:3px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(27,27,58,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .nav-brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--display); color:var(--cloud); font-size:15px;
+    text-decoration:none; white-space:nowrap;
+  }
+  .nav-brand .piece{ width:22px; height:22px; }
+  .nav-links{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    color:var(--cloud); text-decoration:none; font-size:14px; font-weight:600;
+    opacity:0.85; transition:opacity .15s ease, color .15s ease;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--gold); }
+  .nav-cta{
+    background:var(--gold); color:var(--ink); border:none; border-radius:999px;
+    padding:10px 20px; font-weight:700; font-size:14px; text-decoration:none;
+  }
+  @media (max-width:760px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO / MARQUEE ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(244,185,66,0.18), transparent 55%),
+      radial-gradient(ellipse at 90% 10%, rgba(46,196,182,0.16), transparent 50%),
+      var(--ink);
+    color:var(--cloud);
+    padding:64px 0 88px;
+    overflow:hidden;
+  }
+  .marquee-frame{
+    border:3px solid var(--gold);
+    border-radius:24px;
+    padding:48px 40px;
+    position:relative;
+    background:rgba(250,249,246,0.02);
+  }
+  .bulb-row{
+    position:absolute; inset:6px;
+    border-radius:20px;
+    pointer-events:none;
+  }
+  .bulb{
+    position:absolute; width:7px; height:7px; border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px 2px rgba(244,185,66,0.6);
+    animation:chase 1.6s infinite steps(1);
+    transform:translate(-50%,-50%);
+  }
+  @keyframes chase{
+    0%, 49%{ opacity:1; }
+    50%, 100%{ opacity:0.25; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bulb{ animation:none; opacity:0.85; }
+  }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:''; width:8px; height:8px; background:var(--coral); border-radius:2px; transform:rotate(45deg);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(40px, 7vw, 78px);
+    line-height:1.02;
+    color:var(--cloud);
+    text-shadow:0 0 22px rgba(244,185,66,0.25);
+  }
+  .hero h1 span{ color:var(--gold); }
+  .hero-sub{
+    max-width:560px; margin-top:20px; font-size:18px;
+    color:rgba(250,249,246,0.82);
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;
+  }
+  .meta-chip{
+    display:flex; align-items:center; gap:10px;
+    background:rgba(250,249,246,0.06);
+    border:1px solid var(--line-dark);
+    border-radius:999px;
+    padding:10px 18px;
+    font-size:14px; font-weight:600;
+  }
+  .meta-chip b{ color:var(--gold); font-weight:800; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; margin-top:36px; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border-radius:999px; padding:15px 30px; font-weight:700; font-size:15px;
+    text-decoration:none; border:2px solid transparent; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--gold); color:var(--ink); box-shadow:0 10px 24px -10px rgba(244,185,66,0.6); }
+  .btn-ghost{ background:transparent; color:var(--cloud); border-color:var(--line-dark); }
+  .btn-ghost:hover{ border-color:var(--gold); }
+  .btn-dark{ background:var(--ink); color:var(--cloud); }
+  .btn-dark:hover{ box-shadow:0 10px 24px -10px rgba(27,27,58,0.5); }
+  .btn:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{ max-width:640px; margin-bottom:44px; }
+  .section-head .eyebrow{ color:var(--coral); }
+  .section-head .eyebrow::before{ background:var(--teal); }
+  .section-head h2{ font-size:clamp(28px,4vw,42px); color:var(--ink); line-height:1.08; }
+  .section-head p{ margin-top:14px; font-size:16px; color:var(--charcoal-70); }
+  .light .section-head h2{ color:var(--ink); }
+  .dark .section-head h2{ color:var(--cloud); }
+  .dark .section-head p{ color:rgba(250,249,246,0.75); }
+
+  section.py{ padding:88px 0; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start;
+  }
+  .about-grid p{ font-size:17px; color:var(--charcoal-70); margin-bottom:16px; }
+  .stat-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  .stat{
+    background:var(--cloud); border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:20px;
+  }
+  .stat b{ display:block; font-family:var(--display); font-size:26px; color:var(--coral); }
+  .stat span{ font-size:13px; color:var(--charcoal-70); }
+  .round-card{
+    background:var(--ink); color:var(--cloud); border-radius:var(--radius); padding:28px;
+  }
+  .round-card h3{ font-family:var(--body); font-weight:800; font-size:15px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .round-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .round-list li{ display:flex; gap:12px; font-size:14.5px; color:rgba(250,249,246,0.88); }
+  .round-num{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    background:rgba(244,185,66,0.15); color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-size:11px;
+  }
+  @media (max-width:820px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- TICKETS (interlocking puzzle cards) ---------- */
+  .ticket-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  }
+  .ticket-card{
+    background:var(--cloud);
+    border:2px solid var(--ink);
+    padding:32px 26px;
+    position:relative;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .ticket-card + .ticket-card{ border-left:none; }
+  .ticket-card:first-child{ border-radius:var(--radius) 0 0 var(--radius); }
+  .ticket-card:last-child{ border-radius:0 var(--radius) var(--radius) 0; }
+  /* puzzle-piece tabs interlocking each card */
+  .ticket-card::after{
+    content:''; position:absolute; top:50%; right:-15px; transform:translateY(-50%);
+    width:30px; height:30px; border-radius:50%;
+    background:var(--cloud); border:2px solid var(--ink);
+    z-index:2;
+  }
+  .ticket-card:last-child::after{ display:none; }
+  .ticket-card.featured{
+    background:var(--ink); color:var(--cloud); border-color:var(--ink); z-index:1;
+    transform:scale(1.045);
+  }
+  .ticket-card.featured::after{ background:var(--ink); }
+  .ticket-tag{
+    align-self:flex-start; font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+    background:var(--coral); color:var(--cloud); padding:5px 12px; border-radius:999px;
+  }
+  .ticket-card.featured .ticket-tag{ background:var(--gold); color:var(--ink); }
+  .ticket-name{ font-family:var(--display); font-size:20px; }
+  .ticket-price{ font-family:var(--display); font-size:38px; color:var(--coral); }
+  .ticket-card.featured .ticket-price{ color:var(--gold); }
+  .ticket-price sup{ font-size:15px; font-family:var(--body); font-weight:700; }
+  .ticket-desc{ font-size:14px; color:var(--charcoal-70); min-height:40px; }
+  .ticket-card.featured .ticket-desc{ color:rgba(250,249,246,0.75); }
+  .ticket-feats{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; font-size:14px; }
+  .ticket-feats li{ display:flex; gap:8px; align-items:flex-start; }
+  .ticket-feats li::before{ content:'◆'; color:var(--teal); font-size:9px; margin-top:5px; }
+  .qty-row{
+    margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+    border-top:1px solid var(--line); padding-top:16px;
+  }
+  .ticket-card.featured .qty-row{ border-color:var(--line-dark); }
+  .qty-control{ display:flex; align-items:center; gap:10px; }
+  .qty-btn{
+    width:30px; height:30px; border-radius:50%; border:1.5px solid currentColor;
+    background:transparent; color:inherit; font-size:16px; font-weight:700; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .qty-val{ font-weight:800; min-width:16px; text-align:center; }
+  @media (max-width:900px){
+    .ticket-grid{ grid-template-columns:1fr; }
+    .ticket-card, .ticket-card:first-child, .ticket-card:last-child{ border-radius:var(--radius); border-left:2px solid var(--ink); }
+    .ticket-card + .ticket-card{ margin-top:20px; }
+    .ticket-card::after{ display:none; }
+    .ticket-card.featured{ transform:none; }
+  }
+
+  .ticket-summary{
+    margin-top:36px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:20px; background:var(--ink); color:var(--cloud); border-radius:var(--radius); padding:26px 30px;
+  }
+  .ticket-summary .total b{ font-family:var(--display); font-size:26px; color:var(--gold); margin-left:8px; }
+
+  /* ---------- SPONSORS ---------- */
+  .sponsor-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .sponsor-card{
+    background:var(--cloud); border:1.5px solid var(--line); border-radius:var(--radius);
+    padding:26px 22px; display:flex; flex-direction:column; gap:14px;
+  }
+  .sponsor-card.top{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(244,185,66,0.12); }
+  .sponsor-level{ font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal); }
+  .sponsor-name{ font-family:var(--display); font-size:17px; color:var(--ink); }
+  .sponsor-price{ font-family:var(--display); font-size:24px; color:var(--coral); }
+  .sponsor-feats{ list-style:none; margin:0; padding:0; font-size:13.5px; color:var(--charcoal-70); display:flex; flex-direction:column; gap:8px; flex:1; }
+  .sponsor-feats li{ display:flex; gap:7px; }
+  .sponsor-feats li::before{ content:'—'; color:var(--ink); flex:none; }
+  .sponsor-select{
+    border:2px solid var(--ink); background:transparent; color:var(--ink); border-radius:999px;
+    padding:11px; font-weight:700; font-size:13.5px; text-align:center;
+  }
+  .sponsor-select[aria-pressed="true"]{ background:var(--ink); color:var(--cloud); }
+  @media (max-width:940px){ .sponsor-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .sponsor-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- REGISTRATION FORM ---------- */
+  .reg-panel{
+    background:var(--ink-2); border-radius:24px; padding:48px;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:48px;
+  }
+  .reg-side h2{ color:var(--cloud); font-size:clamp(26px,3.4vw,34px); line-height:1.1; }
+  .reg-side p{ color:rgba(250,249,246,0.75); margin-top:14px; font-size:15px; }
+  .reg-order{
+    margin-top:26px; border-top:1px solid var(--line-dark); padding-top:18px;
+    display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--cloud);
+  }
+  .reg-order-row{ display:flex; justify-content:space-between; opacity:0.9; }
+  .reg-order-row.total{ font-weight:800; font-size:16px; opacity:1; padding-top:10px; border-top:1px dashed var(--line-dark); }
+
+  form.card{
+    background:var(--cloud); border-radius:var(--radius); padding:32px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:13px; font-weight:700; color:var(--ink); }
+  .field input, .field select, .field textarea{
+    border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:12px 14px;
+    font-family:var(--body); font-size:15px; background:var(--cloud); color:var(--charcoal);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--teal); }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .checkbox-row{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:var(--charcoal-70); }
+  .checkbox-row input{ margin-top:3px; }
+  .form-note{ font-size:12.5px; color:var(--charcoal-70); }
+  .form-status{ font-size:14px; font-weight:600; min-height:20px; }
+  .form-status.ok{ color:#1a8f5a; }
+  .form-status.err{ color:var(--coral); }
+  @media (max-width:900px){ .reg-panel{ grid-template-columns:1fr; padding:32px; } .field-row{ grid-template-columns:1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{
+    cursor:pointer; padding:22px 4px; font-weight:700; font-size:16px; color:var(--ink);
+    display:flex; justify-content:space-between; align-items:center; list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:'+'; font-family:var(--display); font-size:20px; color:var(--coral); }
+  .faq-item[open] summary::after{ content:'–'; }
+  .faq-item p{ padding:0 4px 22px; color:var(--charcoal-70); font-size:15px; max-width:680px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); color:rgba(250,249,246,0.7); padding:48px 0 32px; }
+  .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:center; }
+  .footer-brand{ font-family:var(--display); color:var(--cloud); font-size:15px; }
+  .footer-links{ display:flex; gap:20px; list-style:none; padding:0; margin:0; font-size:13.5px; }
+  .footer-links a{ text-decoration:none; color:rgba(250,249,246,0.7); }
+  .footer-links a:hover{ color:var(--gold); }
+  .footer-fine{ margin-top:24px; font-size:12.5px; color:rgba(250,249,246,0.45); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="nav-brand">
+      <svg class="piece" viewBox="0 0 24 24" fill="none"><path d="M9 2h4a1 1 0 011 1v2.2a2.3 2.3 0 104 0V3a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-2.2a2.3 2.3 0 100 4H22a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2.2a2.3 2.3 0 10-4 0V19a1 1 0 01-1 1H8a1 1 0 01-1-1v-4a1 1 0 011-1h2.2a2.3 2.3 0 100-4H9a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#F4B942"/></svg>
+      Puzzles Community
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">The Show</a></li>
+      <li><a href="#tickets">Tickets</a></li>
+      <li><a href="#sponsors">Sponsor</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#register" class="nav-cta">Get Tickets</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="marquee-frame" id="marqueeFrame">
+      <div class="bulb-row" id="bulbRow"></div>
+      <span class="eyebrow">Puzzles Community presents</span>
+      <h1>THE<br><span>PUZZLES</span> GAME SHOW</h1>
+      <p class="hero-sub">One night. Three games. Teams battling it out live on stage — all to open Puzzles Community's first summer camp for the neurodivergent and special-needs community.</p>
+      <div class="hero-meta">
+        <span class="meta-chip">🗓️ <b>Sat, Sept 26, 2026</b></span>
+        <span class="meta-chip" title="243 NY-100 Bldg C, Somers, NY 10589">📍 <b>Prodigy Athletic Center</b>, Somers, NY</span>
+        <span class="meta-chip">⏰ Doors <b>5:45 PM</b> · Show <b>7:30 PM</b></span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#tickets" class="btn btn-primary">Grab a Ticket</a>
+        <a href="#sponsors" class="btn btn-ghost">Become a Sponsor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py light" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:20px;">
+          <span class="eyebrow">Why we play</span>
+          <h2>Game night with a purpose.</h2>
+        </div>
+        <p>This event is fundraising for Puzzles Community's main mission: opening a summer camp for the neurodivergent and special-needs community. On top of funding the Puzzles camp, proceeds will also sponsor the full testing, application, and licensing fees for two BCBAs (Board Certified Behavior Analysts) — investing directly in the people who make this community stronger.</p>
+        <p>Puzzles Community is a Gen Z–led nonprofit building neurodivergent-inclusive spaces — from our gardening program to our annual 5K, and now, our biggest stage yet. The Puzzles Game Show brings teams of friends, families, and coworkers together for a night of friendly competition, real prizes, and a shared reason to show up. It's a chance to keep growing our mission by investing in the individuals, families, organizations, businesses, and initiatives that strengthen and support this community.</p>
+        <p>Every ticket and sponsorship goes directly toward program costs: sensory-friendly accommodations, staff training, and scholarships that keep our events free or low-cost for the families who need them most.</p>
+        <div class="stat-row">
+          <div class="stat"><b>3</b><span>Games in 90 minutes</span></div>
+          <div class="stat"><b>100%</b><span>Of net proceeds fund programs</span></div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="round-card">
+          <h3>Tonight's Schedule</h3>
+          <ul class="round-list">
+            <li><span class="round-num">•</span> Doors Open — 5:45 PM</li>
+            <li><span class="round-num">•</span> Cocktail Hour — 6:00 – 7:00 PM</li>
+            <li><span class="round-num">•</span> Speeches — 7:00 – 7:30 PM</li>
+            <li><span class="round-num">•</span> Show — 7:30 – 9:00 PM</li>
+            <li><span class="round-num">•</span> Music & Bar — 9:00 – 10:00 PM</li>
+          </ul>
+        </div>
+        <div class="round-card">
+          <h3>The Games</h3>
+          <ul class="round-list">
+            <li><span class="round-num">•</span> 3 head-to-head games packed into 90 minutes</li>
+            <li><span class="round-num">•</span> Each table seats 8 — bring your crew or join one</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py light" id="tickets" style="background:linear-gradient(180deg, transparent, rgba(46,196,182,0.05));">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Seats are limited</span>
+      <h2>Pick your ticket.</h2>
+      <p>Register a whole table or grab a seat solo — each table seats 8. Every ticket includes open bar, appetizers, the game show, and a shot at the prize.</p>
+    </div>
+
+    <div class="ticket-grid" id="ticketGrid">
+      <div class="ticket-card" data-ticket="general" data-price="90" data-name="General Admission">
+        <span class="ticket-tag">Standard</span>
+        <span class="ticket-name">General Admission</span>
+        <span class="ticket-price">$90<sup>/seat</sup></span>
+        <p class="ticket-desc">One seat, shared table, full access to the show.</p>
+        <ul class="ticket-feats">
+          <li>One seat</li>
+          <li>Open bar</li>
+          <li>Appetizers</li>
+          <li>Game show + 1 prize</li>
+        </ul>
+        <div class="qty-row">
+          <div class="qty-control">
+            <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease General Admission quantity">–</button>
+            <span class="qty-val" data-qty="general">0</span>
+            <button type="button" class="qty-btn" data-action="inc" aria-label="Increase General Admission quantity">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-card featured" data-ticket="table" data-price="640" data-name="Table Deal">
+        <span class="ticket-tag">Most popular</span>
+        <span class="ticket-name">Table Deal</span>
+        <span class="ticket-price">$640<sup>/table</sup></span>
+        <p class="ticket-desc">Save by registering your whole table of 8 in one go.</p>
+        <ul class="ticket-feats">
+          <li>Eight seats</li>
+          <li>Open bar</li>
+          <li>Appetizers</li>
+          <li>Game show + 1 prize</li>
+        </ul>
+        <div class="qty-row">
+          <div class="qty-control">
+            <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease Table Deal quantity">–</button>
+            <span class="qty-val" data-qty="table">0</span>
+            <button type="button" class="qty-btn" data-action="inc" aria-label="Increase Table Deal quantity">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-card" data-ticket="vip" data-price="100" data-name="VIP Table Seat">
+        <span class="ticket-tag">Front section</span>
+        <span class="ticket-name">VIP Table Seat</span>
+        <span class="ticket-price">$100<sup>/seat</sup></span>
+        <p class="ticket-desc">Front-section reserved table, one seat.</p>
+        <ul class="ticket-feats">
+          <li>Front-section reserved table</li>
+          <li>Open bar</li>
+          <li>Appetizers</li>
+          <li>Game show + prize</li>
+        </ul>
+        <div class="qty-row">
+          <div class="qty-control">
+            <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease VIP Table Seat quantity">–</button>
+            <span class="qty-val" data-qty="vip">0</span>
+            <button type="button" class="qty-btn" data-action="inc" aria-label="Increase VIP Table Seat quantity">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket-summary">
+      <span class="total">Your order: <b id="ticketTotal">$0</b></span>
+      <a href="#register" class="btn btn-primary">Continue to Checkout</a>
+    </div>
+  </div>
+</section>
+
+<section class="py dark" id="sponsors" style="background:var(--ink); color:var(--cloud);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--gold);">Fuel the show</span>
+      <h2>Sponsor the Puzzles Game Show.</h2>
+      <p>Your support covers venue costs, accessibility accommodations, and scholarship seats — and puts your name in front of a room full of community. Select a tier below to start your sponsorship.</p>
+    </div>
+
+    <div class="sponsor-grid" id="sponsorGrid">
+      <div class="sponsor-card top" data-sponsor="presenting" data-price="2500" data-name="Presenting Sponsor">
+        <span class="sponsor-level">Presenting</span>
+        <span class="sponsor-name">$2,500</span>
+        <ul class="sponsor-feats">
+          <li>Name in show title ("Puzzles Game Show, presented by...")</li>
+          <li>Logo on stage backdrop & all marketing</li>
+          <li>On-stage shoutout + speaking moment</li>
+          <li>Table of 8 VIP seats included</li>
+        </ul>
+        <button type="button" class="sponsor-select" data-action="select-sponsor">Select tier</button>
+      </div>
+      <div class="sponsor-card" data-sponsor="main" data-price="500" data-name="Main Sponsor">
+        <span class="sponsor-level">Main Sponsor</span>
+        <span class="sponsor-name">$500</span>
+        <ul class="sponsor-feats">
+          <li>Naming rights to one game round</li>
+          <li>Logo on stage screen during your round</li>
+          <li>Shout-out on our website and Instagram</li>
+          <li>Table of 4 VIP seats included</li>
+        </ul>
+        <button type="button" class="sponsor-select" data-action="select-sponsor">Select tier</button>
+      </div>
+      <div class="sponsor-card" data-sponsor="community" data-price="250" data-name="Community Sponsor">
+        <span class="sponsor-level">Community</span>
+        <span class="sponsor-name">$250</span>
+        <ul class="sponsor-feats">
+          <li>Naming rights to one game round</li>
+          <li>Logo on stage screen during your round</li>
+          <li>Shout-out on our website and Instagram</li>
+        </ul>
+        <button type="button" class="sponsor-select" data-action="select-sponsor">Select tier</button>
+      </div>
+      <div class="sponsor-card" data-sponsor="supporting" data-price="100" data-name="Supporting Sponsor">
+        <span class="sponsor-level">Supporting</span>
+        <span class="sponsor-name">$100</span>
+        <ul class="sponsor-feats">
+          <li>Name listed on event program</li>
+          <li>Social media shout-out</li>
+        </ul>
+        <button type="button" class="sponsor-select" data-action="select-sponsor">Select tier</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py light" id="register">
+  <div class="wrap">
+    <div class="reg-panel">
+      <div class="reg-side">
+        <h2>Complete your registration.</h2>
+        <p>Review your order, then continue to secure checkout. Sponsoring instead? Use the sponsor form and our team will follow up within 2 business days to finalize logo placement and benefits.</p>
+        <div class="reg-order" id="orderSummary">
+          <div class="reg-order-row"><span>No tickets selected yet</span><span>—</span></div>
+          <div class="reg-order-row total"><span>Total</span><span id="orderTotal">$0</span></div>
+        </div>
+      </div>
+
+      <div>
+        <form class="card" id="ticketForm">
+          <h3 style="font-family:var(--display); font-size:16px; color:var(--ink);">Ticket checkout</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" name="firstName" required>
+            </div>
+            <div class="field">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" name="lastName" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+          </div>
+          <div class="field">
+            <label for="access">Accessibility or dietary notes</label>
+            <textarea id="access" name="accessNotes" rows="2" placeholder="Let us know how we can make the night work for you"></textarea>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="updates" name="updates">
+            <label for="updates">Keep me posted on future Puzzles Community events</label>
+          </div>
+          <button type="submit" class="btn btn-dark" id="ticketSubmit">Continue to Secure Checkout</button>
+          <p class="form-status" id="ticketStatus"></p>
+          <p class="form-note">You'll be redirected to our secure payment processor to complete your purchase. Ticket sales are final; contact hello@puzzlescommunity.com for accommodations.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py light" id="sponsor-form" style="padding-top:0;">
+  <div class="wrap">
+    <div class="reg-panel" style="background:var(--cloud); border:2px solid var(--ink);">
+      <div class="reg-side">
+        <h2 style="color:var(--ink);">Sponsor inquiry.</h2>
+        <p style="color:var(--charcoal-70);">Selected a tier above? It'll show here. Submit your details and our team will send an invoice and logo spec sheet.</p>
+        <div class="reg-order" id="sponsorSummary" style="color:var(--ink); border-color:var(--line);">
+          <div class="reg-order-row" style="opacity:0.75;"><span>No tier selected yet</span><span>—</span></div>
+        </div>
+      </div>
+      <div>
+        <form class="card" id="sponsorForm">
+          <h3 style="font-family:var(--display); font-size:16px; color:var(--ink);">Sponsor details</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="sOrg">Company / organization</label>
+              <input type="text" id="sOrg" name="organization" required>
+            </div>
+            <div class="field">
+              <label for="sContact">Contact name</label>
+              <input type="text" id="sContact" name="contactName" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="sEmail">Email</label>
+              <input type="email" id="sEmail" name="email" required>
+            </div>
+            <div class="field">
+              <label for="sPhone">Phone</label>
+              <input type="tel" id="sPhone" name="phone">
+            </div>
+          </div>
+          <div class="field">
+            <label for="sTier">Sponsorship tier</label>
+            <select id="sTier" name="tier" required>
+              <option value="">Select a tier</option>
+              <option value="presenting">Presenting Sponsor — $2,500</option>
+              <option value="main">Main Sponsor — $500</option>
+              <option value="community">Community Sponsor — $250</option>
+              <option value="supporting">Supporting Sponsor — $100</option>
+              <option value="custom">Custom amount / in-kind</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sNotes">Notes (in-kind offer, logo files, questions)</label>
+            <textarea id="sNotes" name="notes" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark" id="sponsorSubmit">Submit Sponsor Inquiry</button>
+          <p class="form-status" id="sponsorStatus"></p>
+          <p class="form-note">This sends an inquiry to our team — payment/invoice details follow by email. For same-day sponsorship, email hello@puzzlescommunity.com.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py light" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Good to know</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Is the venue accessible and sensory-friendly?</summary>
+        <p>Yes. Prodigy Athletic Center is wheelchair accessible, and we offer a quiet room, dimmed seating, and noise-reducing headphones on request — just note it during checkout.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I buy tickets for a whole team?</summary>
+        <p>Absolutely — increase the quantity on any ticket tier and add your team name during checkout. Tables seat up to 6.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What's the refund policy?</summary>
+        <p>Tickets are final sale, but fully transferable — email us the new attendee's name anytime before the event.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do sponsorships get invoiced?</summary>
+        <p>After you submit the sponsor form, our team follows up within 2 business days with an invoice and secure payment link, or ACH/check instructions on request.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <span class="footer-brand">Puzzles Community</span>
+      <ul class="footer-links">
+        <li><a href="https://puzzlescommunity.com">puzzlescommunity.com</a></li>
+        <li><a href="mailto:hello@puzzlescommunity.com">hello@puzzlescommunity.com</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+    <p class="footer-fine">Prodigy Athletic Center · 243 NY-100 Bldg C, Somers, NY 10589</p>
+    <p class="footer-fine">© 2026 Puzzles Community. All proceeds support neurodivergent-inclusive programming.</p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   EDIT ME — payment + form configuration
+   =========================================================
+   This page has no backend of its own. Wire it up to your
+   real payment processor and inbox before going live:
+
+   1) STRIPE PAYMENT LINKS (tickets)
+      Create one Stripe Payment Link per ticket type (or one
+      link with adjustable quantity/price via line items using
+      Stripe Checkout + a small serverless function, matching
+      the puzzlesmarathon.com setup). Paste the base links below.
+      For a no-code option, Stripe Payment Links support a
+      `?quantity=` and `prefilled_email=` query param.
+
+   2) FORMSPREE ENDPOINT (sponsor inquiries + registration
+      details) — same pattern used on puzzlesmarathon.com.
+      Replace YOUR_FORM_ID with your Formspree form ID.
+   ========================================================= */
+  const CONFIG = {
+    backend: "https://puzzles-marathon-backend.onrender.com",
+    formspreeTicketsEndpoint:  "https://formspree.io/f/mgogeeok",
+    formspreeSponsorEndpoint:  "https://formspree.io/f/xojgqqje",
+  };
+
+  // ---------- Marquee bulbs ----------
+  // Traces the *actual* rendered perimeter of the frame (in pixels,
+  // measured live) so bulbs land evenly on all four sides regardless
+  // of how tall the content makes the box — rebuilds on resize.
+  (function buildBulbs(){
+    const frame = document.getElementById('bulbRow');
+    const spacing = 34; // px between bulbs
+
+    function layout(){
+      frame.innerHTML = '';
+      const w = frame.clientWidth;
+      const h = frame.clientHeight;
+      if(w === 0 || h === 0) return;
+
+      const perim = 2 * (w + h);
+      const count = Math.max(8, Math.round(perim / spacing));
+
+      for(let i=0;i<count;i++){
+        const t = i / count;
+        const d = t * perim;
+        let x, y;
+        if(d < w){ x = d; y = 0; }
+        else if(d < w + h){ x = w; y = d - w; }
+        else if(d < 2*w + h){ x = w - (d - (w + h)); y = h; }
+        else { x = 0; y = h - (d - (2*w + h)); }
+
+        const b = document.createElement('span');
+        b.className = 'bulb';
+        b.style.left = x + 'px';
+        b.style.top = y + 'px';
+        b.style.animationDelay = (t * 1.6) + 's';
+        frame.appendChild(b);
+      }
+    }
+
+    layout();
+    window.addEventListener('resize', layout);
+    // Recalculate once fonts/layout settle (e.g. web font swap-in).
+    window.addEventListener('load', layout);
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(layout);
+    }
+  })();
+
+  // ---------- Ticket quantities ----------
+  const ticketState = { general: 0, table: 0, vip: 0 };
+  const ticketMeta = {
+    general: { price: 90,  name: "General Admission" },
+    table:   { price: 640, name: "Table Deal" },
+    vip:     { price: 100, name: "VIP Table Seat" },
+  };
+
+  document.getElementById('ticketGrid').addEventListener('click', (e) => {
+    const btn = e.target.closest('.qty-btn');
+    if(!btn) return;
+    const card = btn.closest('.ticket-card');
+    const key = card.dataset.ticket;
+    const delta = btn.dataset.action === 'inc' ? 1 : -1;
+    ticketState[key] = Math.max(0, Math.min(10, ticketState[key] + delta));
+    card.querySelector('.qty-val').textContent = ticketState[key];
+    renderTicketTotals();
+  });
+
+  function renderTicketTotals(){
+    let total = 0;
+    const lines = [];
+    Object.keys(ticketState).forEach(key => {
+      const qty = ticketState[key];
+      if(qty > 0){
+        const lineTotal = qty * ticketMeta[key].price;
+        total += lineTotal;
+        lines.push(`${qty} × ${ticketMeta[key].name} — $${lineTotal}`);
+      }
+    });
+    document.getElementById('ticketTotal').textContent = '$' + total;
+    document.getElementById('orderTotal').textContent = '$' + total;
+
+    const summary = document.getElementById('orderSummary');
+    summary.innerHTML = '';
+    if(lines.length === 0){
+      summary.innerHTML = '<div class="reg-order-row"><span>No tickets selected yet</span><span>—</span></div>';
+    } else {
+      lines.forEach(l => {
+        const [qtyPart, pricePart] = l.split(' — ');
+        const row = document.createElement('div');
+        row.className = 'reg-order-row';
+        row.innerHTML = `<span>${qtyPart}</span><span>${pricePart}</span>`;
+        summary.appendChild(row);
+      });
+    }
+    const totalRow = document.createElement('div');
+    totalRow.className = 'reg-order-row total';
+    totalRow.innerHTML = `<span>Total</span><span>$${total}</span>`;
+    summary.appendChild(totalRow);
+  }
+
+  // ---------- Sponsor tier selection ----------
+  let selectedSponsor = null;
+  document.getElementById('sponsorGrid').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="select-sponsor"]');
+    if(!btn) return;
+    const card = btn.closest('.sponsor-card');
+    document.querySelectorAll('.sponsor-select').forEach(b => {
+      b.setAttribute('aria-pressed','false');
+      b.textContent = 'Select tier';
+    });
+    btn.setAttribute('aria-pressed','true');
+    btn.textContent = 'Selected ✓';
+    selectedSponsor = { key: card.dataset.sponsor, name: card.dataset.name, price: card.dataset.price };
+
+    document.getElementById('sTier').value = selectedSponsor.key;
+    const summary = document.getElementById('sponsorSummary');
+    summary.innerHTML = `<div class="reg-order-row"><span>${selectedSponsor.name}</span><span>$${Number(selectedSponsor.price).toLocaleString()}</span></div>`;
+    document.getElementById('sponsor-form').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  document.getElementById('sTier').addEventListener('change', (e) => {
+    const val = e.target.value;
+    if(!val){ return; }
+    document.querySelectorAll('.sponsor-select').forEach(b => {
+      const card = b.closest('.sponsor-card');
+      const match = card && card.dataset.sponsor === val;
+      b.setAttribute('aria-pressed', match ? 'true' : 'false');
+      b.textContent = match ? 'Selected ✓' : 'Select tier';
+    });
+  });
+
+  // ---------- Ticket checkout submit ----------
+  document.getElementById('ticketForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('ticketStatus');
+    const submitBtn = document.getElementById('ticketSubmit');
+    const totalQty = Object.values(ticketState).reduce((a,b) => a+b, 0);
+
+    if(totalQty === 0){
+      status.textContent = 'Select at least one ticket above before checking out.';
+      status.className = 'form-status err';
+      document.getElementById('tickets').scrollIntoView({ behavior:'smooth' });
+      return;
+    }
+
+    const form = e.target;
+    const payload = {
+      name: `${form.firstName.value} ${form.lastName.value}`.trim(),
+      firstName: form.firstName.value,
+      lastName: form.lastName.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      accessNotes: form.accessNotes.value,
+      updates: form.updates.checked,
+      tickets: ticketState,
+      formspreeUrl: CONFIG.formspreeTicketsEndpoint,
+    };
+
+    submitBtn.disabled = true;
+    status.textContent = 'Saving your details…';
+    status.className = 'form-status';
+
+    try{
+      // 1) Save the registration so it's tied to a payment record
+      const saveRes = await fetch(`${CONFIG.backend}/save-registration`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'gameshow_tickets', data: payload }),
+      });
+      if(!saveRes.ok) throw new Error('save-failed');
+      const { registrationId } = await saveRes.json();
+      if(!registrationId) throw new Error('no-registration-id');
+
+      // 2) Create a Stripe Checkout session for the exact cart (handles
+      //    mixed ticket types + quantities as separate line items)
+      status.textContent = 'Redirecting to secure checkout…';
+      status.className = 'form-status ok';
+
+      const sessionRes = await fetch(`${CONFIG.backend}/create-gameshow-tickets-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ registrationId, tickets: ticketState }),
+      });
+      const { url } = await sessionRes.json();
+      if(!url) throw new Error('no-checkout-url');
+
+      window.location.href = url;
+    }catch(err){
+      console.error('Ticket checkout failed', err);
+      status.textContent = 'Something went wrong — please try again or email hello@puzzlescommunity.com.';
+      status.className = 'form-status err';
+      submitBtn.disabled = false;
+    }
+  });
+
+  // ---------- Sponsor form submit ----------
+  document.getElementById('sponsorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('sponsorStatus');
+    const submitBtn = document.getElementById('sponsorSubmit');
+    const form = e.target;
+
+    if(!form.tier.value){
+      status.textContent = 'Please select a sponsorship tier.';
+      status.className = 'form-status err';
+      return;
+    }
+
+    const payload = {
+      organization: form.organization.value,
+      contactName: form.contactName.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      tier: form.tier.value,
+      notes: form.notes.value,
+      formspreeUrl: CONFIG.formspreeSponsorEndpoint,
+    };
+
+    submitBtn.disabled = true;
+    status.textContent = 'Saving your details…';
+    status.className = 'form-status';
+
+    try{
+      const saveRes = await fetch(`${CONFIG.backend}/save-registration`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'gameshow_sponsor', data: payload }),
+      });
+      if(!saveRes.ok) throw new Error('save-failed');
+      const { registrationId } = await saveRes.json();
+      if(!registrationId) throw new Error('no-registration-id');
+
+      status.textContent = 'Redirecting to secure checkout…';
+      status.className = 'form-status ok';
+
+      const sessionRes = await fetch(`${CONFIG.backend}/create-gameshow-sponsor-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ registrationId, tier: form.tier.value }),
+      });
+      const { url } = await sessionRes.json();
+      if(!url) throw new Error('no-checkout-url');
+
+      window.location.href = url;
+    }catch(err){
+      console.error('Sponsor checkout failed', err);
+      status.textContent = 'Something went wrong — email hello@puzzlescommunity.com directly.';
+      status.className = 'form-status err';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

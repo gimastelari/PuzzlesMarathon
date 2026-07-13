@@ -239,6 +239,93 @@ app.post("/create-gardening-session", async (req, res) => {
 });
 
 // =====================
+// GAME SHOW — CREATE TICKETS CHECKOUT SESSION
+// (supports a mixed cart: any combo of general / table / vip)
+// =====================
+app.post("/create-gameshow-tickets-session", async (req, res) => {
+  try {
+    const { registrationId, tickets } = req.body;
+
+    const priceMap = {
+      general: { amount: 9000,  name: "Puzzles Game Show — General Admission" },
+      table:   { amount: 64000, name: "Puzzles Game Show — Table Deal" },
+      vip:     { amount: 10000, name: "Puzzles Game Show — VIP Table Seat" },
+    };
+
+    const line_items = Object.entries(tickets || {})
+      .filter(([ticketType, qty]) => Number(qty) > 0 && priceMap[ticketType])
+      .map(([ticketType, qty]) => ({
+        price_data: {
+          currency: "usd",
+          product_data: { name: priceMap[ticketType].name },
+          unit_amount: priceMap[ticketType].amount,
+        },
+        quantity: Number(qty),
+      }));
+
+    if (line_items.length === 0) {
+      return res.status(400).json({ error: "No tickets selected" });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items,
+      success_url: `https://puzzlesmarathon.com/gameshow-success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://puzzlesmarathon.com/game-show.html`,
+      metadata: { registrationId, type: "gameshow_tickets" },
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error("Game show ticket session error:", err);
+    res.status(500).json({ error: "Stripe error" });
+  }
+});
+
+// =====================
+// GAME SHOW — CREATE SPONSOR CHECKOUT SESSION
+// =====================
+app.post("/create-gameshow-sponsor-session", async (req, res) => {
+  try {
+    const { registrationId, tier } = req.body;
+
+    const priceMap = {
+      presenting: { amount: 250000, name: "Puzzles Game Show — Presenting Sponsor" },
+      main:       { amount: 50000,  name: "Puzzles Game Show — Main Sponsor" },
+      community:  { amount: 25000,  name: "Puzzles Game Show — Community Sponsor" },
+      supporting: { amount: 10000,  name: "Puzzles Game Show — Supporting Sponsor" },
+    };
+
+    const chosen = priceMap[tier];
+    if (!chosen) {
+      return res.status(400).json({ error: "Invalid sponsor tier" });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [{
+        price_data: {
+          currency: "usd",
+          product_data: { name: chosen.name },
+          unit_amount: chosen.amount,
+        },
+        quantity: 1,
+      }],
+      success_url: `https://puzzlesmarathon.com/gameshow-success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://puzzlesmarathon.com/game-show.html`,
+      metadata: { registrationId, type: "gameshow_sponsor" },
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error("Game show sponsor session error:", err);
+    res.status(500).json({ error: "Stripe error" });
+  }
+});
+
+// =====================
 // FINALIZE REGISTRATION (POST-PAYMENT)
 // =====================
 app.post("/finalize-registration", async (req, res) => {
