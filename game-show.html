@@ -607,7 +607,7 @@
           </div>
           <button type="submit" class="btn btn-dark" id="ticketSubmit">Continue to Secure Checkout</button>
           <p class="form-status" id="ticketStatus"></p>
-          <p class="form-note">You'll be redirected to our secure payment processor to complete your purchase. Ticket sales are final; contact hello@puzzlescommunity.com for accommodations.</p>
+          <p class="form-note">You'll be redirected to our secure payment processor to complete your purchase. Ticket sales are final; contact info@puzzlesmarathon.com for accommodations.</p>
         </form>
       </div>
     </div>
@@ -664,7 +664,7 @@
           </div>
           <button type="submit" class="btn btn-dark" id="sponsorSubmit">Submit Sponsor Inquiry</button>
           <p class="form-status" id="sponsorStatus"></p>
-          <p class="form-note">This sends an inquiry to our team — payment/invoice details follow by email. For same-day sponsorship, email hello@puzzlescommunity.com.</p>
+          <p class="form-note">This sends an inquiry to our team — payment/invoice details follow by email. For same-day sponsorship, email info@puzzlesmarathon.com.</p>
         </form>
       </div>
     </div>
@@ -684,7 +684,7 @@
       </details>
       <details class="faq-item">
         <summary>Can I buy tickets for a whole team?</summary>
-        <p>Absolutely — increase the quantity on any ticket tier and add your team name during checkout. Tables seat up to 6.</p>
+        <p>Absolutely — increase the quantity on any ticket tier and add your team name during checkout. Tables seat up to 8.</p>
       </details>
       <details class="faq-item">
         <summary>What's the refund policy?</summary>
@@ -704,7 +704,7 @@
       <span class="footer-brand">Puzzles Community</span>
       <ul class="footer-links">
         <li><a href="https://puzzlescommunity.com">puzzlescommunity.com</a></li>
-        <li><a href="mailto:hello@puzzlescommunity.com">hello@puzzlescommunity.com</a></li>
+        <li><a href="mailto:info@puzzlesmarathon.com">info@puzzlesmarathon.com</a></li>
         <li><a href="#top">Back to top</a></li>
       </ul>
     </div>
@@ -923,7 +923,7 @@
       window.location.href = url;
     }catch(err){
       console.error('Ticket checkout failed', err);
-      status.textContent = 'Something went wrong — please try again or email hello@puzzlescommunity.com.';
+      status.textContent = 'Something went wrong — please try again or email info@puzzlesmarathon.com.';
       status.className = 'form-status err';
       submitBtn.disabled = false;
     }
@@ -980,7 +980,7 @@
       window.location.href = url;
     }catch(err){
       console.error('Sponsor checkout failed', err);
-      status.textContent = 'Something went wrong — email hello@puzzlescommunity.com directly.';
+      status.textContent = 'Something went wrong — email info@puzzlesmarathon.com directly.';
       status.className = 'form-status err';
       submitBtn.disabled = false;
     }
