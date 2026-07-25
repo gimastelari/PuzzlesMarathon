@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Volunteer | Puzzles Community</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#fffdf8;
+      overflow-x:hidden;
+      color:#16324F;
+    }
+
+    h1,h2,h3,h4{
+      font-family:'Fredoka',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    .floating-puzzle{
+      position:absolute;
+      opacity:0.08;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .footer-link:hover{
+      color:#8ED1FF;
+    }
+
+    /* ========================================= */
+    /* PAGE HERO */
+    /* ========================================= */
+
+    .page-hero{
+      background:#0B3C6D;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* ========================================= */
+    /* FORM CARD */
+    /* ========================================= */
+
+    .form-card{
+      background:white;
+      border-radius:30px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+      padding:50px;
+    }
+
+    .form-label{
+      display:block;
+      font-weight:600;
+      color:#0B3C6D;
+      margin-bottom:8px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea{
+      width:100%;
+      border:2px solid #E5E7EB;
+      border-radius:16px;
+      padding:14px 18px;
+      outline:none;
+      transition:0.25s ease;
+      background:#FAF8F3;
+      color:#16324F;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus{
+      border-color:#8ED1FF;
+      background:white;
+    }
+
+    .checkbox-pill{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#FAF8F3;
+      border:2px solid #E5E7EB;
+      border-radius:16px;
+      padding:12px 16px;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .checkbox-pill:has(input:checked){
+      border-color:#8ED1FF;
+      background:#F0F9FF;
+    }
+
+    .submit-btn{
+      background:#0B3C6D;
+      color:white;
+      font-weight:700;
+      border-radius:9999px;
+      padding:16px 44px;
+      transition:0.25s ease;
+    }
+
+    .submit-btn:hover{
+      background:#072746;
+      transform:translateY(-2px);
+    }
+
+    .submit-btn:disabled{
+      opacity:0.6;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    #successMsg,
+    #errorMsg{
+      display:none;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================= -->
+  <!-- HEADER -->
+  <!-- ========================================= -->
+
+  <header class="bg-[#0B3C6D] py-5 shadow-lg sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-6 flex justify-center items-center relative">
+
+      <a href="index.html" class="flex items-center gap-4">
+
+        <img src="assets/img/logo.png"
+             alt="Puzzles Logo"
+             class="h-16 w-auto object-contain">
+
+      </a>
+
+      <a href="index.html"
+         class="absolute right-6 text-white/80 hover:text-[#8ED1FF] font-semibold transition hidden sm:block">
+        ← Back to Home
+      </a>
+
+    </div>
+
+  </header>
+
+  <!-- ========================================= -->
+  <!-- PAGE HERO -->
+  <!-- ========================================= -->
+
+  <section class="page-hero py-24 px-6 text-center">
+
+    <div class="floating-puzzle top-0 left-0 text-[200px]">🧩</div>
+
+    <div class="max-w-3xl mx-auto relative z-10">
+
+      <p class="text-[#8ED1FF] uppercase tracking-[0.2em] font-semibold text-sm mb-4">
+        Get Involved
+      </p>
+
+      <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight">
+        Volunteer With Puzzles
+      </h1>
+
+      <p class="mt-6 text-lg text-white/80 leading-relaxed">
+        Join our team and help create meaningful, inclusive experiences for
+        neurodivergent and autistic individuals across our community.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FORM SECTION -->
+  <!-- ========================================= -->
+
+  <section class="py-24 px-6 relative overflow-hidden">
+
+    <div class="floating-puzzle bottom-0 right-0 text-[200px]">✨</div>
+
+    <div class="max-w-3xl mx-auto relative z-10">
+
+      <div class="form-card">
+
+        <h2 class="text-3xl font-bold text-[#0B3C6D] mb-2">
+          Volunteer Interest Form
+        </h2>
+
+        <p class="text-gray-600 mb-10">
+          Tell us a bit about yourself and how you'd like to help. We'll follow
+          up with next steps and upcoming opportunities.
+        </p>
+
+        <form id="volunteerForm">
+
+          <div class="grid md:grid-cols-2 gap-6">
+
+            <div>
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="name" required class="form-input">
+            </div>
+
+            <div>
+              <label class="form-label">Email *</label>
+              <input type="email" name="email" required class="form-input">
+            </div>
+
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6 mt-6">
+
+            <div>
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="phone" class="form-input">
+            </div>
+
+            <div>
+              <label class="form-label">Age Range</label>
+              <select name="age_range" class="form-select">
+                <option value="">Select one</option>
+                <option>Under 16</option>
+                <option>16–18</option>
+                <option>19–25</option>
+                <option>26–40</option>
+                <option>41+</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="mt-8">
+            <label class="form-label">Areas You'd Like to Volunteer For</label>
+
+            <div class="grid sm:grid-cols-2 gap-4 mt-3">
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Event Day Support">
+                Event Day Support
+              </label>
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Gardening Program">
+                Gardening Program
+              </label>
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Game Show Fundraiser">
+                Game Show Fundraiser
+              </label>
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Marketing & Social Media">
+                Marketing & Social Media
+              </label>
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Administrative / Behind the Scenes">
+                Administrative / Behind the Scenes
+              </label>
+
+              <label class="checkbox-pill">
+                <input type="checkbox" name="interests" value="Setup & Logistics">
+                Setup & Logistics
+              </label>
+
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <label class="form-label">Availability</label>
+            <select name="availability" class="form-select">
+              <option value="">Select one</option>
+              <option>Weekdays</option>
+              <option>Weekends</option>
+              <option>Evenings</option>
+              <option>Flexible / Anytime</option>
+            </select>
+          </div>
+
+          <div class="mt-8">
+            <label class="form-label">Anything Else We Should Know?</label>
+            <textarea name="message" rows="4" class="form-textarea"></textarea>
+          </div>
+
+          <div class="mt-10 text-center">
+            <button type="submit" id="submitBtn" class="submit-btn">
+              Submit Volunteer Form
+            </button>
+          </div>
+
+          <p id="successMsg" class="mt-6 text-center text-green-700 font-semibold">
+            Thank you! Your volunteer interest has been submitted — we'll be in touch soon.
+          </p>
+
+          <p id="errorMsg" class="mt-6 text-center text-red-600 font-semibold">
+            Something went wrong submitting the form. Please try again or email us directly.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+
+  <footer class="bg-[#0B3C6D] text-white py-24">
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-16">
+
+      <div>
+        <h3 class="text-3xl font-bold mb-6">PUZZLES</h3>
+        <p class="text-white/80 leading-relaxed">
+          Puzzles is dedicated to building a more inclusive world for
+          neurodivergent and autistic individuals through community,
+          accessibility, education, awareness, and meaningful experiences.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-2xl font-bold mb-6">Quick Links</h4>
+        <div class="flex flex-col gap-4">
+          <a href="events-and-programs.html" class="footer-link transition">Programs</a>
+          <a href="events-and-programs.html" class="footer-link transition">Events</a>
+          <a href="about.html" class="footer-link transition">About Us</a>
+          <a href="donate.html" class="footer-link transition">Donate</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-2xl font-bold mb-6">Connect</h4>
+        <div class="flex flex-col gap-4">
+          <a href="get-involved.html" class="footer-link transition">Get Involved</a>
+          <a href="volunteer.html" class="footer-link transition">Volunteer Opportunities</a>
+          <a href="join-the-community.html" class="footer-link transition">Join the Community</a>
+          <a href="#" class="footer-link transition">Instagram</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-2xl font-bold mb-6">Join Our Email List</h4>
+        <p class="text-white/80 mb-6">
+          Stay informed on events, programs, and community updates.
+        </p>
+        <div class="flex flex-col gap-4">
+          <input type="email" placeholder="Enter your email" class="px-5 py-4 rounded-full text-black outline-none">
+          <button class="bg-[#8ED1FF] hover:bg-[#76c4f7] text-[#0B3C6D] px-6 py-4 rounded-full font-bold transition">
+            Subscribe
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ========================================= -->
+  <!-- FORM SUBMIT SCRIPT (Formspree AJAX) -->
+  <!-- ========================================= -->
+
+  <script>
+
+    const form = document.getElementById('volunteerForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async function(e){
+
+      e.preventDefault();
+
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+
+      try {
+
+        const response = await fetch('https://formspree.io/f/xojgppaj', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if(response.ok){
+          form.reset();
+          successMsg.style.display = 'block';
+        } else {
+          errorMsg.style.display = 'block';
+        }
+
+      } catch(err){
+        errorMsg.style.display = 'block';
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Volunteer Form';
+
+    });
+
+  </script>
+
+</body>
+</html>
