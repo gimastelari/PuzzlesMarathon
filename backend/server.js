@@ -1,4 +1,3 @@
-
 const express = require("express");
 const cors = require("cors");
 const Stripe = require("stripe");
@@ -326,6 +325,58 @@ app.post("/create-gameshow-sponsor-session", async (req, res) => {
 });
 
 // =====================
+// WREATH MAKING CLASS — CREATE CHECKOUT SESSION
+// (one line item, quantity = number of seats)
+// =====================
+app.post("/create-wreath-session", async (req, res) => {
+  try {
+    const { registrationId, seats, session: classSession } = req.body;
+
+    // Early bird $15 through Sat Oct 18, 2026 (11:59 PM Eastern), $30 after.
+    // Price is decided here on the server so it can't be changed in the browser.
+    const EARLY_BIRD_ENDS = Date.parse("2026-10-19T04:00:00Z");
+    const isEarlyBird = Date.now() < EARLY_BIRD_ENDS;
+    const SEAT_PRICE = isEarlyBird ? 1500 : 3000;
+
+    const sessionNames = {
+      nov14: "Sat Nov 14 · LEAD Danbury",
+      nov21: "Sat Nov 21 · Steck's Nursery (Bethel)",
+    };
+    if (!sessionNames[classSession]) {
+      return res.status(400).json({ error: "Invalid class date" });
+    }
+
+    const qty = parseInt(seats, 10);
+    if (!qty || qty < 1 || qty > 10) {
+      return res.status(400).json({ error: "Invalid number of seats" });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [{
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: `Holiday Wreath Making Class — ${sessionNames[classSession]}${isEarlyBird ? " (Early Bird)" : ""}`,
+          },
+          unit_amount: SEAT_PRICE,
+        },
+        quantity: qty,
+      }],
+      success_url: `https://puzzlesmarathon.com/wreath-success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://puzzlesmarathon.com/wreath-making.html`,
+      metadata: { registrationId, type: "wreath_class" },
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error("Wreath session error:", err);
+    res.status(500).json({ error: "Stripe error" });
+  }
+});
+
+// =====================
 // FINALIZE REGISTRATION (POST-PAYMENT)
 // =====================
 app.post("/finalize-registration", async (req, res) => {
@@ -406,4 +457,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
 });
-

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You're Registered — Holiday Wreath Making Class</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #fffdf8; color: #16324F; }
+    h1, h2 { font-family: 'Fredoka', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-6">
+
+  <div class="bg-white rounded-[28px] shadow-xl p-10 md:p-14 max-w-xl w-full text-center">
+    <img src="https://images.unsplash.com/photo-1480835382106-d1923af88f3f?auto=format&fit=crop&w=800&q=80"
+         onerror="this.style.display='none'"
+         alt="Holiday wreath" class="w-full h-44 object-cover rounded-2xl mb-8">
+    <img src="assets/img/logo.png" alt="Puzzles" class="h-16 mx-auto mb-6">
+    <h1 id="title" class="text-3xl md:text-4xl font-bold text-[#0B3C6D]">Confirming your registration...</h1>
+    <p id="message" class="mt-4 text-gray-600 leading-relaxed">Please don't close this page.</p>
+    <a href="events-and-programs.html"
+       class="inline-block mt-10 bg-[#0B3C6D] hover:bg-[#072746] text-white px-8 py-4 rounded-full font-semibold transition">
+      Back to Events
+    </a>
+  </div>
+
+  <script>
+    // Same backend as gardening.html
+    const API_BASE = "https://puzzles-marathon-backend.onrender.com";
+
+    const titleEl = document.getElementById("title");
+    const msgEl = document.getElementById("message");
+    const sessionId = new URLSearchParams(window.location.search).get("session_id");
+
+    (async () => {
+      if (!sessionId) {
+        titleEl.textContent = "Missing payment info";
+        msgEl.textContent = "If you completed payment, please contact us and we'll confirm your seat.";
+        return;
+      }
+      try {
+        const res = await fetch(`${API_BASE}/finalize-registration`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+        if (!res.ok) throw new Error("finalize failed");
+        const result = await res.json();
+
+        titleEl.textContent = "You're registered! 🎄";
+        msgEl.textContent =
+          "Thanks for joining the Holiday Wreath Making Class" +
+          (result.session_selection ? " on " + result.session_selection : "") +
+          ". A Stripe receipt is on its way to your inbox. See you there for wreaths, hot chocolate, and holiday fun!";
+      } catch (err) {
+        console.error(err);
+        titleEl.textContent = "Payment received";
+        msgEl.textContent = "Your payment went through, but we had trouble saving your details. Please contact us and we'll make sure your seat is confirmed.";
+      }
+    })();
+  </script>
+</body>
+</html>

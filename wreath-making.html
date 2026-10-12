@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Holiday Wreath Making Class — Puzzles Community</title>
+  <link rel="icon" href="assets/img/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+    body { background: #fffdf8; color: #16324F; margin: 0; }
+    h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+    .field label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1.5px solid #E2DED2;
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: #FFFEFB;
+      outline: none;
+      transition: border 0.2s ease;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #0B3C6D; }
+
+    .feature {
+      background: #F7FBFF;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Date picker cards */
+    .session-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .session-card {
+      border: 2px solid #E2DED2;
+      border-radius: 22px;
+      padding: 22px 24px;
+      cursor: pointer;
+      transition: border 0.2s ease, background 0.2s ease;
+      height: 100%;
+    }
+    .session-option input:checked + .session-card { border-color: #1F6B3A; background: #F2FAF4; }
+    .session-option input:focus-visible + .session-card { outline: 3px solid #8ED1FF; }
+
+    .price-box { background: #1F4D2E; color: white; border-radius: 22px; }
+    .price-col.inactive { opacity: 0.45; }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="bg-[#0B3C6D] py-5 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex justify-center items-center">
+      <a href="index.html"><img src="assets/img/logo.png" alt="Puzzles Logo" class="h-16 w-auto object-contain"></a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 pt-14 pb-28">
+
+    <a href="events-and-programs.html" class="text-sm font-semibold text-[#0B3C6D]/60 hover:text-[#0B3C6D] transition">← Back to Events & Programs</a>
+
+    <!-- ========================================= -->
+    <!-- HERO IMAGE (stock photo: Erwan Hesry on Unsplash, free license) -->
+    <!-- ========================================= -->
+    <img src="https://images.unsplash.com/photo-1480930700499-dc44aa7cb2cf?auto=format&fit=crop&w=1600&q=80"
+         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1480835382106-d1923af88f3f?auto=format&fit=crop&w=1600&q=80'"
+         alt="Handmade holiday wreath"
+         class="mt-6 w-full h-64 md:h-96 object-cover rounded-[28px] shadow-lg">
+
+    <!-- ========================================= -->
+    <!-- EVENT INTRO -->
+    <!-- ========================================= -->
+    <section class="mt-10 mb-12">
+      <span class="text-xs font-semibold uppercase tracking-[0.2em] text-[#2FA84F]">November 2026 · Registration Open</span>
+      <h1 class="text-4xl md:text-6xl font-bold text-[#B22234] mt-3">Holiday Wreath Making Class</h1>
+      <p class="mt-2 text-sm font-semibold text-gray-500 uppercase tracking-wider">
+        Presented by Puzzles Community · LEAD (Leaders for Educational Advocacy and Diversity) · Steck's Nursery
+      </p>
+      <p class="mt-6 text-gray-600 text-lg max-w-2xl leading-relaxed">
+        The head gardener from Steck's Nursery will lead the class, teaching families how to make,
+        decorate, and personalize their own beautiful holiday wreaths. Come create, connect, and get
+        into the holiday spirit!
+      </p>
+
+      <!-- WHAT'S INCLUDED -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+        <div class="feature">
+          <div class="text-3xl">🎄</div>
+          <p class="font-semibold mt-2 text-sm">Make & decorate your own wreath</p>
+        </div>
+        <div class="feature">
+          <div class="text-3xl">☕</div>
+          <p class="font-semibold mt-2 text-sm">Hot chocolate station</p>
+        </div>
+        <div class="feature">
+          <div class="text-3xl">🎶</div>
+          <p class="font-semibold mt-2 text-sm">Holiday music & festive vibes</p>
+        </div>
+        <div class="feature">
+          <div class="text-3xl">🎁</div>
+          <p class="font-semibold mt-2 text-sm">Giveaways, games & fun</p>
+        </div>
+      </div>
+
+      <!-- PRICING -->
+      <div class="price-box mt-10 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
+        <div id="earlyCol" class="price-col">
+          <p class="text-xs uppercase tracking-widest font-semibold text-white/80">Early Bird (by Oct 18)</p>
+          <p class="text-4xl font-bold mt-1" style="font-family:'Fredoka',sans-serif">$15</p>
+        </div>
+        <div class="hidden sm:block w-px h-14 bg-white/30"></div>
+        <div id="regularCol" class="price-col">
+          <p class="text-xs uppercase tracking-widest font-semibold text-white/80">After Oct 18</p>
+          <p class="text-4xl font-bold mt-1" style="font-family:'Fredoka',sans-serif">$30</p>
+        </div>
+      </div>
+      <p class="mt-3 text-center text-sm text-gray-500 italic">Registration fees cover wreath-making materials only. Price is per wreath.</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- REGISTRATION FORM -->
+    <!-- ========================================= -->
+    <section class="card p-8 md:p-12">
+      <h2 class="text-3xl font-bold text-[#0B3C6D]">Reserve Your Spot</h2>
+      <p class="mt-2 text-gray-600">Pick a date, fill this out, and you'll be sent to a secure checkout to pay.</p>
+
+      <form id="wreathForm" class="mt-10 grid md:grid-cols-2 gap-6">
+
+        <!-- CLASS DATE -->
+        <fieldset class="md:col-span-2">
+          <legend class="font-semibold text-sm mb-3">Choose your class date *</legend>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <label class="session-option relative">
+              <input type="radio" name="session" value="nov14" required checked>
+              <div class="session-card">
+                <p class="text-xs uppercase tracking-wider font-semibold text-gray-500">Saturday</p>
+                <p class="text-2xl font-bold text-[#B22234]" style="font-family:'Fredoka',sans-serif">November 14</p>
+                <p class="mt-1 font-semibold">10:00 – 11:30 AM</p>
+                <p class="mt-3 text-sm text-gray-600">📍 LEAD Danbury<br>358 Main Street, Danbury, CT</p>
+              </div>
+            </label>
+            <label class="session-option relative">
+              <input type="radio" name="session" value="nov21">
+              <div class="session-card">
+                <p class="text-xs uppercase tracking-wider font-semibold text-gray-500">Saturday</p>
+                <p class="text-2xl font-bold text-[#B22234]" style="font-family:'Fredoka',sans-serif">November 21</p>
+                <p class="mt-1 font-semibold">10:00 – 11:30 AM</p>
+                <p class="mt-3 text-sm text-gray-600">📍 Steck's Nursery<br>Bethel, CT</p>
+              </div>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="full_name">Parent / guardian full name *</label>
+          <input id="full_name" name="full_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone *</label>
+          <input id="phone" name="phone" type="tel" required>
+        </div>
+
+        <div class="field">
+          <label for="seats">Number of wreaths *</label>
+          <select id="seats" name="seats" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="field md:col-span-2">
+          <label for="attendee_names">Names of everyone attending</label>
+          <input id="attendee_names" name="attendee_names" type="text" placeholder="e.g. Jamie Smith, Alex Smith (age 8)">
+        </div>
+
+        <div class="field md:col-span-2">
+          <label for="accommodations">Accessibility, sensory, allergy, or other needs we should know about</label>
+          <textarea id="accommodations" name="accommodations" rows="3"></textarea>
+        </div>
+
+        <div class="field md:col-span-2">
+          <label for="heard_about">How did you hear about us?</label>
+          <select id="heard_about" name="heard_about">
+            <option value="">Select one</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>Flyer</option>
+            <option>LEAD</option>
+            <option>Steck's Nursery</option>
+            <option>Friend or family</option>
+            <option>Past Puzzles event</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2 flex flex-col gap-3 text-sm text-gray-700">
+          <label class="flex gap-3 items-start">
+            <input type="checkbox" name="waiver" required class="mt-1">
+            <span>I understand participation is at my own risk and release Puzzles Community, LEAD, and Steck's Nursery from liability for any injury. *</span>
+          </label>
+          <label class="flex gap-3 items-start">
+            <input type="checkbox" name="photo_consent" class="mt-1">
+            <span>Puzzles Community may use photos taken at this event on its website and social media.</span>
+          </label>
+        </div>
+
+        <!-- TOTAL + SUBMIT -->
+        <div class="md:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-[#EAE6DA]">
+          <div>
+            <p class="text-lg">Total: <span id="totalLabel" class="font-bold text-[#0B3C6D] text-2xl">$15</span></p>
+            <p id="priceNote" class="text-sm text-[#2FA84F] font-semibold"></p>
+          </div>
+          <button id="submitBtn" type="submit"
+                  class="bg-[#0B3C6D] hover:bg-[#072746] text-white px-10 py-4 rounded-full font-semibold transition disabled:opacity-60">
+            Continue to Payment
+          </button>
+        </div>
+
+        <p id="formError" class="md:col-span-2 text-[#D84B4B] font-semibold hidden"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <script>
+    // =========================================
+    // CONFIG
+    // =========================================
+    // Same backend as gardening.html
+    const API_BASE = "https://puzzles-marathon-backend.onrender.com";
+    const FORMSPREE_URL = "https://formspree.io/f/xppqjbov";
+
+    // Early bird $15 through Oct 18 (11:59 PM Eastern), then $30.
+    // Display only. The backend sets the real price at checkout.
+    const EARLY_BIRD_ENDS = Date.parse("2026-10-19T04:00:00Z");
+    const isEarlyBird = Date.now() < EARLY_BIRD_ENDS;
+    const SEAT_PRICE = isEarlyBird ? 15 : 30;
+
+    const SESSION_LABELS = {
+      nov14: "Sat Nov 14, 10:00–11:30 AM · LEAD Danbury, 358 Main St, Danbury",
+      nov21: "Sat Nov 21, 10:00–11:30 AM · Steck's Nursery, Bethel",
+    };
+
+    const form = document.getElementById("wreathForm");
+    const seatsEl = document.getElementById("seats");
+    const totalLabel = document.getElementById("totalLabel");
+    const priceNote = document.getElementById("priceNote");
+    const submitBtn = document.getElementById("submitBtn");
+    const errorEl = document.getElementById("formError");
+
+    // Dim whichever price tier doesn't apply right now
+    document.getElementById(isEarlyBird ? "regularCol" : "earlyCol").classList.add("inactive");
+    priceNote.textContent = isEarlyBird ? "Early bird pricing applied ($15 per wreath)" : "$30 per wreath";
+    if (!isEarlyBird) priceNote.classList.replace("text-[#2FA84F]", "text-gray-500");
+
+    function updateTotal() {
+      totalLabel.textContent = "$" + (SEAT_PRICE * Number(seatsEl.value));
+    }
+    seatsEl.addEventListener("change", updateTotal);
+    updateTotal();
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.classList.remove("hidden");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Continue to Payment";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorEl.classList.add("hidden");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Redirecting to checkout...";
+
+      const fd = new FormData(form);
+      const sessionKey = fd.get("session");
+      const data = {
+        event: "Holiday Wreath Making Class",
+        session: SESSION_LABELS[sessionKey],
+        full_name: fd.get("full_name"),
+        email: fd.get("email"),
+        phone: fd.get("phone"),
+        wreaths: fd.get("seats"),
+        attendee_names: fd.get("attendee_names") || "",
+        accommodations: fd.get("accommodations") || "",
+        heard_about: fd.get("heard_about") || "",
+        waiver: fd.get("waiver") ? "Agreed" : "No",
+        photo_consent: fd.get("photo_consent") ? "Yes" : "No",
+        pricing: isEarlyBird ? "Early Bird ($15)" : "Regular ($30)",
+        total_due: "$" + (SEAT_PRICE * Number(fd.get("seats"))),
+        formspreeUrl: FORMSPREE_URL, // backend forwards this to Formspree after payment
+      };
+
+      try {
+        // 1) Save registration
+        const saveRes = await fetch(`${API_BASE}/save-registration`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: "wreath_class", data }),
+        });
+        const saved = await saveRes.json();
+        if (!saveRes.ok || !saved.registrationId) throw new Error("save failed");
+
+        // 2) Create Stripe checkout
+        const payRes = await fetch(`${API_BASE}/create-wreath-session`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            registrationId: saved.registrationId,
+            seats: fd.get("seats"),
+            session: sessionKey,
+          }),
+        });
+        const pay = await payRes.json();
+        if (!payRes.ok || !pay.url) throw new Error("checkout failed");
+
+        window.location.href = pay.url;
+      } catch (err) {
+        console.error(err);
+        showError("Something went wrong starting checkout. Please try again or email us.");
+      }
+    });
+  </script>
+
+</body>
+</html>
